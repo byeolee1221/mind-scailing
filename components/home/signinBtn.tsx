@@ -33,7 +33,7 @@ const SigninBtn = () => {
           </button>
         )}
       </DialogTrigger>
-      <DialogContent className="w-[90%] rounded-md">
+      {!session ? <DialogContent className="w-[90%] rounded-md">
         <DialogHeader>
           <DialogTitle>마인드스케일링 로그인</DialogTitle>
           <DialogDescription>
@@ -49,7 +49,7 @@ const SigninBtn = () => {
             <p>구글로 로그인하기</p>
           </button>
         </div>
-      </DialogContent>
+      </DialogContent> : null}
     </Dialog>
   );
 };
