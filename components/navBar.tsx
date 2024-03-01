@@ -1,6 +1,9 @@
+"use client"
+
 import { cls } from "@/lib/styleUtil";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface INavbar {
   title: string;
@@ -10,10 +13,11 @@ interface INavbar {
 }
 
 const NavBar = ({ title, pageBack, hasTabBar, children }: INavbar) => {
+  const router = useRouter();
   const navBarMenu = [
     { link: "/", imageSrc: "/home.png", imageAlt: "홈", className: "p-3" },
     {
-      link: "/job/board",
+      link: "/board/job",
       imageSrc: "/community.png",
       imageAlt: "게시판",
       className: "p-3",
@@ -39,6 +43,10 @@ const NavBar = ({ title, pageBack, hasTabBar, children }: INavbar) => {
     },
   ];
 
+  const onClickBack = () => {
+    router.back();
+  }
+
   return (
     <div>
       <div
@@ -48,7 +56,7 @@ const NavBar = ({ title, pageBack, hasTabBar, children }: INavbar) => {
         )}
       >
         {pageBack ? (
-          <button className="border p-1 rounded-lg shadow-sm hover:bg-slate-100 transition-colors">
+          <button onClick={onClickBack} className="border p-1 rounded-lg shadow-sm hover:bg-slate-100 transition-colors">
             <Image src="/back.png" alt="뒤로가기" width={20} height={20} />
           </button>
         ) : (

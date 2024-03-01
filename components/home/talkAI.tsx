@@ -18,7 +18,7 @@ const TalkAI = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      conversation: ""
+      conversation: "",
     },
   });
 
@@ -119,7 +119,7 @@ const TalkAI = () => {
                         className="bg-slate-300 rounded-full p-2"
                       />
                     )}
-                    <p className="text-sm">{data.content}</p>
+                    <p className="text-sm">{data.content as string}</p>
                   </div>
                 </div>
               ))}
