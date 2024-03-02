@@ -1,49 +1,57 @@
+"use client";
+
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import useSWR from "swr";
+
+interface IPostList {
+  id: number;
+  category: string;
+  userId: string;
+  post: string;
+  commentCount: number;
+  view: number;
+  like: number;
+  createdAt: number;
+}
+
+const fetcher = (url: string) =>
+  axios.get(url).then((response) => response.data);
 
 const PostList = () => {
-  const dummyData = [
-    {
-      name: "hong1125",
-      uploadTime: 1,
-      postPreview: "설날에 잔소리 들은 게 아직도 안잊혀져요..",
-      commentCount: 16,
-      view: 222,
-      like: 35,
-    },
-    {
-      name: "imdayeong99",
-      uploadTime: 2,
-      postPreview: "흰색 옷 변색된 거 해결방법 아시는 분~",
-      commentCount: 10,
-      view: 187,
-      like: 40,
-    },
-    {
-      name: "moon0221",
-      uploadTime: 2,
-      postPreview:
-        "스트레스 때문에 잠을 잘못 잤나봐요.. 어깨가 하루종일 아프네요 ㅜ",
-      commentCount: 7,
-      view: 58,
-      like: 79,
-    },
-    {
-      name: "keyoflife111",
-      uploadTime: 10,
-      postPreview: "스트레스 풀 곳 없어서 여기에 좀 풀어봅니당..",
-      commentCount: 23,
-      view: 867,
-      like: 112,
-    },
-  ];
+  // useSWR 훅은 데이터를 비동기적으로 가져옴. 따라서 가져온 데이터를 필터링하려면 조건을 걸어줘야 함.
+  const { data, error } = useSWR("/api/board", fetcher);
+  const [currentCategory, setCurrentCategory] = useState("");
+  const pathname = usePathname();
+  let filteredPost;
+
+  if (data) {
+    filteredPost = data.filter(
+      (post: IPostList) => post.category === currentCategory
+    );
+  }
+
+  useEffect(() => {
+    const nameMapping: Record<string, string> = {
+      "/board/daily": "일상",
+      "/board/company": "직장",
+      "/board/employment": "취업",
+      "/board/study": "학업",
+      "/board/health": "건강",
+    };
+
+    setCurrentCategory(nameMapping[pathname] || "관계");
+  }, []);
 
   return (
     <>
-      {dummyData.map((data, i) => (
+      {filteredPost?.map((post: IPostList) => (
         <Link
-          key={i}
-          href=""
+          key={post.id}
+          href={`${pathname}/${post.id}`}
           className="flex flex-col items-start p-3 space-y-5 border-2 border-green-500 rounded-md shadow-sm"
         >
           <div className="flex items-center justify-between w-full">
@@ -56,10 +64,8 @@ const PostList = () => {
                 className="bg-slate-300 p-2 rounded-full"
               />
               <div className="flex flex-col items-start">
-                <h1 className="font-semibold text-sm">{data.name}</h1>
-                <p className="text-xs text-gray-500">
-                  {data.uploadTime}시간 전
-                </p>
+                <h1 className="font-semibold text-sm">{post.userId}</h1>
+                <p className="text-xs text-gray-500">{post.createdAt}</p>
               </div>
             </div>
             <button className="hover:bg-slate-300 p-1 rounded-full transition-colors">
@@ -67,7 +73,7 @@ const PostList = () => {
             </button>
           </div>
           <p className="text-sm h-10 text-ellipsis overflow-hidden">
-            {data.postPreview}
+            {post.post}
           </p>
           <div className="flex items-center justify-between w-full">
             <div className="flex items-center justify-between w-full">
@@ -75,20 +81,20 @@ const PostList = () => {
                 <Image src="/like.png" alt="좋아요" width={20} height={20} />
                 <span className="font-semibold text-sm">공감</span>
                 <span className="bg-slate-200 px-1 rounded-sm shadow-sm select-none text-sm">
-                  {data.like}
+                  {post.like}
                 </span>
               </div>
               <div className="flex items-center space-x-2">
                 <Image src="/comment.png" alt="댓글" width={20} height={20} />
                 <span className="font-semibold text-sm">댓글</span>
                 <span className="bg-slate-200 px-1 rounded-sm shadow-sm select-none text-sm">
-                  {data.commentCount}
+                  {post.commentCount}
                 </span>
               </div>
               <div className="flex items-center space-x-2">
                 <Image src="/view.png" alt="조회" width={20} height={20} />
                 <span className="bg-slate-200 px-1 rounded-sm shadow-sm select-none text-sm">
-                  {data.view}
+                  {post.view}
                 </span>
               </div>
             </div>

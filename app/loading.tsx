@@ -10,7 +10,6 @@ const Loading = () => {
         height={50}
         className="rounded-full"
       />
-      ;
     </div>
   );
 };

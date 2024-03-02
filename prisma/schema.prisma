@@ -68,6 +68,7 @@ enum Role {
 
 model Post {
   id           Int      @id @default(autoincrement())
+  category     String   
   userId       String
   avatar       String?
   post         String   @db.LongText

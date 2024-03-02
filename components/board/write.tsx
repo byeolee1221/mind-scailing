@@ -10,20 +10,33 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { postSchema } from "@/app/board/[category]/constants";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const Write = () => {
   const { data: session } = useSession();
   const [file, setFile] = useState<File | null>(null);
-  const [post, setPost] = useState("");
-  const [error, setError] = useState("");
+  const [category, setCategory] = useState("");
+  const [formError, setFormError] = useState("");;
   const router = useRouter();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const nameMapping: Record<string, string> = {
+      "/board/daily": "일상",
+      "/board/company": "직장",
+      "/board/employment": "취업",
+      "/board/study": "학업",
+      "/board/health": "건강",
+    }
+
+    setCategory(nameMapping[pathname] || "관계");
+  }, [])
 
   const onChangePhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
@@ -56,19 +69,19 @@ const Write = () => {
       const response = await axios.post("/api/board", {
         post: values.post,
         file,
+        category,
         userId: session.user!.name,
         userEmail: session.user!.email,
       });
 
-      setPost(response.data);
-
       if (response.status === 200) {
         form.reset();
+        // 게시글 디테일 페이지 구현한 후 해당 페이지로 이동하도록 수정하기
         router.refresh();
       }
     } catch (error: any) {
       console.log(error);
-      setError(error?.response?.data);
+      setFormError(error?.response?.data);
       return;
     }
   };
@@ -114,7 +127,9 @@ const Write = () => {
                   {form.formState.errors.post.message}
                 </p>
               ) : null}
-              {error ? <p className="text-red-500 text-xs">{error}</p> : null}
+              {formError ? (
+                <p className="text-red-500 text-xs">{formError}</p>
+              ) : null}
               <div className="flex items-center justify-between w-full">
                 <button
                   type="submit"
