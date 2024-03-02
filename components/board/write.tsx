@@ -22,21 +22,21 @@ const Write = () => {
   const { data: session } = useSession();
   const [file, setFile] = useState<File | null>(null);
   const [category, setCategory] = useState("");
-  const [formError, setFormError] = useState("");;
+  const [formError, setFormError] = useState("");
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
     const nameMapping: Record<string, string> = {
-      "/board/daily": "일상",
-      "/board/company": "직장",
-      "/board/employment": "취업",
-      "/board/study": "학업",
-      "/board/health": "건강",
-    }
+      "/board/daily": "daily",
+      "/board/company": "company",
+      "/board/employment": "employment",
+      "/board/study": "study",
+      "/board/health": "health",
+    };
 
-    setCategory(nameMapping[pathname] || "관계");
-  }, [])
+    setCategory(nameMapping[pathname] || "relationship");
+  }, []);
 
   const onChangePhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
