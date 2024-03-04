@@ -51,6 +51,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   Post          Post[]
+  Like          Like[]
 }
 
 model VerificationToken {
@@ -68,7 +69,7 @@ enum Role {
 
 model Post {
   id           Int      @id @default(autoincrement())
-  category     String   
+  category     String
   userId       String
   avatar       String?
   post         String   @db.LongText
@@ -79,4 +80,17 @@ model Post {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Like         Like[]
+}
+
+model Like {
+  id        Int      @id @default(autoincrement())
+  postId    Int
+  userId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@unique([postId, userId])
 }

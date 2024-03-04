@@ -1,11 +1,13 @@
 "use client";
 
+import CommentBtn from "@/components/board/boardDetail/commentBtn";
+import LikeBtn from "@/components/board/boardDetail/likeBtn";
 import NavBar from "@/components/navBar";
+import { btnClickEffect } from "@/lib/style";
 import axios from "axios";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import useSWR from "swr";
 
 interface IUser {
   name: string;
@@ -31,7 +33,9 @@ const PostDetail = () => {
   const params = useParams<{ id: string }>();
   const [post, setPost] = useState<IPost | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
   const id = params.id;
+
   // console.log(post);
 
   useEffect(() => {
@@ -47,6 +51,7 @@ const PostDetail = () => {
     };
 
     fetchData();
+    router.refresh();
   }, []);
 
   return (
@@ -89,26 +94,27 @@ const PostDetail = () => {
                 </button>
               </div>
             </div>
-            <div className="flex flex-col space-y-2">
-              <Image
-                src="/ai.png"
-                alt="사진"
-                width={400}
-                height={100}
-                className="bg-slate-300 rounded-lg shadow-sm"
-              />
+            <div className="flex flex-col space-y-2 w-full">
+              <p className="whitespace-pre-line">{post?.data.post}</p>
+              {post?.data.file ? (
+                <img
+                  src={post?.data.file}
+                  className="bg-slate-300 rounded-lg shadow-sm"
+                />
+              ) : null}
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <Image src="/like.png" alt="좋아요" width={25} height={25} />
-                  <Image src="/comment.png" alt="댓글" width={25} height={25} />
-                  <Image src="/paper.png" alt="DM" width={25} height={25} />
+                  <LikeBtn id={id} />
+                  <CommentBtn id={id} />
+                  <button className={btnClickEffect}>
+                    <Image src="/paper.png" alt="DM" width={25} height={25} />
+                  </button>
                 </div>
                 <div className="flex items-center space-x-3 text-sm text-gray-500 select-none">
                   <p>공감 {post?.data.like}개</p>
                   <p>댓글 {post?.data.commentCount}개</p>
                 </div>
               </div>
-              <p className="whitespace-pre-line">{post?.data.post}</p>
             </div>
           </div>
         </div>
