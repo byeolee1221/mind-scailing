@@ -2,12 +2,14 @@
 
 import CommentBtn from "@/components/board/boardDetail/commentBtn";
 import LikeBtn from "@/components/board/boardDetail/likeBtn";
+import ViewCount from "@/components/board/boardDetail/viewCount";
 import NavBar from "@/components/navBar";
 import { btnClickEffect } from "@/lib/style";
 import axios from "axios";
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { mutate } from "swr";
 
 interface IUser {
   name: string;
@@ -33,10 +35,7 @@ const PostDetail = () => {
   const params = useParams<{ id: string }>();
   const [post, setPost] = useState<IPost | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
   const id = params.id;
-
-  // console.log(post);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,12 +45,12 @@ const PostDetail = () => {
 
       if (response.status === 200) {
         setPost(response.data);
+        mutate("/api/board/boardDetail");       
       }
       setIsLoading(false);
     };
 
     fetchData();
-    router.refresh();
   }, []);
 
   return (
@@ -73,16 +72,7 @@ const PostDetail = () => {
                 </div>
               </div>
               <div className="flex items-center space-x-4">
-                <div className="flex items-center space-x-2">
-                  <Image
-                    src="/view.png"
-                    alt="조회"
-                    width={20}
-                    height={20}
-                    className="select-none"
-                  />
-                  <span className="text-sm">{post?.data.view}</span>
-                </div>
+                <ViewCount id={id} />
                 <button>
                   <Image
                     src="/menu.png"

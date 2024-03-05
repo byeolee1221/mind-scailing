@@ -8,7 +8,7 @@ const Loading = () => {
         alt="로딩"
         width={50}
         height={50}
-        className="rounded-full"
+        className="rounded-full animate-spin"
       />
     </div>
   );

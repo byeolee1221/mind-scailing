@@ -1,3 +1,6 @@
+"use client";
+
+import { commentSchema } from "@/app/board/[category]/[id]/constants";
 import {
   Drawer,
   DrawerContent,
@@ -6,9 +9,52 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { btnClickEffect } from "@/lib/style";
+import { cls } from "@/lib/styleUtil";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import CommentList from "./commentList";
+import { mutate } from "swr";
 
 const CommentBtn = (props: any) => {
+  const { data: session } = useSession();
+  const [error, setError] = useState(false);
+  const form = useForm<z.infer<typeof commentSchema>>({
+    resolver: zodResolver(commentSchema),
+    defaultValues: {
+      comment: "",
+    },
+  });
+
+  const isLoading = form.formState.isSubmitting;
+
+  const onSubmit = async (values: z.infer<typeof commentSchema>) => {
+    if (!session || !values.comment) {
+      return;
+    }
+
+    try {
+      const fetchComment = await axios.post("/api/board/comment", {
+        comment: values.comment,
+        userEmail: session.user!.email,
+        postId: props.id,
+      });
+
+      if (fetchComment.status === 200) {
+        form.reset();
+        mutate("/api/board/comment");
+      }
+    } catch (error: any) {
+      console.log(error);
+      setError(true);
+      alert(error.response.data);
+    }
+  };
+
   return (
     <Drawer>
       <DrawerTrigger asChild>
@@ -22,9 +68,10 @@ const CommentBtn = (props: any) => {
             <DrawerTitle>댓글</DrawerTitle>
           </DrawerHeader>
           <div className="flex flex-col items-start justify-between h-[90%]">
-            <div className="grid grid-cols-1 items-start space-y-6 px-4 divide-y pt-2 w-full">
-              <div className="flex items-center justify-between w-full">
-                <div className="flex items-center space-x-3">
+            <CommentList />
+            <div className="border-t w-full px-4">
+              {session ? (
+                <div className="flex items-center space-x-2 py-3">
                   <Image
                     src="/user.png"
                     alt="프로필"
@@ -32,48 +79,44 @@ const CommentBtn = (props: any) => {
                     height={40}
                     className="p-2 bg-slate-300 rounded-full"
                   />
-                  <div className="flex flex-col items-start">
-                    <h1 className="font-semibold text-sm">바위별</h1>
-                    <p className="text-sm">공감해요</p>
-                  </div>
-                </div>
-                <button>
-                  <Image
-                    src="/menu.png"
-                    alt="메뉴"
-                    width={30}
-                    height={30}
-                    className="p-1 rounded-full hover:bg-slate-300 transition-colors"
-                  />
-                </button>
-              </div>
-            </div>
-            <div className="border-t w-full px-4">
-              <div className="flex items-center space-x-2 py-3">
-                <Image
-                  src="/user.png"
-                  alt="프로필"
-                  width={40}
-                  height={40}
-                  className="p-2 bg-slate-300 rounded-full"
-                />
-                <form className="flex items-center space-x-3 w-full">
-                  <input
-                    type="text"
-                    name="comment"
-                    placeholder="댓글 입력"
-                    className="border px-4 py-1.5 rounded-3xl w-full"
-                  />
-                  <button className="bg-blue-200 hover:bg-blue-300 px-2 py-1 rounded-3xl transition-colors">
-                    <Image
-                      src="/up-arrow.png"
-                      alt="화살표"
-                      width={30}
-                      height={30}
+                  <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="flex items-center space-x-3 w-full"
+                    autoComplete="off"
+                  >
+                    <input
+                      {...form.register("comment", {
+                        required: "댓글을 입력해주세요.",
+                      })}
+                      type="text"
+                      name="comment"
+                      placeholder="댓글 입력"
+                      className={cls(
+                        "border px-4 py-1.5 rounded-3xl w-full focus:border-green-500 focus:outline-none text-sm",
+                        error ? "bg-red-200" : ""
+                      )}
                     />
-                  </button>
-                </form>
-              </div>
+                    <button
+                      type="submit"
+                      className={cls(
+                        "bg-blue-200 hover:bg-blue-300 px-2 py-1 rounded-3xl transition-colors",
+                        isLoading ? "animate-pulse" : ""
+                      )}
+                    >
+                      <Image
+                        src="/up-arrow.png"
+                        alt="화살표"
+                        width={30}
+                        height={30}
+                      />
+                    </button>
+                  </form>
+                </div>
+              ) : (
+                <p className="text-green-500 text-center p-4">
+                  댓글을 쓰려면 로그인해주세요.
+                </p>
+              )}
             </div>
           </div>
         </div>

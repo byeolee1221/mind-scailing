@@ -4,6 +4,7 @@ import { btnClickEffect } from "@/lib/style";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { mutate } from "swr";
 
 const LikeBtn = (props: any) => {
   const id = props.id;
@@ -11,10 +12,19 @@ const LikeBtn = (props: any) => {
 
   const onClick = async () => {
     if (session) {
-      const response = await axios.post("/api/board/like", {
-        id,
-        userId: session?.user?.email,
-      });
+      try {
+        const response = await axios.post("/api/board/like", {
+          id,
+          userId: session?.user?.email,
+        });
+
+        if (response.status === 200) {
+          mutate("/api/board/like");
+        }
+      } catch (error: any) {
+        console.log(error);
+        alert(error.response.error);
+      }
     } else {
       alert("공감하시려면 로그인해주세요.");
     }
