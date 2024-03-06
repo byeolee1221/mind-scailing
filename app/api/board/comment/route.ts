@@ -92,7 +92,8 @@ export async function GET(req: Request) {
         createdAt: formattedDate,
         userName: comment.user.name,
         avatar: comment.user.image,
-        id: comment.id
+        id: comment.id,
+        postId: comment.postId
       };
     });
 

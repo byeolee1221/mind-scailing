@@ -11,6 +11,7 @@ interface IView {
 
 const ViewCount = (props: IView) => {
   const [view, setView] = useState(0);
+  mutate("/api/board/view");
 
   useEffect(() => {
     const fetchView = async () => {
@@ -20,7 +21,6 @@ const ViewCount = (props: IView) => {
         });
 
         if (response.status === 200) {
-          mutate("/api/board/view");
           setView(response.data);
         }
       } catch (error) {

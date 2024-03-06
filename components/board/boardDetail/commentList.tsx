@@ -3,7 +3,7 @@
 import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 
 interface ICommentList {
   avatar: string;
@@ -11,24 +11,38 @@ interface ICommentList {
   comment: string;
   id: number;
   createdAt: string;
+  postId: number;
+}
+
+interface IProps {
+  id: string;
 }
 
 const fetcher = (url: string) =>
   axios.get(url).then((response) => response.data);
 
-const CommentList = () => {
+const CommentList = (props: IProps) => {
+  const postId = props.id;
   const { data, error } = useSWR<ICommentList[]>("/api/board/comment", fetcher);
   const [commentError, setCommentError] = useState("");
+  let filteredComment;
 
   if (error) {
     setCommentError("오류가 발생하여 게시글을 가져오지 못했습니다.");
   }
 
+  if (data) {
+    filteredComment = data.filter(
+      (comment: ICommentList) => comment.postId === +postId
+    );
+  }
+  mutate("/api/board/comment");
+
   return (
     <>
       {!error ? (
         <div className="grid grid-cols-1 items-start space-y-4 px-4 divide-y w-full">
-          {data?.map((comment) => (
+          {filteredComment?.map((comment) => (
             <div
               key={comment.id}
               className="flex items-center justify-between w-full pt-3"

@@ -107,3 +107,10 @@ model Comment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Search {
+  id        Int      @id @default(autoincrement())
+  search    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

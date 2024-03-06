@@ -68,7 +68,7 @@ const CommentBtn = (props: any) => {
             <DrawerTitle>댓글</DrawerTitle>
           </DrawerHeader>
           <div className="flex flex-col items-start justify-between h-[90%]">
-            <CommentList />
+            <CommentList id={props.id} />
             <div className="border-t w-full px-4">
               {session ? (
                 <div className="flex items-center space-x-2 py-3">

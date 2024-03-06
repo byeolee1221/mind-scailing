@@ -45,7 +45,7 @@ const PostDetail = () => {
 
       if (response.status === 200) {
         setPost(response.data);
-        mutate("/api/board/boardDetail");       
+        mutate("/api/board/boardDetail");
       }
       setIsLoading(false);
     };

@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 
 interface IPostList {
   id: number;
@@ -29,6 +29,7 @@ const PostList = () => {
   const [postError, setPostError] = useState("");
   const pathname = usePathname();
   let filteredPost;
+  mutate("/api/board");
 
   if (data) {
     filteredPost = data.filter(
