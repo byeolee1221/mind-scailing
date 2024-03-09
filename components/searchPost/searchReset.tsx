@@ -1,8 +1,15 @@
 import axios from "axios";
+import { useRouter } from "next/navigation";
+
 
 const SearchReset = () => {
+  const router = useRouter();
   const onDelete = async () => {
     const req = await axios.delete("/api/search");
+
+    if (req.status === 200) {
+
+    }
   };
 
   return (

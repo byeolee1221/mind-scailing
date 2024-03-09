@@ -1,6 +1,7 @@
-"use client"
+"use client";
 
 import { cls } from "@/lib/styleUtil";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -14,12 +15,13 @@ interface INavbar {
 
 const NavBar = ({ title, pageBack, hasTabBar, children }: INavbar) => {
   const router = useRouter();
+
   const navBarMenu = [
     { link: "/", imageSrc: "/home.png", imageAlt: "홈", className: "p-3" },
     {
-      link: "/board/job",
-      imageSrc: "/community.png",
-      imageAlt: "게시판",
+      link: "/myPost",
+      imageSrc: "/post.png",
+      imageAlt: "내 글",
       className: "p-3",
     },
     {
@@ -30,9 +32,9 @@ const NavBar = ({ title, pageBack, hasTabBar, children }: INavbar) => {
         "p-3 bg-green-500 hover:bg-green-600 rounded-xl shadow-md transition-colors",
     },
     {
-      link: "/reservation",
-      imageSrc: "/business.png",
-      imageAlt: "예약현황",
+      link: `/myDiary`,
+      imageSrc: "/diary.png",
+      imageAlt: "나만의 일기장",
       className: "p-3",
     },
     {
@@ -45,7 +47,7 @@ const NavBar = ({ title, pageBack, hasTabBar, children }: INavbar) => {
 
   const onClickBack = () => {
     router.back();
-  }
+  };
 
   return (
     <div>
@@ -56,7 +58,10 @@ const NavBar = ({ title, pageBack, hasTabBar, children }: INavbar) => {
         )}
       >
         {pageBack ? (
-          <button onClick={onClickBack} className="border p-1 rounded-lg shadow-sm hover:bg-slate-100 transition-colors">
+          <button
+            onClick={onClickBack}
+            className="border p-1 rounded-lg shadow-sm hover:bg-slate-100 transition-colors"
+          >
             <Image src="/back.png" alt="뒤로가기" width={20} height={20} />
           </button>
         ) : (

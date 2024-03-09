@@ -27,8 +27,8 @@ interface IResult {
   createdAt: string;
 }
 
-const fetcher = (url: string) =>
-  axios.get(url).then((response) => response.data);
+const fetcher = async (url: string) =>
+  await axios.get(url).then((response) => response.data);
 
 const Search = () => {
   const { data, error } = useSWR<ISearchList[]>("/api/search", fetcher);
@@ -57,8 +57,8 @@ const Search = () => {
       console.log(error);
     }
   };
-  // console.log(empty);
-  console.log(result);
+  console.log(empty);
+  console.log(data);
 
   useEffect(() => {
     preload("/api/search", fetcher);

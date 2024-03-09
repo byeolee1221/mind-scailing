@@ -50,7 +50,6 @@ export async function POST(req: Request) {
       }
     })
 
-
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
     console.log(error);
@@ -79,6 +78,7 @@ export async function DELETE(req: Request) {
   try {
     const deleteSearch = await prismadb.search.deleteMany();
 
+    // console.log(deleteSearch)
     return NextResponse.json({ status: 200 });
   } catch (error) {
     console.log(error);

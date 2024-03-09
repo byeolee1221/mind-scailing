@@ -53,6 +53,7 @@ model User {
   Post          Post[]
   Like          Like[]
   Comment       Comment[]
+  Diary         Diary[]
 }
 
 model VerificationToken {
@@ -111,6 +112,16 @@ model Comment {
 model Search {
   id        Int      @id @default(autoincrement())
   search    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Diary {
+  id        Int      @id @default(autoincrement())
+  diary     String
+  file      String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

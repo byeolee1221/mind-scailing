@@ -77,7 +77,6 @@ const Write = () => {
       if (response.status === 200) {
         form.reset();
         // 게시글 디테일 페이지 구현한 후 해당 페이지로 이동하도록 수정하기
-        router.refresh();
       }
     } catch (error: any) {
       console.log(error);
