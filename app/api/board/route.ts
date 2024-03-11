@@ -8,6 +8,7 @@ export async function POST(req: Request) {
     const session = await getServerSession(authOptions);
     const body = await req.json();
     const { post, file, category, userId, userEmail } = body;
+    let postLink;
 
     if (!session) {
       return new NextResponse("업로드하시려면 로그인해주세요.", {
@@ -30,7 +31,7 @@ export async function POST(req: Request) {
     });
 
     if (userCheck) {
-      await prismadb.post.create({
+      const createPost = await prismadb.post.create({
         data: {
           post,
           file,
@@ -42,9 +43,10 @@ export async function POST(req: Request) {
           },
         },
       });
+      postLink = createPost.id;
     }
 
-    return NextResponse.json({ status: 200 });
+    return NextResponse.json(postLink, { status: 200 });
   } catch (error) {
     console.log("board api에서 오류 발생", error);
     return new NextResponse("오류가 발생했으니 잠시 후 다시 업로드해주세요.", {
@@ -60,7 +62,7 @@ export async function GET(req: Request) {
         createdAt: "desc",
       },
       include: {
-        user: true
+        user: true,
       },
     });
 
@@ -70,7 +72,7 @@ export async function GET(req: Request) {
       return {
         ...post,
         createdAt: formattedDate,
-        userId: post.user.name
+        userId: post.user.name,
       };
     });
 

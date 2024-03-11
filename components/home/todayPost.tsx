@@ -4,7 +4,7 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import useSWR from "swr";
+import useSWR, { preload } from "swr";
 
 interface ITodayPost {
   id: number;
@@ -26,15 +26,18 @@ const TodayPost = () => {
   const [postError, setPostError] = useState("");
   const [empty, setEmpty] = useState("");
 
-  if (error) {
-    setPostError("오류가 발생하여 게시글을 가져오지 못했습니다.");
-  }
-
   useEffect(() => {
+    preload("/api/home", fetcher);
+
     if (data && data.length === 0) {
       setEmpty("게시글이 아직 없습니다.");
     }
   }, [data]);
+
+  if (error) {
+    console.log(error);
+    setPostError("오류가 발생하여 게시글을 가져오지 못했습니다.");
+  }
 
   return (
     <div className="flex flex-col items-start px-6">

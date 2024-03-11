@@ -64,45 +64,51 @@ const DiaryList = (props: any) => {
 
   return (
     <div className="flex flex-col space-y-3 w-full">
-      {!empty ? !resError ? (
-        filteredDiary.map((data: IDiaryList) => (
-          <div
-            key={data.id}
-            className="border p-2 rounded-md flex flex-col space-y-2 text-sm shadow-md"
-          >
-            <h1>{data.createdAt}</h1>
-            <p>{data.diary}</p>
-            <div className="flex flex-row-reverse">
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <button className="bg-slate-200 hover:bg-slate-300 p-2 w-20 rounded-lg transition-colors shadow-sm">
-                    삭제
-                  </button>
-                </AlertDialogTrigger>
-                <AlertDialogContent className="w-[90%] rounded-lg">
-                  <AlertDialogHeader className="text-left">
-                    <AlertDialogTitle>일기를 삭제하시겠어요?</AlertDialogTitle>
-                    <AlertDialogDescription>
-                      삭제하면 되돌릴 수 없습니다.
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <AlertDialogFooter className="gap-2">
-                    <AlertDialogAction
-                      onClick={() => onDelete(data.id)}
-                      className="bg-slate-200 hover:bg-slate-300 p-2 rounded-md transition-colors"
-                    >
-                      삭제하기
-                    </AlertDialogAction>
-                    <AlertDialogCancel>취소</AlertDialogCancel>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
+      {!empty ? (
+        !resError ? (
+          filteredDiary?.map((data: IDiaryList) => (
+            <div
+              key={data.id}
+              className="border p-2 rounded-md flex flex-col space-y-2 text-sm shadow-md"
+            >
+              <h1>{data.createdAt}</h1>
+              <p>{data.diary}</p>
+              <div className="flex flex-row-reverse">
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <button className="bg-slate-200 hover:bg-slate-300 p-2 w-20 rounded-lg transition-colors shadow-sm">
+                      삭제
+                    </button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent className="w-[90%] rounded-lg">
+                    <AlertDialogHeader className="text-left">
+                      <AlertDialogTitle>
+                        일기를 삭제하시겠어요?
+                      </AlertDialogTitle>
+                      <AlertDialogDescription>
+                        삭제하면 되돌릴 수 없습니다.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter className="gap-2">
+                      <AlertDialogAction
+                        onClick={() => onDelete(data.id)}
+                        className="bg-slate-200 hover:bg-slate-300 p-2 rounded-md transition-colors"
+                      >
+                        삭제하기
+                      </AlertDialogAction>
+                      <AlertDialogCancel>취소</AlertDialogCancel>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </div>
             </div>
-          </div>
-        ))
+          ))
+        ) : (
+          <p className="text-center">업로드한 일기가 없습니다.</p>
+        )
       ) : (
-        <p className="text-center">업로드한 일기가 없습니다.</p>
-      ) : <p className="text-center">{resError}</p>}
+        <p className="text-center">{resError}</p>
+      )}
     </div>
   );
 };

@@ -4,7 +4,6 @@ import CommentBtn from "@/components/board/boardDetail/commentBtn";
 import LikeBtn from "@/components/board/boardDetail/likeBtn";
 import ViewCount from "@/components/board/boardDetail/viewCount";
 import NavBar from "@/components/navBar";
-import { btnClickEffect } from "@/lib/style";
 import axios from "axios";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -96,9 +95,6 @@ const PostDetail = () => {
                 <div className="flex items-center space-x-3">
                   <LikeBtn id={id} />
                   <CommentBtn id={id} />
-                  <button className={btnClickEffect}>
-                    <Image src="/paper.png" alt="DM" width={25} height={25} />
-                  </button>
                 </div>
                 <div className="flex items-center space-x-3 text-sm text-gray-500 select-none">
                   <p>공감 {post?.data.like}개</p>

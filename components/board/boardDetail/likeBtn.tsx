@@ -1,6 +1,5 @@
 "use client";
 
-import { btnClickEffect } from "@/lib/style";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -32,7 +31,7 @@ const LikeBtn = (props: any) => {
 
   return (
     <>
-      <button onClick={onClick} className={btnClickEffect}>
+      <button onClick={onClick} className="btnClickEffect">
         <Image src="/like.png" alt="좋아요" width={25} height={25} />
       </button>
     </>

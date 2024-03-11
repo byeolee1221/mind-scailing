@@ -29,7 +29,6 @@ const PostList = () => {
   const [postError, setPostError] = useState("");
   const pathname = usePathname();
   let filteredPost;
-  mutate("/api/board");
 
   if (data) {
     filteredPost = data.filter(

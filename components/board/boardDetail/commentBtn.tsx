@@ -8,7 +8,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { btnClickEffect } from "@/lib/style";
 import { cls } from "@/lib/styleUtil";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
@@ -58,7 +57,7 @@ const CommentBtn = (props: any) => {
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <button className={btnClickEffect}>
+        <button className="btnClickEffect">
           <Image src="/comment.png" alt="댓글" width={25} height={25} />
         </button>
       </DrawerTrigger>
