@@ -33,10 +33,10 @@ const MyPost = () => {
   const [empty, setEmpty] = useState("");
 
   useEffect(() => {
-      if (!session) {
-        alert("이용하시려면 로그인해주세요!");
-        router.push("/");
-      }
+    if (!session) {
+      alert("이용하시려면 로그인해주세요!");
+      router.push("/");
+    }
 
     preload("/api/myPost", fetcher);
 
@@ -47,7 +47,7 @@ const MyPost = () => {
 
   return (
     <NavBar title="내 글" pageBack hasTabBar>
-      <div className="w-full flex flex-col space-y-3 border-t">
+      <div className="w-full flex flex-col space-y-3 border-t dark:bg-slate-800 dark:text-white min-h-screen">
         <div className="border p-2 mt-4 flex flex-col">
           <Table>
             <TableHeader>

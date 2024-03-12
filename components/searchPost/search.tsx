@@ -71,10 +71,10 @@ const Search = () => {
   }, [data]);
 
   return (
-    <div className="w-full">
+    <div className="w-full min-h-screen">
       <div className="flex flex-col items-start space-y-1">
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
-          <div className="flex items-center space-x-1 pl-2 border-b">
+          <div className="flex items-center space-x-1 pl-2 border-b dark:bg-slate-500">
             <Image src="/searchPost.png" alt="검색" width={20} height={20} />
             <input
               {...form.register("search")}
@@ -82,7 +82,7 @@ const Search = () => {
               name="search"
               placeholder="검색할 내용을 입력하세요."
               className={cls(
-                "w-full p-2 text-sm focus:outline-none",
+                "w-full p-2 text-sm focus:outline-none dark:bg-slate-500 dark:text-white",
                 error ? "bg-red-200" : ""
               )}
             />
@@ -92,14 +92,18 @@ const Search = () => {
         <div className="w-full flex flex-col space-y-1 px-1">
           {!empty ? (
             <div className="flex flex-col items-start border-b pb-1.5 px-2">
-              <h1 className="text-sm text-gray-500">검색내역</h1>
+              <h1 className="text-sm text-gray-500 dark:text-gray-300">
+                검색내역
+              </h1>
               {data?.map((search: ISearchList) => (
                 <button
                   key={search.id}
                   className="hover:bg-slate-200 w-full cursor-default text-sm py-1"
                 >
                   {search ? (
-                    <p className="text-start">{search.search}</p>
+                    <p className="text-start dark:text-white">
+                      {search.search}
+                    </p>
                   ) : (
                     "검색결과 없음"
                   )}
@@ -107,17 +111,19 @@ const Search = () => {
               ))}
             </div>
           ) : (
-            <p className="text-center text-sm mt-2">검색내역 없음</p>
+            <p className="text-center text-sm mt-2 dark:text-white">
+              검색내역 없음
+            </p>
           )}
           {!empty && <SearchReset />}
         </div>
       </div>
-      <div className="px-6 mt-7 text-sm">
+      <div className="px-6 mt-7 text-sm dark:text-white">
         {result?.map((post: IResult) => (
           <Link
             href={`/board/${post.cetegory}/${post.id}`}
             key={post.id}
-            className="flex flex-col items-start p-5 space-y-5 border-2 border-green-500 rounded-md shadow-sm"
+            className="flex flex-col items-start p-5 space-y-5 border-2 border-green-500 rounded-md shadow-sm dark:bg-slate-700"
           >
             <div className="flex items-center justify-between w-full">
               <div className="flex items-center space-x-2">
@@ -132,25 +138,49 @@ const Search = () => {
                 </div>
               </div>
               <button className="hover:bg-slate-300 p-1 rounded-full transition-colors">
-                <Image src="/menu.png" alt="메뉴바" width={20} height={20} />
+                <Image
+                  src="/menu.png"
+                  alt="메뉴바"
+                  width={20}
+                  height={20}
+                  className="dark:invert"
+                />
               </button>
             </div>
             <p>{post.post}</p>
             <div className="flex items-center justify-between w-full">
               <div className="w-full space-x-8 flex items-center">
                 <div className="flex items-center space-x-2">
-                  <Image src="/like.png" alt="좋아요" width={20} height={20} />
+                  <Image
+                    src="/like.png"
+                    alt="좋아요"
+                    width={20}
+                    height={20}
+                    className="dark:invert"
+                  />
                   <span className="font-medium">공감 {post.like}</span>
                   <span className="bg-slate-200 px-1 rounded-sm shadow-sm select-none"></span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Image src="/comment.png" alt="댓글" width={20} height={20} />
+                  <Image
+                    src="/comment.png"
+                    alt="댓글"
+                    width={20}
+                    height={20}
+                    className="dark:invert"
+                  />
                   <span className="font-medium">댓글 {post.commentCount}</span>
                   <span className="bg-slate-200 px-1 rounded-sm shadow-sm select-none"></span>
                 </div>
               </div>
               <div className="flex items-center space-x-2">
-                <Image src="/view.png" alt="조회" width={20} height={20} />
+                <Image
+                  src="/view.png"
+                  alt="조회"
+                  width={20}
+                  height={20}
+                  className="dark:invert"
+                />
                 <span>{post.view}</span>
               </div>
             </div>

@@ -13,8 +13,6 @@ const SearchPost = () => {
   const [isSearch, setIsSearch] = useState(false);
   const { data, error } = useSWR("/api/search", fetcher);
 
-  
-
   return (
     <div className="w-full space-y-2">
       <NavBar title="검색" hasTabBar pageBack>

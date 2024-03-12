@@ -81,8 +81,8 @@
   }
   .btnClickEffect {
     @apply p-1 active:ring-2 ring-green-500 active:ring-offset-2 rounded-full transition-all;
-  } 
+  }
   .greenBtn {
-    @apply bg-green-300 hover:bg-green-400 px-5 py-2 rounded-lg transition-all shadow-sm font-semibold;
+    @apply bg-green-300 hover:bg-green-400 px-5 py-2 rounded-lg transition-all shadow-sm font-semibold dark:bg-green-600 dark:hover:text-green-700;
   }
 }

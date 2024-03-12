@@ -19,7 +19,9 @@ export default function RootLayout({
     <html lang="ko">
       <body className={NotoSansKR.className}>
         <NextAuthProvider>
-          <div className="max-w-5xl text-gray-900">{children}</div>
+          <div className="max-w-5xl text-gray-900 dark:bg-slate-800 dark:text-white">
+            {children}
+          </div>
         </NextAuthProvider>
       </body>
     </html>

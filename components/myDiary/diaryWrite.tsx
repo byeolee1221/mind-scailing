@@ -82,8 +82,8 @@ const DiaryWrite = () => {
 
   return (
     <>
-      <div className="flex flex-col items-start space-y-2 border rounded-lg py-2 px-3 shadow-sm w-full">
-        <div className="flex items-center space-x-2 border-b w-full pb-2">
+      <div className="flex flex-col items-start space-y-2 border rounded-lg py-2 px-3 shadow-sm w-full dark:border-white">
+        <div className="flex items-center space-x-2 border-b w-full pb-2 dark:border-white">
           <Image
             src="/user.png"
             alt="프로필"

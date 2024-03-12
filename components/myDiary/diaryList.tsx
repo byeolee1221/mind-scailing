@@ -69,14 +69,14 @@ const DiaryList = (props: any) => {
           filteredDiary?.map((data: IDiaryList) => (
             <div
               key={data.id}
-              className="border p-2 rounded-md flex flex-col space-y-2 text-sm shadow-md"
+              className="border p-2 rounded-md flex flex-col space-y-2 text-sm shadow-md dark:bg-slate-700 dark:text-white"
             >
               <h1>{data.createdAt}</h1>
               <p>{data.diary}</p>
               <div className="flex flex-row-reverse">
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
-                    <button className="bg-slate-200 hover:bg-slate-300 p-2 w-20 rounded-lg transition-colors shadow-sm">
+                    <button className="bg-slate-200 hover:bg-slate-300 p-2 w-20 rounded-lg transition-colors shadow-sm dark:bg-slate-500 dark:hover:hover:bg-slate-600">
                       삭제
                     </button>
                   </AlertDialogTrigger>
