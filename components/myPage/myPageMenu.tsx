@@ -1,17 +1,23 @@
 "use client";
 
 import { Switch } from "@/components/ui/switch";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { themeDark, themeLight } from "@/slice/themeSlice";
 import Image from "next/image";
 import Link from "next/link";
 
 const MypageMenu = () => {
+  const dispatch = useAppDispatch();
+
   const onDark = () => {
     const currentTheme = localStorage.getItem("theme");
 
     if (currentTheme === "light") {
       localStorage.setItem("theme", "dark");
+      dispatch(themeDark());
     } else {
       localStorage.setItem("theme", "light");
+      dispatch(themeLight());
     }
   };
 
@@ -34,11 +40,11 @@ const MypageMenu = () => {
         <div className="flex items-center space-x-5 pt-4">
           <Image
             src="/myPageHeart.png"
-            alt="내가 좋아요한 글"
+            alt="내가 공감한 글"
             width={30}
             height={30}
           />
-          <button>내가 공감한 글</button>
+          <Link href="/myPage/likePost">내가 공감한 글</Link>
         </div>
         <div className="flex items-center space-x-5 pt-4">
           <Image src="/alarm.png" alt="알림" width={30} height={30} />

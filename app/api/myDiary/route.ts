@@ -13,10 +13,6 @@ export async function POST(req: Request) {
       return new NextResponse("이용하시려면 로그인해주세요!", { status: 401 });
     }
 
-    if (session.user?.email !== user.email) {
-      return new NextResponse("잘못된 접근입니다.", { status: 401 });
-    }
-
     const createDiary = await prismadb.diary.create({
       data: {
         diary,
@@ -31,7 +27,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ status: 200 });
   } catch (error) {
-    console.log("myDiary API에서 오류 발생", error);
+    console.log("myDiary POST API에서 오류 발생", error);
     return new NextResponse(
       "오류가 발생하여 업로드되지 않았습니다. 잠시 후 다시 시도해주세요.",
       { status: 500 }
@@ -81,7 +77,11 @@ export async function GET(req: Request) {
       include: {
         user: true,
       },
-      where: {},
+      where: {
+        user: {
+          email: session.user?.email
+        }
+      },
     });
 
     resultData = findDiary.map((data) => {

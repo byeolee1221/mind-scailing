@@ -4,10 +4,8 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import useSWR from "swr";
 import MyIntroduce from "./myIntroduce";
-
 interface IMypage {
   name: string;
   email: string;
@@ -23,7 +21,6 @@ const fetcher = (url: string) =>
 const ProfileCard = () => {
   const { data } = useSWR<IMypage>("/api/myPage", fetcher);
   const { data: session } = useSession();
-  const router = useRouter();
 
   return (
     <div className="bg-white overflow-hidden rounded-3xl w-full h-72 shadow-xl dark:bg-slate-600 dark:text-white">
@@ -45,7 +42,7 @@ const ProfileCard = () => {
               className="w-16 p-2 rounded-full ml-2"
             />
           )}
-          <div className="flex items-center justify-between w-full select-none">
+          <div className="flex items-center justify-between w-full select-none px-4">
             <h1 className="font-bold">
               {session ? data?.name : "로그인해주세요."}
             </h1>
@@ -53,7 +50,7 @@ const ProfileCard = () => {
               {session ? (data?.role === "USER" ? "일반회원" : "관리자") : null}
             </p>
           </div>
-          <div className="flex flex-col space-y-10 items-start w-full">
+          <div className="flex flex-col space-y-10 items-start w-full px-4">
             <p className="font-medium text-sm">
               {session
                 ? data?.introduce

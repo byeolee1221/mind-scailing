@@ -1,5 +1,3 @@
-"use client";
-
 import DiaryWrite from "@/components/myDiary/diaryWrite";
 import NavBar from "@/components/navBar";
 

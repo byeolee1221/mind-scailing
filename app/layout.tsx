@@ -1,25 +1,40 @@
-import type { Metadata } from "next";
+"use client";
+
 import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 import { NextAuthProvider } from "@/lib/nextauthProvider";
+import { cls } from "@/lib/styleUtil";
+import StoreProvider from "./storeProvider";
+import { useEffect, useState } from "react";
+import Providers from "./reduxProvider";
 
 const NotoSansKR = Noto_Sans_KR({ subsets: ["latin"], weight: "400" });
-
-export const metadata: Metadata = {
-  title: "마인드스케일링 | Mind Scailing",
-  description: "마음이 가벼워 지는 곳, 마인드스케일링",
-};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [theme, setTheme] = useState("light");
+  // console.log(theme);
+  useEffect(() => {
+    const themeValue = localStorage.getItem("theme");
+
+    if (themeValue) {
+      setTheme(themeValue);
+    }
+  }, []);
+
   return (
     <html lang="ko">
       <body className={NotoSansKR.className}>
         <NextAuthProvider>
-          <div className="max-w-5xl text-gray-900 dark:bg-slate-800 dark:text-white">
+          <div
+            className={cls(
+              "max-w-5xl text-gray-900 dark:bg-slate-800 dark:text-white transition-all",
+              theme === "dark" ? "dark" : ""
+            )}
+          >
             {children}
           </div>
         </NextAuthProvider>

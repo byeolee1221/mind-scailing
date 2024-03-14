@@ -59,20 +59,20 @@ const PostList = () => {
           <Link
             key={post.id}
             href={`${pathname}/${post.id}`}
-            className="flex flex-col items-start p-3 space-y-5 border-2 border-green-500 rounded-md shadow-sm"
+            className="flex flex-col items-start p-3 space-y-5 border-2 border-green-500 rounded-md shadow-sm dark:bg-slate-500 dark:text-white"
           >
             <div className="flex items-center justify-between w-full">
               <div className="flex items-center space-x-2">
-                <Image
-                  src="/user.png"
+                <img
+                  src={post.avatar}
                   alt="프로필"
-                  width={40}
-                  height={40}
-                  className="bg-slate-300 p-2 rounded-full"
+                  className="bg-slate-300 rounded-full w-10"
                 />
                 <div className="flex flex-col items-start">
                   <h1 className="font-semibold text-sm">{post.userId}</h1>
-                  <p className="text-xs text-gray-500">{post.createdAt}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-900">
+                    {post.createdAt}
+                  </p>
                 </div>
               </div>
               <button className="hover:bg-slate-300 p-1 rounded-full transition-colors">
@@ -85,22 +85,40 @@ const PostList = () => {
             <div className="flex items-center justify-between w-full">
               <div className="flex items-center justify-between w-full">
                 <div className="flex items-center space-x-2">
-                  <Image src="/like.png" alt="좋아요" width={20} height={20} />
+                  <Image
+                    src="/like.png"
+                    alt="좋아요"
+                    width={20}
+                    height={20}
+                    className="dark:invert"
+                  />
                   <span className="font-semibold text-sm">공감</span>
-                  <span className="bg-slate-200 px-1 rounded-sm shadow-sm select-none text-sm">
+                  <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm">
                     {post.like}
                   </span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Image src="/comment.png" alt="댓글" width={20} height={20} />
+                  <Image
+                    src="/comment.png"
+                    alt="댓글"
+                    width={20}
+                    height={20}
+                    className="dark:invert"
+                  />
                   <span className="font-semibold text-sm">댓글</span>
-                  <span className="bg-slate-200 px-1 rounded-sm shadow-sm select-none text-sm">
+                  <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm">
                     {post.commentCount}
                   </span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Image src="/view.png" alt="조회" width={20} height={20} />
-                  <span className="bg-slate-200 px-1 rounded-sm shadow-sm select-none text-sm">
+                  <Image
+                    src="/view.png"
+                    alt="조회"
+                    width={20}
+                    height={20}
+                    className="dark:invert"
+                  />
+                  <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm">
                     {post.view}
                   </span>
                 </div>

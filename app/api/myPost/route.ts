@@ -15,9 +15,11 @@ export async function GET(req: Request) {
       orderBy: {
         createdAt: "asc",
       },
-      include: {
-        user: true
-      },
+      where: {
+        user: {
+          email: session.user?.email
+        }
+      }
     });
 
     return NextResponse.json(getPost, { status: 200 });

@@ -23,25 +23,11 @@ const Board = () => {
     };
 
     setName(nameMapping[pathname] || "관계고민 커뮤니티");
-
-    // if (pathname === "/board/daily") {
-    //   setName("일상고민 커뮤니티");
-    // } else if (pathname === "/board/company") {
-    //   setName("직장고민 커뮤니티");
-    // } else if (pathname === "/board/employment") {
-    //   setName("취업고민 커뮤니티");
-    // } else if (pathname === "/board/study") {
-    //   setName("학업고민 커뮤니티");
-    // } else if (pathname === "/board/health") {
-    //   setName("건강고민 커뮤니티");
-    // } else {
-    //   setName("관계고민 커뮤니티");
-    // }
   }, [pathname]);
 
   return (
     <NavBar title={name} hasTabBar pageBack>
-      <div className="px-8 space-y-6 mt-4 mb-10">
+      <div className="px-8 space-y-6 mt-4 mb-10 min-h-screen">
         {session ? (
           <Write />
         ) : (

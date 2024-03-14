@@ -8,7 +8,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { mutate } from "swr";
+import useSWR, { mutate, preload } from "swr";
 
 interface IUser {
   name: string;
@@ -30,27 +30,19 @@ interface IPost {
   data: IPostDetail;
 }
 
+const fetcher = (url: string) =>
+  axios.get(url).then((response) => response.data);
+
 const PostDetail = () => {
   const params = useParams<{ id: string }>();
   const [post, setPost] = useState<IPost | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const id = params.id;
+  const { data } = useSWR(`/api/board/boardDetail?postId=${id}`, fetcher);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.post("/api/board/boardDetail", {
-        id,
-      });
-
-      if (response.status === 200) {
-        setPost(response.data);
-        mutate("/api/board/boardDetail");
-      }
-      setIsLoading(false);
-    };
-
-    fetchData();
-  }, []);
+    mutate("/api/board/boardDetail?postId=${id}");
+  }, [data]);
 
   return (
     <NavBar title="게시글" hasTabBar pageBack>
@@ -59,15 +51,10 @@ const PostDetail = () => {
           <div className="flex flex-col items-start space-y-3">
             <div className="flex items-center justify-between w-full">
               <div className="flex items-center space-x-2">
-                <img
-                  src={post?.data.user.image}
-                  className="rounded-full w-10"
-                />
+                <img src={data?.findPost.user.image} className="rounded-full w-10" />
                 <div className="flex flex-col items-start">
-                  <h1 className="text-sm font-semibold">
-                    {post?.data.user.name}
-                  </h1>
-                  <p className="text-xs text-gray-500">{post?.createdAt}</p>
+                  <h1 className="text-sm font-semibold">{data?.findPost.user.name}</h1>
+                  <p className="text-xs text-gray-500">{data?.formattedDate}</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
@@ -84,10 +71,10 @@ const PostDetail = () => {
               </div>
             </div>
             <div className="flex flex-col space-y-2 w-full">
-              <p className="whitespace-pre-line">{post?.data.post}</p>
-              {post?.data.file ? (
+              <p className="whitespace-pre-line">{data?.findPost.post}</p>
+              {data?.findPost.file ? (
                 <img
-                  src={post?.data.file}
+                  src={data?.findPost.file}
                   className="bg-slate-300 rounded-lg shadow-sm"
                 />
               ) : null}
@@ -97,8 +84,8 @@ const PostDetail = () => {
                   <CommentBtn id={id} />
                 </div>
                 <div className="flex items-center space-x-3 text-sm text-gray-500 select-none">
-                  <p>공감 {post?.data.like}개</p>
-                  <p>댓글 {post?.data.commentCount}개</p>
+                  <p>공감 {data?.findPost.like}개</p>
+                  <p>댓글 {data?.findPost.commentCount}개</p>
                 </div>
               </div>
             </div>

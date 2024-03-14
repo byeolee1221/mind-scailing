@@ -34,6 +34,7 @@ const Search = () => {
   const { data, error } = useSWR<ISearchList[]>("/api/search", fetcher);
   const [result, setResult] = useState<IResult[]>([]);
   const [empty, setEmpty] = useState(true);
+  
   const form = useForm<z.infer<typeof searchSchema>>({
     resolver: zodResolver(searchSchema),
     defaultValues: {
@@ -57,8 +58,8 @@ const Search = () => {
       console.log(error);
     }
   };
-  console.log(empty);
-  console.log(data);
+  // console.log(empty);
+  // console.log(data);
 
   useEffect(() => {
     preload("/api/search", fetcher);

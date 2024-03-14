@@ -27,7 +27,7 @@ const fetcher = (url: string) =>
   axios.get(url).then((response) => response.data);
 
 const MyPost = () => {
-  const { data, error } = useSWR<IMyPost[]>("/api/myPost", fetcher);
+  const { data } = useSWR<IMyPost[]>("/api/myPost", fetcher);
   const { data: session } = useSession();
   const router = useRouter();
   const [empty, setEmpty] = useState("");
@@ -70,6 +70,7 @@ const MyPost = () => {
                   <TableCell className="text-right">{post.view}</TableCell>
                 </TableRow>
               ))}
+              {empty ? <p className="text-center text-sm">{empty}</p> : null}
             </TableBody>
           </Table>
         </div>
