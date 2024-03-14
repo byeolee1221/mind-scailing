@@ -48,7 +48,7 @@ const MypageMenu = () => {
         </div>
         <div className="flex items-center space-x-5 pt-4">
           <Image src="/alarm.png" alt="알림" width={30} height={30} />
-          <Link href="">알림</Link>
+          <Link href="/myPage/alarm">알림</Link>
         </div>
         <div className="flex items-center space-x-5 pt-4">
           <Image src="/setting.png" alt="회원관리" width={30} height={30} />

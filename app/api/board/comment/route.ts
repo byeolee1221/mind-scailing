@@ -63,8 +63,19 @@ export async function POST(req: Request) {
         return new NextResponse("해당 게시글을 찾을 수 없습니다.", { status: 500 });
       }
     }
+
+    const sendAlarm = await prismadb.alarm.create({
+      data: {
+        toUser: createComment?.userId!,
+        category: "댓글"
+      },
+      include: {
+        user: true
+      }
+    })
     
     // console.log(createComment);
+    
     return NextResponse.json({ status: 200 });
   } catch (error) {
     console.log(error);

@@ -35,7 +35,7 @@ export async function POST(req: Request) {
       // console.log(existingLike)
       // 이미 좋아요를 누르면 좋아요가 취소되도록 함. 그게 아니라면 좋아요가 1 증가하도록 함.
       if (existingLike) {
-        await prismadb.like.delete({
+        const likeCancel = await prismadb.like.delete({
           where: {
             postId_userId: {
               postId: +id,
@@ -55,13 +55,13 @@ export async function POST(req: Request) {
           },
         });
       } else {
-        await prismadb.like.create({
+        const createLike = await prismadb.like.create({
           data: {
             userId,
             postId: +id,
           },
         });
-
+        console.log(createLike)
         await prismadb.post.update({
           where: {
             id: +id,
@@ -72,10 +72,19 @@ export async function POST(req: Request) {
             },
           },
         });
+
+        const createAlarm = await prismadb.alarm.create({
+          data: {
+            toUser: createLike.userId,
+            category: "공감"
+          },
+          include: {
+            user: true
+          }
+        });
+        console.log(createAlarm)
       }
     }
-
-    // console.log(post);
 
     return NextResponse.json({ status: 200 });
   } catch (error) {

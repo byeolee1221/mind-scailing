@@ -8,6 +8,7 @@ import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 
 const Home = async () => {
   // const session = await getServerSession(authOptions);
@@ -22,9 +23,9 @@ const Home = async () => {
           </h1>
           <p className="text-sm">오늘은 어떤 하루를 보내셨나요?</p>
         </div>
-        <button className="bg-slate-200 p-2 rounded-full hover:bg-slate-300 transition-colors">
+        <Link href="/myPage/alarm" className="bg-slate-200 p-2 rounded-full hover:bg-slate-300 transition-colors">
           <Image src="/notifications.png" alt="알림" width={30} height={30} />
-        </button>
+        </Link>
       </div>
       <div className="bg-green-500 mx-6 rounded-3xl shadow-xl p-5 space-y-2">
         <div className="space-y-2 text-sm">

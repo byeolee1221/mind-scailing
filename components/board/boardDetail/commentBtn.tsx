@@ -19,6 +19,8 @@ import { z } from "zod";
 import CommentList from "./commentList";
 import { mutate } from "swr";
 
+type Avatar = string;
+
 const CommentBtn = (props: any) => {
   const { data: session } = useSession();
   const [error, setError] = useState(false);
@@ -71,12 +73,10 @@ const CommentBtn = (props: any) => {
             <div className="border-t w-full px-4">
               {session ? (
                 <div className="flex items-center space-x-2 py-3">
-                  <Image
-                    src="/user.png"
+                  <img
+                    src={session.user?.image!}
                     alt="프로필"
-                    width={40}
-                    height={40}
-                    className="p-2 bg-slate-300 rounded-full"
+                    className="w-10 h-10 bg-slate-300 rounded-full"
                   />
                   <form
                     onSubmit={form.handleSubmit(onSubmit)}
