@@ -48,7 +48,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(postLink, { status: 200 });
   } catch (error) {
-    console.log("board api에서 오류 발생", error);
+    console.log("board POST API에서 오류 발생", error);
     return new NextResponse("오류가 발생했으니 잠시 후 다시 업로드해주세요.", {
       status: 500,
     });
@@ -79,7 +79,7 @@ export async function GET(req: Request) {
 
     return NextResponse.json(formattedPosts, { status: 200 });
   } catch (error) {
-    console.log(error);
+    console.log("board GET API에서 오류 발생", error);
     return new NextResponse("오류가 발생하여 게시글을 가져오지 못했습니다.", {
       status: 500,
     });

@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import useSWR, { mutate } from "swr";
+import useSWR from "swr";
 
 interface IPostList {
   id: number;
@@ -34,7 +34,7 @@ const PostList = () => {
     filteredPost = data.filter(
       (post: IPostList) => post.category === currentCategory
     );
-  }
+  } 
 
   if (error) {
     setPostError("오류가 발생하여 게시글을 가져오지 못했습니다.");

@@ -49,7 +49,7 @@ export async function POST(req: Request) {
           },
         });
 
-        await prismadb.post.update({
+        const updatePost = await prismadb.post.update({
           where: {
             id: +postId
           },
@@ -59,21 +59,22 @@ export async function POST(req: Request) {
             }
           }
         })
+        const sendAlarm = await prismadb.alarm.create({
+          data: {
+            toUser: createComment?.userId!,
+            category: "댓글",
+            postId: updatePost.id
+          },
+          include: {
+            user: true,
+            post: true
+          }
+        })
       } else {
         return new NextResponse("해당 게시글을 찾을 수 없습니다.", { status: 500 });
       }
     }
 
-    const sendAlarm = await prismadb.alarm.create({
-      data: {
-        toUser: createComment?.userId!,
-        category: "댓글"
-      },
-      include: {
-        user: true
-      }
-    })
-    
     // console.log(createComment);
     
     return NextResponse.json({ status: 200 });

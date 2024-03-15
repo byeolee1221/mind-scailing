@@ -35,7 +35,6 @@ const fetcher = (url: string) =>
 
 const PostDetail = () => {
   const params = useParams<{ id: string }>();
-  const [post, setPost] = useState<IPost | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const id = params.id;
   const { data } = useSWR(`/api/board/boardDetail?postId=${id}`, fetcher);

@@ -55,14 +55,14 @@ export async function POST(req: Request) {
           },
         });
       } else {
-        const createLike = await prismadb.like.create({
+        await prismadb.like.create({
           data: {
             userId,
             postId: +id,
           },
         });
-        console.log(createLike)
-        await prismadb.post.update({
+
+        const updatePost = await prismadb.post.update({
           where: {
             id: +id,
           },
@@ -75,14 +75,16 @@ export async function POST(req: Request) {
 
         const createAlarm = await prismadb.alarm.create({
           data: {
-            toUser: createLike.userId,
-            category: "공감"
+            toUser: updatePost.userId,
+            category: "공감",
+            postId: updatePost.id
           },
           include: {
-            user: true
+            user: true,
+            post: true
           }
         });
-        console.log(createAlarm)
+        console.log(createAlarm);
       }
     }
 
