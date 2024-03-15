@@ -29,6 +29,8 @@ const Alarm = () => {
   useEffect(() => {
     if (data && data.length === 0) {
       setEmpty(true);
+    } else {
+      setEmpty(false);
     }
   }, []);
 
@@ -49,7 +51,7 @@ const Alarm = () => {
 
   return (
     <NavBar title="내 알림" pageBack hasTabBar>
-      <div className="w-full min-h-screen divide-y flex flex-col space-y-2 px-2">
+      <div className="w-full min-h-screen divide-y flex flex-col space-y-2 px-2 dark:text-white">
         {empty && (
           <p className="text-center mt-2">받은 알림이 아직 없습니다.</p>
         )}
@@ -72,7 +74,7 @@ const Alarm = () => {
                 </Link>
                 <button
                   onClick={() => onDelete(item.alarmId)}
-                  className="border p-2 rounded-md shadow-sm text-sm hover:bg-slate-200 transition-colors"
+                  className="border p-2 rounded-md shadow-sm text-sm hover:bg-slate-200 transition-colors dark:border-white dark:bg-green-600 dark:hover:bg-green-700"
                 >
                   삭제
                 </button>

@@ -32,7 +32,13 @@ const LikeBtn = (props: any) => {
   return (
     <>
       <button onClick={onClick} className="btnClickEffect">
-        <Image src="/like.png" alt="좋아요" width={25} height={25} />
+        <Image
+          src="/like.png"
+          alt="좋아요"
+          width={25}
+          height={25}
+          className="dark:invert"
+        />
       </button>
     </>
   );

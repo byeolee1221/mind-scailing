@@ -72,10 +72,9 @@ const DiaryWrite = () => {
 
       if (response.status === 200) {
         setClose(true);
-        // console.log(response.data);
       }
     } catch (error) {
-      console.log(error);
+      console.log("dirayWrite 클라이언트에서 오류 발생", error);
       alert("오류가 발생하여 업로드되지 않았습니다. 다시 시도해주세요.");
     }
   };

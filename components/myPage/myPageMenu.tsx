@@ -1,7 +1,7 @@
 "use client";
 
 import { Switch } from "@/components/ui/switch";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { useAppDispatch } from "@/lib/hooks";
 import { themeDark, themeLight } from "@/slice/themeSlice";
 import Image from "next/image";
 import Link from "next/link";
@@ -29,9 +29,7 @@ const MypageMenu = () => {
             <Image src="/moon.png" alt="다크모드" width={30} height={30} />
             <p>다크모드 전환</p>
           </label>
-          <button onClick={onDark}>
-            <Switch id="dark" className="dark:bg-white" />
-          </button>
+          <Switch id="dark" onClick={onDark} className="dark:invert" />
         </div>
         <div className="flex items-center space-x-5 pt-4">
           <Image src="/board.png" alt="게시글" width={30} height={30} />

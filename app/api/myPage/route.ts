@@ -63,18 +63,18 @@ export async function POST(req: Request) {
     const checkProfileEmpty = await prismadb.profile.findMany({
       where: {
         user: {
-          email: session.user!.email!,
+          email: session.user?.email,
         },
       },
     });
-
-    if (!checkProfileEmpty) {
+    // console.log(checkProfileEmpty)
+    if (checkProfileEmpty.length === 0) {
       const createIntroduce = await prismadb.profile.create({
         data: {
           introduce,
           user: {
             connect: {
-              email: session.user!.email!,
+              email: session.user?.email!,
             },
           },
         },

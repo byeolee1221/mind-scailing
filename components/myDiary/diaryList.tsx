@@ -25,24 +25,26 @@ const fetcher = (url: string) =>
   axios.get(url).then((response) => response.data);
 
 const DiaryList = (props: any) => {
-  const { data } = useSWR("/api/myDiary", fetcher);
+  const { data } = useSWR<IDiaryList[]>("/api/myDiary", fetcher);
   const [empty, setEmpty] = useState(false);
   const [resError, setResError] = useState("");
-  let filteredDiary;
+  let filteredDiary: any;
 
   useEffect(() => {
     preload("/api/myDiary", fetcher);
-
-    if (data && data.length === 0) {
-      setEmpty(true);
-    }
-  }, [data]);
+  }, []);
 
   if (data) {
     filteredDiary = data.filter(
       (diary: IDiaryList) => diary.userEmail === props.session.user.email
     );
   }
+
+  useEffect(() => {
+    if (filteredDiary && filteredDiary.length === 0) {
+      setEmpty(true);
+    }
+  }, [filteredDiary]);
 
   // console.log(filteredDiary);
   const onDelete = async (id: number) => {
@@ -54,7 +56,7 @@ const DiaryList = (props: any) => {
       });
 
       if (response.status === 200) {
-        alert("삭제되었습니다.");
+        alert("일기가 삭제되었습니다.");
       }
     } catch (error: any) {
       console.log(error);
@@ -104,10 +106,12 @@ const DiaryList = (props: any) => {
             </div>
           ))
         ) : (
-          <p className="text-center">업로드한 일기가 없습니다.</p>
+          <p className="text-center">{resError}</p>
         )
       ) : (
-        <p className="text-center">{resError}</p>
+        <p className="text-center bg-slate-200 p-2 rounded-md">
+          업로드한 일기가 없습니다.
+        </p>
       )}
     </div>
   );

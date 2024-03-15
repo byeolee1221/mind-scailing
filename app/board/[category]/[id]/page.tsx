@@ -46,13 +46,18 @@ const PostDetail = () => {
   return (
     <NavBar title="게시글" hasTabBar pageBack>
       {!isLoading ? (
-        <div className="px-6 mt-4 space-y-6 mb-10">
+        <div className="px-6 mt-4 space-y-6 mb-10 min-h-screen dark:text-white">
           <div className="flex flex-col items-start space-y-3">
             <div className="flex items-center justify-between w-full">
               <div className="flex items-center space-x-2">
-                <img src={data?.findPost.user.image} className="rounded-full w-10" />
+                <img
+                  src={data?.findPost.user.image}
+                  className="rounded-full w-10"
+                />
                 <div className="flex flex-col items-start">
-                  <h1 className="text-sm font-semibold">{data?.findPost.user.name}</h1>
+                  <h1 className="text-sm font-semibold">
+                    {data?.findPost.user.name}
+                  </h1>
                   <p className="text-xs text-gray-500">{data?.formattedDate}</p>
                 </div>
               </div>
@@ -64,7 +69,7 @@ const PostDetail = () => {
                     alt="메뉴"
                     width={30}
                     height={30}
-                    className="hover:bg-slate-300 p-1 rounded-full"
+                    className="hover:bg-slate-300 p-1 rounded-full dark:invert"
                   />
                 </button>
               </div>
@@ -82,7 +87,7 @@ const PostDetail = () => {
                   <LikeBtn id={id} />
                   <CommentBtn id={id} />
                 </div>
-                <div className="flex items-center space-x-3 text-sm text-gray-500 select-none">
+                <div className="flex items-center space-x-3 text-sm text-gray-500 dark:text-white select-none">
                   <p>공감 {data?.findPost.like}개</p>
                   <p>댓글 {data?.findPost.commentCount}개</p>
                 </div>

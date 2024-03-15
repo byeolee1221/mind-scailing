@@ -24,17 +24,18 @@ const fetcher = (url: string) =>
 
 const PostList = () => {
   // useSWR 훅은 데이터를 비동기적으로 가져옴. 따라서 가져온 데이터를 필터링하려면 조건을 걸어줘야 함.
-  const { data, error } = useSWR("/api/board", fetcher);
+  const { data, error } = useSWR<IPostList[]>("/api/board", fetcher);
   const [currentCategory, setCurrentCategory] = useState("");
   const [postError, setPostError] = useState("");
+  const [empty, setEmpty] = useState(false);
   const pathname = usePathname();
-  let filteredPost;
+  let filteredPost: any;
 
   if (data) {
     filteredPost = data.filter(
       (post: IPostList) => post.category === currentCategory
     );
-  } 
+  }
 
   if (error) {
     setPostError("오류가 발생하여 게시글을 가져오지 못했습니다.");
@@ -52,8 +53,21 @@ const PostList = () => {
     setCurrentCategory(nameMapping[pathname] || "relationship");
   }, []);
 
+  useEffect(() => {
+    if (filteredPost && filteredPost.length === 0) {
+      setEmpty(true);
+    } else {
+      setEmpty(false);
+    }
+  }, [filteredPost]);
+
   return (
     <>
+      {empty && (
+        <p className="text-center mt-2 bg-slate-200 rounded-md p-2">
+          게시글이 아직 없습니다.
+        </p>
+      )}
       {!error ? (
         filteredPost?.map((post: IPostList) => (
           <Link

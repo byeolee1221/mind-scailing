@@ -60,7 +60,13 @@ const CommentBtn = (props: any) => {
     <Drawer>
       <DrawerTrigger asChild>
         <button className="btnClickEffect">
-          <Image src="/comment.png" alt="댓글" width={25} height={25} />
+          <Image
+            src="/comment.png"
+            alt="댓글"
+            width={25}
+            height={25}
+            className="dark:invert"
+          />
         </button>
       </DrawerTrigger>
       <DrawerContent>

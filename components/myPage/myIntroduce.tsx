@@ -40,7 +40,6 @@ const MyIntroduce = () => {
 
       if (postData.status === 200) {
         alert("자기소개글이 수정되었습니다.");
-
         form.reset();
         setClose(true);
       }

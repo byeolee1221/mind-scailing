@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { searchSchema } from "@/app/searchPost/constants";
@@ -34,7 +36,7 @@ const Search = () => {
   const { data, error } = useSWR<ISearchList[]>("/api/search", fetcher);
   const [result, setResult] = useState<IResult[]>([]);
   const [empty, setEmpty] = useState(true);
-  
+
   const form = useForm<z.infer<typeof searchSchema>>({
     resolver: zodResolver(searchSchema),
     defaultValues: {
@@ -55,7 +57,7 @@ const Search = () => {
 
       form.reset();
     } catch (error) {
-      console.log(error);
+      console.log("search 클라이언트에서 오류 발생", error);
     }
   };
   // console.log(empty);
@@ -69,7 +71,7 @@ const Search = () => {
     } else {
       setEmpty(false);
     }
-  }, [data]);
+  }, []);
 
   return (
     <div className="w-full min-h-screen">

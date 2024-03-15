@@ -8,7 +8,7 @@ const ShortPost = () => {
         <CarouselContent className="p-2">
           {Array.from({ length: 2 }).map((_, index) => (
             <CarouselItem key={index}>
-              <div className="flex items-center space-x-3 justify-around">
+              <div className="flex items-center space-x-3 justify-around dark:text-white">
                 {[1, 2, 3, 4, 5].map((item, i) => (
                   <button
                     key={i}

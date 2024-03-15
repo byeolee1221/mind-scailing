@@ -79,15 +79,15 @@ const Write = () => {
         router.push(`/board/${category}/${response.data}`);
       }
     } catch (error: any) {
-      console.log(error);
+      console.log("board write POST 클라이언트에서 오류 발생", error);
       setFormError(error?.response?.data);
       return;
     }
   };
 
   return (
-    <div className="flex flex-col items-start space-y-2 border rounded-lg py-2 px-3 shadow-sm">
-      <div className="flex items-center space-x-2 border-b w-full pb-2">
+    <div className="flex flex-col items-start space-y-2 border rounded-lg py-2 px-3 shadow-sm dark:border-white">
+      <div className="flex items-center space-x-2 border-b w-full pb-2 dark:border-white">
         <Image
           src="/user.png"
           alt="프로필"
