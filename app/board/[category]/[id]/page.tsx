@@ -1,14 +1,14 @@
 "use client";
 
 import CommentBtn from "@/components/board/boardDetail/commentBtn";
+import DetailPostMenu from "@/components/board/boardDetail/detailPostMenu";
 import LikeBtn from "@/components/board/boardDetail/likeBtn";
 import ViewCount from "@/components/board/boardDetail/viewCount";
 import NavBar from "@/components/navBar";
 import axios from "axios";
-import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import useSWR, { mutate, preload } from "swr";
+import useSWR, { mutate } from "swr";
 
 interface IUser {
   name: string;
@@ -63,15 +63,7 @@ const PostDetail = () => {
               </div>
               <div className="flex items-center space-x-4">
                 <ViewCount id={id} />
-                <button>
-                  <Image
-                    src="/menu.png"
-                    alt="메뉴"
-                    width={30}
-                    height={30}
-                    className="hover:bg-slate-300 p-1 rounded-full dark:invert"
-                  />
-                </button>
+                <DetailPostMenu user={data?.findPost.user.email} />
               </div>
             </div>
             <div className="flex flex-col space-y-2 w-full">

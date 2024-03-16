@@ -1,18 +1,15 @@
-"use client"
-
 import BoardList from "@/components/home/boardList";
 import SigninBtn from "@/components/home/signinBtn";
 import TalkAI from "@/components/home/talkAI";
 import TodayPost from "@/components/home/todayPost";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 
 const Home = async () => {
-  // const session = await getServerSession(authOptions);
-  const { data: session } = useSession();
+  const session = await getServerSession(authOptions);
+
 
   return (
     <div className="space-y-16 mb-10 dark:bg-slate-800 dark:text-white">

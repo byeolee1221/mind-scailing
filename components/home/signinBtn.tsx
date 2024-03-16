@@ -10,9 +10,20 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 const SigninBtn = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const [statusMsg, setStatusMsg] = useState("");
+
+  useEffect(() => {
+    if (status === "loading") {
+      setStatusMsg("로딩중...");
+    } else if (status === "authenticated") {
+      setStatusMsg("로그아웃하기");
+    }
+  }, [session]);
+
   const onSignin = () => {
     signIn("google");
   };
@@ -28,7 +39,7 @@ const SigninBtn = () => {
           <button className="whiteBgBtn">로그인하고 시작하기</button>
         ) : (
           <button onClick={onSignOut} className="whiteBgBtn">
-            로그아웃하기
+            {statusMsg}
           </button>
         )}
       </DialogTrigger>

@@ -6,11 +6,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
+import PostMenu from "./postMenu";
 
 interface IPostList {
   id: number;
   category: string;
   userId: string;
+  userEmail: string;
   avatar: string;
   post: string;
   commentCount: number;
@@ -30,13 +32,13 @@ const PostList = () => {
   const [empty, setEmpty] = useState(false);
   const pathname = usePathname();
   let filteredPost: any;
-
+  
   if (data) {
     filteredPost = data.filter(
       (post: IPostList) => post.category === currentCategory
     );
   }
-
+  
   if (error) {
     setPostError("오류가 발생하여 게시글을 가져오지 못했습니다.");
   }
@@ -89,9 +91,7 @@ const PostList = () => {
                   </p>
                 </div>
               </div>
-              <button className="hover:bg-slate-300 p-1 rounded-full transition-colors">
-                <Image src="/menu.png" alt="메뉴" width={20} height={20} />
-              </button>
+              <PostMenu user={post?.userEmail} />
             </div>
             <p className="text-sm h-10 text-ellipsis overflow-hidden">
               {post.post}

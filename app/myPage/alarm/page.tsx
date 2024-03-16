@@ -58,7 +58,7 @@ const Alarm = () => {
         {session ? (
           !error ? (
             data?.map((item) => (
-              <div className="flex items-center justify-around pt-2">
+              <div key={item.alarmId} className="flex items-center justify-around pt-2">
                 <Link
                   href={`/board/${item.postCategory}/${item.postId}`}
                   className="flex flex-col"
@@ -86,7 +86,7 @@ const Alarm = () => {
             </p>
           )
         ) : (
-          <p className="text-center">로그인이 필요한 서비스입니다.</p>
+          <p className="text-center mt-4">로그인이 필요한 서비스입니다.</p>
         )}
       </div>
     </NavBar>

@@ -73,6 +73,7 @@ export async function GET(req: Request) {
         ...post,
         createdAt: formattedDate,
         userId: post.user.name,
+        userEmail: post.user.email,
         avatar: post.user.image
       };
     });

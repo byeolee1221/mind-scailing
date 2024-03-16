@@ -23,7 +23,6 @@ const fetcher = (url: string) =>
 
 const TodayPost = () => {
   const { data, error } = useSWR("/api/home", fetcher);
-  const [postError, setPostError] = useState("");
   const [empty, setEmpty] = useState("");
 
   useEffect(() => {
@@ -33,11 +32,6 @@ const TodayPost = () => {
       setEmpty("게시글이 아직 없습니다.");
     }
   }, []);
-
-  if (error) {
-    console.log(error);
-    setPostError("오류가 발생하여 게시글을 가져오지 못했습니다.");
-  }
 
   return (
     <div className="flex flex-col items-start px-6">
@@ -50,7 +44,7 @@ const TodayPost = () => {
           {empty}
         </p>
       ) : null}
-      {!postError ? (
+      {!error ? (
         <div className="grid grid-cols-2 gap-x-5">
           {data?.map((post: ITodayPost) => (
             <Link
@@ -71,7 +65,7 @@ const TodayPost = () => {
                   <p className="text-gray-500 text-xs">{post.createdAt}</p>
                 </div>
               </div>
-              <p className="text-sm border-b-2 border-green-600 pb-2 h-12 text-ellipsis overflow-hidden w-full">
+              <p className="text-sm border-b-2 border-green-600 pb-2 h-12 text-ellipsis overflow-hidden w-full ...">
                 {post.post}
               </p>
               <div className="flex items-center justify-between w-full">
@@ -88,7 +82,9 @@ const TodayPost = () => {
           ))}
         </div>
       ) : (
-        <p className="text-red-500 text-sm">{postError}</p>
+        <p className="text-red-500 text-sm">
+          오류가 발생하여 게시글을 불러오지 못했습니다.
+        </p>
       )}
     </div>
   );
