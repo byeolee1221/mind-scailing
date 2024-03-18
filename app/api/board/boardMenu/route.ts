@@ -111,6 +111,17 @@ export async function POST(req: Request) {
         }
       });
     } else {
+      const checkAlreadyReport = await prismadb.report.findMany({
+        where: {
+          postId: postId,
+          fromUserId: findFromUser?.id
+        }
+      });
+      
+      if (checkAlreadyReport) {
+        return new NextResponse("이미 신고하신 게시글입니다.", { status: 422 });
+      }
+
       const updateReportCount = await prismadb.report.update({
         data: {
           report: {
@@ -122,6 +133,7 @@ export async function POST(req: Request) {
         }
       });
     }
+    
     return NextResponse.json({ status: 200 });
   } catch (error) {
     console.log("boardMenu POST API에서 오류 발생", error);

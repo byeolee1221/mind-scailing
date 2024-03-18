@@ -6,16 +6,19 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import useSWR, { preload } from "swr";
 
+interface IUser {
+  image: string;
+}
 interface ITodayPost {
   id: number;
   userId: string;
   category: string;
-  avatar: string;
   post: string;
   commentCount: number;
   view: number;
   like: number;
   createdAt: number;
+  user: IUser;
 }
 
 const fetcher = (url: string) =>
@@ -53,12 +56,10 @@ const TodayPost = () => {
               className="flex flex-col items-start space-y-2 bg-green-500 w-full rounded-xl shadow-xl p-3 mt-5"
             >
               <div className="flex items-center">
-                <Image
-                  src="/user.png"
+                <img
+                  src={post.user.image}
                   alt="프로필"
-                  width={35}
-                  height={35}
-                  className="bg-white rounded-full p-2"
+                  className="bg-white rounded-full w-7 h-7"
                 />
                 <div className="ml-2">
                   <h2 className="font-semibold text-xs">{post.userId}</h2>

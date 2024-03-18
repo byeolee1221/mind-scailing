@@ -43,44 +43,54 @@ export async function POST(req: Request) {
             },
             post: {
               connect: {
-                id: +postId
-              }
-            }
-          },
-        });
-
-        const updatePost = await prismadb.post.update({
-          where: {
-            id: +postId
-          },
-          data: {
-            commentCount: {
-              increment: 1
-            }
-          }
-        })
-        const sendAlarm = await prismadb.alarm.create({
-          data: {
-            toUser: createComment?.userId!,
-            category: "댓글",
-            postId: updatePost.id
+                id: +postId,
+              },
+            },
           },
           include: {
             user: true,
-            post: true
-          }
-        })
+          },
+        });
+        // console.log(createComment);
+        const updatePost = await prismadb.post.update({
+          where: {
+            id: +postId,
+          },
+          data: {
+            commentCount: {
+              increment: 1,
+            },
+          },
+        });
+
+        console.log(updatePost);
+        const sendAlarm = await prismadb.alarm.create({
+          data: {
+            toUser: updatePost.userId,
+            category: "댓글",
+            postId: updatePost.id,
+          },
+          include: {
+            user: true,
+            post: true,
+          },
+        });
+        // console.log(sendAlarm)
       } else {
-        return new NextResponse("해당 게시글을 찾을 수 없습니다.", { status: 500 });
+        return new NextResponse("해당 게시글을 찾을 수 없습니다.", {
+          status: 500,
+        });
       }
     }
 
     // console.log(createComment);
-    
+
     return NextResponse.json({ status: 200 });
   } catch (error) {
     console.log(error);
-    return new NextResponse("오류가 발생하였으니 잠시 후 다시 시도해주세요.", { status: 500 });
+    return new NextResponse("오류가 발생하였으니 잠시 후 다시 시도해주세요.", {
+      status: 500,
+    });
   }
 }
 
@@ -92,7 +102,7 @@ export async function GET(req: Request) {
       },
       include: {
         user: true,
-        post: true
+        post: true,
       },
     });
 
@@ -105,7 +115,7 @@ export async function GET(req: Request) {
         userName: comment.user.name,
         avatar: comment.user.image,
         id: comment.id,
-        postId: comment.postId
+        postId: comment.postId,
       };
     });
 

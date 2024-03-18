@@ -24,7 +24,7 @@ const LikePost = () => {
   const { data, error } = useSWR("/api/myPage/likePost", fetcher);
   const { data: session } = useSession();
   const router = useRouter();
-
+  console.log(data)
   useEffect(() => {
     if (!session) {
       alert("확인하시려면 로그인해주세요.");

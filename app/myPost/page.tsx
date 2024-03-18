@@ -70,9 +70,11 @@ const MyPost = () => {
                   <TableCell className="text-right">{post.view}</TableCell>
                 </TableRow>
               ))}
-              {empty ? <p className="text-center text-sm">{empty}</p> : null}
             </TableBody>
           </Table>
+          {empty ? (
+            <p className="text-center text-sm mt-2 w-full">{empty}</p>
+          ) : null}
         </div>
       </div>
     </NavBar>

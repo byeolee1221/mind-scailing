@@ -9,19 +9,15 @@ export async function GET(req: Request) {
     let resultPost;
 
     if (!session) {
-      return new NextResponse("확인하시려면 로그인해주세요.", { status: 401 });
+      return new NextResponse("로그인이 필요한 서비스입니다.", { status: 401 });
     }
 
     const findLike = await prismadb.like.findMany({
       where: {
-        post: {
-          user: {
-            email: session.user?.email,
-          },
-        },
+        userId: session.user?.email!
       },
     });
-
+    // console.log(findLike);
     const findId = findLike.map((data) => data.postId);
 
     if (findLike) {
@@ -35,8 +31,8 @@ export async function GET(req: Request) {
           },
         },
         include: {
-          user: true
-        }
+          user: true,
+        },
       });
       // console.log(findPost);
 
@@ -49,7 +45,7 @@ export async function GET(req: Request) {
           avatar: post.user.image,
           name: post.user.name,
           post: post.post,
-          category: post.category
+          category: post.category,
         };
       });
     }

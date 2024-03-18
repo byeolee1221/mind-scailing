@@ -8,10 +8,10 @@ export async function POST(req: Request) {
     const session = await getServerSession(authOptions);
     const body = await req.json();
     const { id, userId } = body;
-
+    // console.log(id, userId);
     // 유저 확인
     if (!session) {
-      return new NextResponse("공감을 누르려면 로그인해주세요.", {
+      return new NextResponse("로그인이 필요한 서비스입니다.", {
         status: 401,
       });
     }
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
           },
         },
       });
-      // console.log(existingLike)
+      // console.log(existingLike);
       // 이미 좋아요를 누르면 좋아요가 취소되도록 함. 그게 아니라면 좋아요가 1 증가하도록 함.
       if (existingLike) {
         const likeCancel = await prismadb.like.delete({
@@ -72,17 +72,17 @@ export async function POST(req: Request) {
             },
           },
         });
-
+        console.log(updatePost);
         const createAlarm = await prismadb.alarm.create({
           data: {
             toUser: updatePost.userId,
             category: "공감",
-            postId: updatePost.id
+            postId: updatePost.id,
           },
           include: {
             user: true,
-            post: true
-          }
+            post: true,
+          },
         });
         console.log(createAlarm);
       }
