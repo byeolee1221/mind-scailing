@@ -68,16 +68,18 @@ export async function GET(req: Request) {
 
     const formattedPosts = data.map((post) => {
       const date = new Date(post.createdAt);
+      const userCreate = new Date(post.user.createdAt); 
       const formattedDate = date.toISOString().slice(0, 10);
+      const formattedUserDate = userCreate.toISOString().slice(0, 10);
       return {
         ...post,
         createdAt: formattedDate,
         userId: post.user.name,
-        userEmail: post.user.email,
+        userCreatedAt: formattedUserDate,
         avatar: post.user.image
       };
     });
-
+    // console.log(formattedPosts);
     return NextResponse.json(formattedPosts, { status: 200 });
   } catch (error) {
     console.log("board GET API에서 오류 발생", error);

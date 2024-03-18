@@ -48,6 +48,8 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
   accounts      Account[]
   sessions      Session[]
   Post          Post[]
@@ -56,6 +58,7 @@ model User {
   Diary         Diary[]
   Profile       Profile[]
   Alarm         Alarm[]
+  Report        Report[]
 }
 
 model VerificationToken {
@@ -87,6 +90,7 @@ model Post {
   Like         Like[]
   Comment      Comment[]
   Alarm        Alarm[]
+  Report       Report[]
 }
 
 model Like {
@@ -147,4 +151,16 @@ model Alarm {
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Report {
+  id         Int      @id @default(autoincrement())
+  report     Int      @default(0)
+  targetId   String
+  fromUserId String
+  postId     Int
+  targetUser User     @relation(fields: [targetId], references: [id], onDelete: Cascade)
+  post       Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }

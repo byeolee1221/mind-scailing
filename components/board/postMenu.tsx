@@ -8,23 +8,41 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import {
-  ClipboardEditIcon,
-  MailXIcon,
-  ShieldAlert,
-  Trash,
-  User,
-} from "lucide-react";
+import { ClipboardEditIcon, ShieldAlert, Trash } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import MenuProfile from "./menuProfile";
+import MenuReport from "./menuReport";
 
-const PostMenu = (props: any) => {
+interface IUser {
+  name: string;
+  email: string;
+}
+
+interface IPostMenu {
+  id: number;
+  category: string;
+  userId: string;
+  avatar: string;
+  post: string;
+  commentCount: number;
+  view: number;
+  like: number;
+  createdAt: number;
+  user: IUser
+}
+
+interface IPost {
+  post: IPostMenu
+}
+
+const PostMenu = (props: IPost) => {
   const { data: session } = useSession();
   const [isMatch, setIsMatch] = useState(false);
-  // console.log(props.user);
+  // console.log(props);
 
   useEffect(() => {
-    if (props.user === session?.user?.email) {
+    if (props.post.user.email === session?.user?.email) {
       setIsMatch(true);
     } else {
       setIsMatch(false);
@@ -42,17 +60,9 @@ const PostMenu = (props: any) => {
         <DropdownMenuLabel>게시글 메뉴</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
+          {!isMatch ? <MenuProfile post={props.post} /> : null}
           {!isMatch ? (
-            <DropdownMenuItem>
-              <User className="mr-2 h-4 w-4" />
-              <span>프로필 보기</span>
-            </DropdownMenuItem>
-          ) : null}
-          {!isMatch ? (
-            <DropdownMenuItem>
-              <ShieldAlert className="mr-2 h-4 w-4" />
-              <span>게시글 신고</span>
-            </DropdownMenuItem>
+            <MenuReport />
           ) : (
             <DropdownMenuItem>
               <Trash className="mr-2 h-4 w-4" />

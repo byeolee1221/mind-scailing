@@ -8,17 +8,23 @@ import { useEffect, useState } from "react";
 import useSWR from "swr";
 import PostMenu from "./postMenu";
 
+interface IUser {
+  name: string;
+  email: string;
+}
+
 interface IPostList {
   id: number;
   category: string;
-  userId: string;
-  userEmail: string;
-  avatar: string;
   post: string;
+  userId: string;
+  userCreatedAt: string;
+  avatar: string;
   commentCount: number;
   view: number;
   like: number;
   createdAt: number;
+  user: IUser;
 }
 
 const fetcher = (url: string) =>
@@ -32,13 +38,12 @@ const PostList = () => {
   const [empty, setEmpty] = useState(false);
   const pathname = usePathname();
   let filteredPost: any;
-  
+
   if (data) {
     filteredPost = data.filter(
       (post: IPostList) => post.category === currentCategory
     );
   }
-  
   if (error) {
     setPostError("오류가 발생하여 게시글을 가져오지 못했습니다.");
   }
@@ -72,9 +77,8 @@ const PostList = () => {
       )}
       {!error ? (
         filteredPost?.map((post: IPostList) => (
-          <Link
+          <div
             key={post.id}
-            href={`${pathname}/${post.id}`}
             className="flex flex-col items-start p-3 space-y-5 border-2 border-green-500 rounded-md shadow-sm dark:bg-slate-500 dark:text-white"
           >
             <div className="flex items-center justify-between w-full">
@@ -91,54 +95,59 @@ const PostList = () => {
                   </p>
                 </div>
               </div>
-              <PostMenu user={post?.userEmail} />
+              <PostMenu post={post} />
             </div>
-            <p className="text-sm h-10 text-ellipsis overflow-hidden">
-              {post.post}
-            </p>
-            <div className="flex items-center justify-between w-full">
-              <div className="flex items-center justify-between w-full">
-                <div className="flex items-center space-x-2">
-                  <Image
-                    src="/like.png"
-                    alt="좋아요"
-                    width={20}
-                    height={20}
-                    className="dark:invert"
-                  />
-                  <span className="font-semibold text-sm">공감</span>
-                  <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm">
-                    {post.like}
-                  </span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Image
-                    src="/comment.png"
-                    alt="댓글"
-                    width={20}
-                    height={20}
-                    className="dark:invert"
-                  />
-                  <span className="font-semibold text-sm">댓글</span>
-                  <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm">
-                    {post.commentCount}
-                  </span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Image
-                    src="/view.png"
-                    alt="조회"
-                    width={20}
-                    height={20}
-                    className="dark:invert"
-                  />
-                  <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm">
-                    {post.view}
-                  </span>
+            <Link
+              href={`${pathname}/${post.id}`}
+              className="flex flex-col items-start w-full"
+            >
+              <p className="text-sm h-10 text-ellipsis overflow-hidden">
+                {post.post}
+              </p>
+              <div className="w-full">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <Image
+                      src="/like.png"
+                      alt="좋아요"
+                      width={20}
+                      height={20}
+                      className="dark:invert"
+                    />
+                    <span className="font-semibold text-sm">공감</span>
+                    <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm">
+                      {post.like}
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Image
+                      src="/comment.png"
+                      alt="댓글"
+                      width={20}
+                      height={20}
+                      className="dark:invert"
+                    />
+                    <span className="font-semibold text-sm">댓글</span>
+                    <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm">
+                      {post.commentCount}
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Image
+                      src="/view.png"
+                      alt="조회"
+                      width={20}
+                      height={20}
+                      className="dark:invert"
+                    />
+                    <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm">
+                      {post.view}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          </div>
         ))
       ) : (
         <p className="text-red-500 text-sm">{postError}</p>

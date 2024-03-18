@@ -6,6 +6,7 @@ import LikeBtn from "@/components/board/boardDetail/likeBtn";
 import ViewCount from "@/components/board/boardDetail/viewCount";
 import NavBar from "@/components/navBar";
 import axios from "axios";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import useSWR, { mutate } from "swr";
@@ -50,10 +51,12 @@ const PostDetail = () => {
           <div className="flex flex-col items-start space-y-3">
             <div className="flex items-center justify-between w-full">
               <div className="flex items-center space-x-2">
-                <img
-                  src={data?.findPost.user.image}
-                  className="rounded-full w-10"
-                />
+                <Link href="">
+                  <img
+                    src={data?.findPost.user.image}
+                    className="rounded-full w-10"
+                  />
+                </Link>
                 <div className="flex flex-col items-start">
                   <h1 className="text-sm font-semibold">
                     {data?.findPost.user.name}
