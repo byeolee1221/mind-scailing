@@ -62,7 +62,7 @@ const PostMenu = (props: IPost) => {
         <DropdownMenuGroup>
           {!isMatch ? <MenuProfile post={props.post} /> : null}
           {!isMatch ? (
-            <MenuReport />
+            <MenuReport postId={props.post.id} />
           ) : (
             <DropdownMenuItem>
               <Trash className="mr-2 h-4 w-4" />

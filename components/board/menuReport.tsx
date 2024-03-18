@@ -11,8 +11,36 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
+import { useSession } from "next-auth/react";
+import axios from "axios";
 
-const MenuReport = () => {
+interface IProps {
+  postId: number;
+}
+
+const MenuReport = (props: IProps) => {
+  const { data: session } = useSession();
+  
+  const onReport = async () => {
+    if (!session) {
+      alert("로그인이 필요한 서비스입니다.");
+      return;
+    }
+
+    try {
+      const fetchData = await axios.post("/api/board/boardMenu", {
+        postId: props.postId,
+      });
+
+      if (fetchData.status === 200) {
+        alert("신고가 완료되었습니다. 감사합니다.");
+      }
+    } catch (error) {
+      console.log("menuReport POST 클라이언트에서 오류 발생", error);
+      alert("오류가 발생하여 신고되지 않았습니다. 잠시 후 다시 시도해주세요.");
+    }
+  };
+
   return (
     <AlertDialog>
       <AlertDialogTrigger>
@@ -30,7 +58,7 @@ const MenuReport = () => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>취소</AlertDialogCancel>
-          <AlertDialogAction>신고하기</AlertDialogAction>
+          <AlertDialogAction onClick={onReport}>신고하기</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
