@@ -1,26 +1,43 @@
+"use client";
+
 import BoardList from "@/components/home/boardList";
 import SigninBtn from "@/components/home/signinBtn";
 import TalkAI from "@/components/home/talkAI";
 import TodayPost from "@/components/home/todayPost";
-import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
+import axios from "axios";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
+import useSWR from "swr";
 
-const Home = async () => {
-  const session = await getServerSession(authOptions);
+const fetcher = (url: string) =>
+  axios.get(url).then((response) => response.data);
 
+const Home = () => {
+  const { data: session } = useSession();
+  const { data, error } = useSWR("/api/myPage/setting", fetcher);
+  // console.log(data);
+
+  useEffect(() => {
+    if (error) {
+      alert(error);
+    }
+  }, [])
 
   return (
     <div className="space-y-16 mb-10 dark:bg-slate-800 dark:text-white">
       <div className="flex items-center justify-between mt-4 px-6">
         <div className="flex flex-col items-start">
           <h1 className="font-semibold">
-            {session ? `${session.user?.name}님, 안녕하세요!` : "안녕하세요!"}
+            {session ? data ? `${data}님, 안녕하세요!` : `${session.user?.name}님, 안녕하세요!` : "안녕하세요!"}
           </h1>
           <p className="text-sm">오늘은 어떤 하루를 보내셨나요?</p>
         </div>
-        <Link href="/myPage/alarm" className="bg-slate-200 p-2 rounded-full hover:bg-slate-300 transition-colors">
+        <Link
+          href="/myPage/alarm"
+          className="bg-slate-200 p-2 rounded-full hover:bg-slate-300 transition-colors"
+        >
           <Image src="/notifications.png" alt="알림" width={30} height={30} />
         </Link>
       </div>

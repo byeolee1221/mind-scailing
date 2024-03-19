@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import MenuReport from "../menuReport";
+import MenuProfile from "../menuProfile";
 
 interface IProps {
   email: string;
@@ -29,7 +30,7 @@ const DetailPostMenu = (props: IProps) => {
       setIsMatch(false);
     }
   }, [isMatch]);
-
+  // console.log(props);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -41,9 +42,8 @@ const DetailPostMenu = (props: IProps) => {
         <DropdownMenuLabel>게시글 메뉴</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          {!isMatch ? (
-            <MenuReport postId={props?.postId} />
-          ) : null}
+          {/* {!isMatch ? <MenuProfile post={props} /> : null} */}
+          {!isMatch ? <MenuReport postId={props?.postId} /> : null}
           {isMatch && (
             <>
               <DropdownMenuItem>

@@ -39,7 +39,7 @@ const PostDetail = () => {
     `/api/board/boardDetail?postId=${id}`,
     fetcher
   );
-
+  // console.log(data);
   useEffect(() => {
     mutate("/api/board/boardDetail?postId=${id}");
   }, []);

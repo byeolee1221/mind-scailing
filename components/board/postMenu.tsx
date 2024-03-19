@@ -29,11 +29,11 @@ interface IPostMenu {
   view: number;
   like: number;
   createdAt: number;
-  user: IUser
+  user: IUser;
 }
 
 interface IPost {
-  post: IPostMenu
+  post: IPostMenu;
 }
 
 const PostMenu = (props: IPost) => {

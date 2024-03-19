@@ -10,6 +10,7 @@ import PostMenu from "./postMenu";
 
 interface IUser {
   name: string;
+  newName: string;
   email: string;
 }
 

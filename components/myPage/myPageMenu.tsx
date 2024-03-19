@@ -50,7 +50,7 @@ const MypageMenu = () => {
         </div>
         <div className="flex items-center space-x-5 pt-4">
           <Image src="/setting.png" alt="회원관리" width={30} height={30} />
-          <button>회원관리</button>
+          <Link href="/myPage/accountSetting">계정관리</Link>
         </div>
       </div>
     </div>

@@ -20,7 +20,7 @@ interface IProps {
 
 const MenuReport = (props: IProps) => {
   const { data: session } = useSession();
-  
+
   const onReport = async () => {
     if (!session) {
       alert("로그인이 필요한 서비스입니다.");
@@ -43,7 +43,7 @@ const MenuReport = (props: IProps) => {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger>
+      <AlertDialogTrigger asChild>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
           <ShieldAlert className="mr-2 h-4 w-4" />
           <span>게시글 신고</span>
