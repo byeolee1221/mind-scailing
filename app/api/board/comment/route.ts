@@ -114,6 +114,7 @@ export async function GET(req: Request) {
         ...comment,
         createdAt: formattedDate,
         userName: comment.user.name,
+        userNewName: comment.user.newName,
         avatar: comment.user.image,
         id: comment.id,
         postId: comment.postId,

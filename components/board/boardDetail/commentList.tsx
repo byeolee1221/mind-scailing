@@ -8,6 +8,7 @@ import useSWR, { mutate } from "swr";
 interface ICommentList {
   avatar: string;
   userName: string;
+  userNewName: string;
   comment: string;
   id: number;
   createdAt: string;
@@ -52,7 +53,7 @@ const CommentList = (props: IProps) => {
                 <div className="flex flex-col items-start">
                   <div className="flex items-center space-x-2">
                     <h1 className="font-semibold text-sm">
-                      {comment.userName}
+                      {comment.userNewName ? comment.userNewName : comment.userName}
                     </h1>
                     <p className="text-gray-500 text-xs">{comment.createdAt}</p>
                   </div>

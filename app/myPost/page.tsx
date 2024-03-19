@@ -43,7 +43,7 @@ const MyPost = () => {
     if (data && data.length === 0) {
       setEmpty("게시글이 아직 없습니다.");
     }
-  }, [data]);
+  }, []);
 
   return (
     <NavBar title="내 글" pageBack hasTabBar>

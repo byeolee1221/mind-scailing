@@ -17,9 +17,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useState } from "react";
+import useSWR from "swr";
+
+const fetcher = (url: string) =>
+  axios.get(url).then((response) => response.data);
 
 const ActiveNameChange = () => {
   const { data: session } = useSession();
+  const { data } = useSWR<string>("/api/myPage/setting", fetcher);
   const [error, setError] = useState(false);
   const router = useRouter();
 
@@ -75,7 +80,7 @@ const ActiveNameChange = () => {
         <div className="flex flex-col space-y-5">
           <div className="flex flex-col space-y-1 mt-4">
             <h2 className="text-sm font-semibold">현재 프로필이름</h2>
-            <p className="text-sm">{session?.user?.name}</p>
+            <p className="text-sm">{data ? data : session?.user?.name}</p>
           </div>
           <form
             onSubmit={form.handleSubmit(onSubmit)}

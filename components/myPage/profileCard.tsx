@@ -7,6 +7,7 @@ import useSWR from "swr";
 import MyIntroduce from "./myIntroduce";
 interface IMypage {
   name: string;
+  newName: string;
   email: string;
   role: string;
   avatar: string;
@@ -43,7 +44,7 @@ const ProfileCard = () => {
           )}
           <div className="flex items-center justify-between w-full select-none px-4">
             <h1 className="font-bold">
-              {session ? data?.name : "로그인이 필요합니다."}
+              {session ? data?.newName ? data.newName : data?.name : "로그인이 필요합니다."}
             </h1>
             <p className="text-sm text-gray-500 dark:text-white">
               {session ? (data?.role === "USER" ? "일반회원" : "관리자") : null}

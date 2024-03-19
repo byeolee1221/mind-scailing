@@ -31,6 +31,7 @@ export async function GET(req: Request) {
 
       userInfo = {
         name: findUser?.name,
+        newName: findUser?.newName,
         email: findUser?.email,
         role: findUser?.role,
         avatar: findUser?.image,

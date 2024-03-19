@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     }
 
     if (!userId) {
-      return new NextResponse("잘못된 접근입니다.", { status: 401 });
+      return new NextResponse("잘못된 접근입니다.", { status: 400 });
     }
 
     if (!post) {

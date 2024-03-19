@@ -13,6 +13,7 @@ import useSWR, { mutate } from "swr";
 
 interface IUser {
   name: string;
+  newName: string;
   image: string;
   email: string;
 }
@@ -55,7 +56,9 @@ const PostDetail = () => {
                   <img src={data?.user.image} className="rounded-full w-10" />
                 </Link>
                 <div className="flex flex-col items-start">
-                  <h1 className="text-sm font-semibold">{data?.user.name}</h1>
+                  <h1 className="text-sm font-semibold">
+                    {data?.user.newName ? data?.user.newName : data?.user.name}
+                  </h1>
                   <p className="text-xs text-gray-500">{data?.formattedDate}</p>
                 </div>
               </div>

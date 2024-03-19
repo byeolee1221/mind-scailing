@@ -90,7 +90,7 @@ const PostList = () => {
                   className="bg-slate-300 rounded-full w-10"
                 />
                 <div className="flex flex-col items-start">
-                  <h1 className="font-semibold text-sm">{post.userId}</h1>
+                  <h1 className="font-semibold text-sm">{post.user.newName ? post.user.newName : post.userId}</h1>
                   <p className="text-xs text-gray-500 dark:text-gray-900">
                     {post.createdAt}
                   </p>
