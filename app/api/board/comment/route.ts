@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     let createComment;
 
     if (!session) {
-      return new NextResponse("댓글을 쓰려면 로그인해주세요.", { status: 401 });
+      return new NextResponse("로그인이 필요한 서비스입니다.", { status: 401 });
     }
 
     if (!comment) {
@@ -63,12 +63,13 @@ export async function POST(req: Request) {
           },
         });
 
-        console.log(updatePost);
+        // console.log(updatePost);
         const sendAlarm = await prismadb.alarm.create({
           data: {
             toUser: updatePost.userId,
             category: "댓글",
             postId: updatePost.id,
+            fromUserId: createComment.userId
           },
           include: {
             user: true,

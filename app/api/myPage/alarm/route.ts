@@ -24,18 +24,18 @@ export async function GET(req: Request) {
       include: {
         user: true,
         post: true,
+        fromUser: true
       },
     });
 
-    
-
+    // console.log(resultComment);
     if (findAlarm) {
       resultData = findAlarm.map((data) => {
         const date = new Date(data.createdAt);
         const formattedDate = date.toISOString().slice(0, 10);
         return {
           alarmId: data.id,
-          name: data.user.name,
+          name: data.fromUser.name,
           createdAt: formattedDate,
           category: data.category,
           postCategory: data.post.category,

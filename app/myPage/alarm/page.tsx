@@ -25,7 +25,7 @@ const Alarm = () => {
   const { data, error } = useSWR<IAlarm[]>("/api/myPage/alarm", fetcher);
   const [empty, setEmpty] = useState(false);
   const router = useRouter();
-
+  console.log(data)
   useEffect(() => {
     if (data && data.length === 0) {
       setEmpty(true);

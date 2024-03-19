@@ -57,7 +57,8 @@ model User {
   Comment       Comment[]
   Diary         Diary[]
   Profile       Profile[]
-  Alarm         Alarm[]
+  AlarmToUser   Alarm[]   @relation(name: "user")
+  AlarmFromUser Alarm[]   @relation(name: "fromUser")
   Report        Report[]
 }
 
@@ -143,14 +144,16 @@ model Profile {
 }
 
 model Alarm {
-  id        Int      @id @default(autoincrement())
-  category  String
-  toUser    String
-  postId    Int
-  user      User     @relation(fields: [toUser], references: [id], onDelete: Cascade)
-  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         Int      @id @default(autoincrement())
+  category   String
+  toUser     String
+  fromUserId String
+  postId     Int
+  user       User     @relation(name: "user", fields: [toUser], references: [id], onDelete: Cascade)
+  fromUser   User     @relation(name: "fromUser", fields: [fromUserId], references: [id], onDelete: Cascade)
+  post       Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model Report {

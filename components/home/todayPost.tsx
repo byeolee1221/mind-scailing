@@ -29,8 +29,6 @@ const TodayPost = () => {
   const [empty, setEmpty] = useState("");
 
   useEffect(() => {
-    preload("/api/home", fetcher);
-
     if (data && data.length === 0) {
       setEmpty("게시글이 아직 없습니다.");
     }

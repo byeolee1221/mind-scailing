@@ -88,12 +88,10 @@ const Write = () => {
   return (
     <div className="flex flex-col items-start space-y-2 border rounded-lg py-2 px-3 shadow-sm dark:border-white">
       <div className="flex items-center space-x-2 border-b w-full pb-2 dark:border-white">
-        <Image
-          src="/user.png"
+        <img
+          src={session?.user?.image!}
           alt="프로필"
-          width={35}
-          height={35}
-          className="p-2 bg-slate-300 rounded-full"
+          className="w-10 bg-slate-300 rounded-full"
         />
         <Dialog>
           <DialogTrigger asChild>

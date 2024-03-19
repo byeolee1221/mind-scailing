@@ -41,16 +41,16 @@ export async function GET(req: Request) {
         id: +postId,
       },
       include: {
-        user: true
-      }
+        user: true,
+      },
     });
 
     const date = new Date(findPost?.createdAt!);
     const formattedDate = date.toISOString().slice(0, 10);
     resultData = {
-      findPost,
-      formattedDate
-    }
+      ...findPost,
+      formattedDate,
+    };
     // console.log(resultData);
 
     return NextResponse.json(resultData, { status: 200 });

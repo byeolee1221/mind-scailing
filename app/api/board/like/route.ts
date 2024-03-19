@@ -55,7 +55,7 @@ export async function POST(req: Request) {
           },
         });
       } else {
-        await prismadb.like.create({
+        const createLike = await prismadb.like.create({
           data: {
             userId,
             postId: +id,
@@ -78,6 +78,7 @@ export async function POST(req: Request) {
             toUser: updatePost.userId,
             category: "공감",
             postId: updatePost.id,
+            fromUserId: createLike.userId
           },
           include: {
             user: true,

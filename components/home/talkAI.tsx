@@ -103,20 +103,18 @@ const TalkAI = () => {
                 >
                   <div className="flex items-center space-x-3">
                     {data.role === "user" ? (
-                      <Image
-                        src="/user.png"
+                      <img
+                        src={session.user?.image!}
                         alt="프로필"
-                        width={35}
-                        height={35}
-                        className="bg-slate-300 rounded-full p-2"
+                        className="bg-slate-300 rounded-full w-10"
                       />
                     ) : (
                       <Image
                         src="/ai.png"
                         alt="ai"
-                        width={35}
-                        height={35}
-                        className="bg-slate-300 rounded-full p-2"
+                        width={40}
+                        height={40}
+                        className="bg-slate-200 rounded-full p-1"
                       />
                     )}
                     <p className="text-sm">{data.content as string}</p>

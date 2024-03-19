@@ -14,6 +14,7 @@ import useSWR, { mutate } from "swr";
 interface IUser {
   name: string;
   image: string;
+  email: string;
 }
 interface IPostDetail {
   id: number;
@@ -24,11 +25,7 @@ interface IPostDetail {
   view: number;
   like: number;
   user: IUser;
-}
-
-interface IPost {
-  createdAt: number;
-  data: IPostDetail;
+  formattedDate: string;
 }
 
 const fetcher = (url: string) =>
@@ -38,11 +35,14 @@ const PostDetail = () => {
   const params = useParams<{ id: string }>();
   const [isLoading, setIsLoading] = useState(false);
   const id = params.id;
-  const { data } = useSWR(`/api/board/boardDetail?postId=${id}`, fetcher);
+  const { data } = useSWR<IPostDetail>(
+    `/api/board/boardDetail?postId=${id}`,
+    fetcher
+  );
 
   useEffect(() => {
     mutate("/api/board/boardDetail?postId=${id}");
-  }, [data]);
+  }, []);
 
   return (
     <NavBar title="게시글" hasTabBar pageBack>
@@ -52,28 +52,23 @@ const PostDetail = () => {
             <div className="flex items-center justify-between w-full">
               <div className="flex items-center space-x-2">
                 <Link href="">
-                  <img
-                    src={data?.findPost.user.image}
-                    className="rounded-full w-10"
-                  />
+                  <img src={data?.user.image} className="rounded-full w-10" />
                 </Link>
                 <div className="flex flex-col items-start">
-                  <h1 className="text-sm font-semibold">
-                    {data?.findPost.user.name}
-                  </h1>
+                  <h1 className="text-sm font-semibold">{data?.user.name}</h1>
                   <p className="text-xs text-gray-500">{data?.formattedDate}</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
                 <ViewCount id={id} />
-                <DetailPostMenu user={data?.findPost.user.email} />
+                <DetailPostMenu email={data?.user.email!} postId={data?.id!} />
               </div>
             </div>
             <div className="flex flex-col space-y-2 w-full">
-              <p className="whitespace-pre-line">{data?.findPost.post}</p>
-              {data?.findPost.file ? (
+              <p className="whitespace-pre-line">{data?.post}</p>
+              {data?.file ? (
                 <img
-                  src={data?.findPost.file}
+                  src={data?.file}
                   className="bg-slate-300 rounded-lg shadow-sm"
                 />
               ) : null}
@@ -83,8 +78,8 @@ const PostDetail = () => {
                   <CommentBtn id={id} />
                 </div>
                 <div className="flex items-center space-x-3 text-sm text-gray-500 dark:text-white select-none">
-                  <p>공감 {data?.findPost.like}개</p>
-                  <p>댓글 {data?.findPost.commentCount}개</p>
+                  <p>공감 {data?.like}개</p>
+                  <p>댓글 {data?.commentCount}개</p>
                 </div>
               </div>
             </div>

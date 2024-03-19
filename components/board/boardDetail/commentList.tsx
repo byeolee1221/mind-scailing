@@ -41,7 +41,7 @@ const CommentList = (props: IProps) => {
   return (
     <>
       {!error ? (
-        <div className="grid grid-cols-1 items-start space-y-4 px-4 divide-y w-full">
+        <div className="grid grid-cols-1 items-start space-y-4 px-4 divide-y w-full overflow-auto mb-2">
           {filteredComment?.map((comment) => (
             <div
               key={comment.id}
