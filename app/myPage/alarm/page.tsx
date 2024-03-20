@@ -26,7 +26,7 @@ const Alarm = () => {
   const { data, error } = useSWR<IAlarm[]>("/api/myPage/alarm", fetcher);
   const [empty, setEmpty] = useState(false);
   const router = useRouter();
-  console.log(data)
+  // console.log(data);
   useEffect(() => {
     if (data && data.length === 0) {
       setEmpty(true);
@@ -59,14 +59,19 @@ const Alarm = () => {
         {session ? (
           !error ? (
             data?.map((item) => (
-              <div key={item.alarmId} className="flex items-center justify-around pt-2">
+              <div
+                key={item.alarmId}
+                className="flex items-center justify-around pt-2"
+              >
                 <Link
                   href={`/board/${item.postCategory}/${item.postId}`}
                   className="flex flex-col"
                 >
                   <p className="text-sm">{item?.createdAt}</p>
                   <p className="text-sm">
-                    <span className="font-semibold">{item.newName ? item.newName : item.name}</span>
+                    <span className="font-semibold">
+                      {item.newName ? item.newName : item.name}
+                    </span>
                     {item.category === "댓글" &&
                       "님이 회원님의 게시글에 댓글을 남겼습니다."}
                     {item.category === "공감" &&
@@ -82,7 +87,7 @@ const Alarm = () => {
               </div>
             ))
           ) : (
-            <p className="text-center">
+            <p className="text-center mt-4">
               오류가 발생하여 알림을 불러오지 못했습니다.
             </p>
           )

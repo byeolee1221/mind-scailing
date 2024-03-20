@@ -17,12 +17,12 @@ const AccountDisconnect = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <button className="border-2 rounded-md flex items-center p-2 shadow-sm hover:bg-green-100 transition-colors justify-between">
+        <button className="border-2 dark:border-white rounded-md flex items-center p-2 shadow-sm hover:bg-green-100 dark:hover:bg-green-600 transition-colors justify-between">
           <div className="flex items-center space-x-2">
             <Image src="/account.png" alt="계정" width={30} height={30} />
             <h1 className="font-semibold">계정연결 해제</h1>
           </div>
-          <MoveRight className="bg-slate-100 p-1 rounded-full w-8 h-8 hover:bg-slate-200 transition-all" />
+          <MoveRight className="bg-slate-100 dark:bg-slate-600 p-1 rounded-full w-8 h-8 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all" />
         </button>
       </SheetTrigger>
       <SheetContent className="w-full">

@@ -89,7 +89,7 @@ const MenuProfile = (props: IPost) => {
                 </p>
               </div>
             </div>
-            <div className="grid grid-cols-2 bg-slate-200 p-2 rounded-md text-center">
+            <div className="grid grid-cols-2 bg-slate-200 dark:bg-slate-900 p-2 rounded-md text-center">
               <div className="flex flex-col space-y-1 border-r-2 border-gray-300">
                 <p className="font-semibold">{item.postCount}</p>
                 <h2 className="text-sm">게시글 수</h2>

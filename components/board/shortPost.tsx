@@ -19,7 +19,7 @@ const ShortPost = () => {
                       alt="프로필"
                       width={40}
                       height={40}
-                      className="p-2 bg-slate-300 rounded-full ring-2 ring-offset-2 ring-green-500 outline-none"
+                      className="p-2 bg-slate-300 dark:bg-slate-600 rounded-full ring-2 ring-offset-2 ring-green-500 outline-none"
                     />
                     <p className="text-xs">바위별</p>
                   </button>

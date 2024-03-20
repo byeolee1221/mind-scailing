@@ -78,7 +78,8 @@ export async function POST(req: Request) {
             toUser: updatePost.userId,
             category: "공감",
             postId: updatePost.id,
-            fromUserId: createLike.userId
+            fromUserId: createLike.userId,
+            fromEmail: session.user?.email!
           },
           include: {
             user: true,

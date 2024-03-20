@@ -22,21 +22,28 @@ export async function GET(req: Request) {
         },
       },
       include: {
-        user: true,
         post: true,
-        fromUser: true
       },
     });
 
-    // console.log(resultComment);
+    const findFromUser = findAlarm.map((data) => data.fromEmail);
+    // console.log(findFromUser);
+    
+    const fromUserInfo = await prismadb.user.findUnique({
+      where: {
+        email: findFromUser.join("")
+      }
+    })
+
+    // console.log(fromUserInfo);
     if (findAlarm) {
       resultData = findAlarm.map((data) => {
         const date = new Date(data.createdAt);
         const formattedDate = date.toISOString().slice(0, 10);
         return {
           alarmId: data.id,
-          name: data.fromUser.name,
-          newName: data.fromUser.newName,
+          name: fromUserInfo?.name,
+          newName: fromUserInfo?.newName,
           createdAt: formattedDate,
           category: data.category,
           postCategory: data.post.category,
@@ -45,7 +52,7 @@ export async function GET(req: Request) {
       });
     }
 
-    console.log(resultData);
+    // console.log(resultData);
     return NextResponse.json(resultData, { status: 200 });
   } catch (error) {
     console.log("alarm GET API에서 오류 발생", error);

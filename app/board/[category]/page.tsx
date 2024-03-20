@@ -27,7 +27,7 @@ const Board = () => {
 
   return (
     <NavBar title={name} hasTabBar pageBack>
-      <div className="px-8 space-y-6 mt-4 mb-10 min-h-screen">
+      <div className="px-8 space-y-6 mt-4 mb-10 min-h-screen overflow-auto">
         {session ? (
           <Write />
         ) : (

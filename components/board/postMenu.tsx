@@ -16,6 +16,7 @@ import MenuReport from "./menuReport";
 
 interface IUser {
   name: string;
+  newName: string;
   email: string;
 }
 

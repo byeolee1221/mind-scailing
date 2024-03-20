@@ -74,7 +74,7 @@ const PostList = () => {
   return (
     <>
       {empty && (
-        <p className="text-center mt-2 bg-slate-200 rounded-md p-2">
+        <p className="text-center mt-2 bg-slate-200 dark:bg-slate-500 rounded-md p-2">
           게시글이 아직 없습니다.
         </p>
       )}
@@ -82,7 +82,7 @@ const PostList = () => {
         filteredPost?.map((post: IPostList) => (
           <div
             key={post.id}
-            className="flex flex-col items-start p-3 space-y-5 border-2 border-green-500 rounded-md shadow-sm dark:bg-slate-500 dark:text-white"
+            className="flex flex-col items-start p-3 space-y-5 border-2 border-green-500 rounded-md shadow-sm dark:bg-slate-700 dark:text-white"
           >
             <div className="flex items-center justify-between w-full">
               <div className="flex items-center space-x-2">

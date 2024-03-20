@@ -136,7 +136,7 @@ const Write = () => {
                 </button>
                 <label
                   htmlFor="photo"
-                  className="bg-white hover:bg-slate-200 border-2 border-green-500 px-6 py-2 rounded-lg font-bold transition-colors shadow-md"
+                  className="bg-white dark:bg-slate-500 hover:bg-slate-200 dark:hover:bg-slate-600 border-2 border-green-500 px-6 py-2 rounded-lg font-bold transition-colors shadow-md cursor-pointer"
                 >
                   {file ? "사진 추가됨 😊" : "사진 추가"}
                 </label>

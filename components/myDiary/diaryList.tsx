@@ -59,8 +59,8 @@ const DiaryList = (props: any) => {
         alert("일기가 삭제되었습니다.");
       }
     } catch (error: any) {
-      console.log(error);
-      setResError(error);
+      console.log("myDiary DELETE 클라이언트에서 오류 발생", error);
+      setResError(error.response.data);
     }
   };
 
@@ -109,7 +109,7 @@ const DiaryList = (props: any) => {
           <p className="text-center">{resError}</p>
         )
       ) : (
-        <p className="text-center bg-slate-200 p-2 rounded-md">
+        <p className="text-center bg-slate-200 dark:bg-slate-500 p-2 rounded-md">
           업로드한 일기가 없습니다.
         </p>
       )}
