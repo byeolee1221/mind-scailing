@@ -11,6 +11,7 @@ import useSWR from "swr";
 interface IAlarm {
   alarmId: number;
   name: string;
+  newName: string;
   createdAt: string;
   category: string;
   postCategory: string;
@@ -65,7 +66,7 @@ const Alarm = () => {
                 >
                   <p className="text-sm">{item?.createdAt}</p>
                   <p className="text-sm">
-                    <span className="font-semibold">{item?.name}</span>
+                    <span className="font-semibold">{item.newName ? item.newName : item.name}</span>
                     {item.category === "댓글" &&
                       "님이 회원님의 게시글에 댓글을 남겼습니다."}
                     {item.category === "공감" &&

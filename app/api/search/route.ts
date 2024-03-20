@@ -42,6 +42,7 @@ export async function POST(req: Request) {
         createdAt: formattedDate,
         category: data.category,
         name: data.user.name,
+        newName: data.user.newName,
         avatar: data.user.image,
         post: data.post,
         commentCount: data.commentCount,

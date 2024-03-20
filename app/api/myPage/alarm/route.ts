@@ -36,6 +36,7 @@ export async function GET(req: Request) {
         return {
           alarmId: data.id,
           name: data.fromUser.name,
+          newName: data.fromUser.newName,
           createdAt: formattedDate,
           category: data.category,
           postCategory: data.post.category,
@@ -44,7 +45,7 @@ export async function GET(req: Request) {
       });
     }
 
-    // console.log(resultData);
+    console.log(resultData);
     return NextResponse.json(resultData, { status: 200 });
   } catch (error) {
     console.log("alarm GET API에서 오류 발생", error);

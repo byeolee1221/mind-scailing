@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 import PostMenu from "./postMenu";
+import { useSession } from "next-auth/react";
 
 interface IUser {
   name: string;
@@ -34,6 +35,7 @@ const fetcher = (url: string) =>
 const PostList = () => {
   // useSWR 훅은 데이터를 비동기적으로 가져옴. 따라서 가져온 데이터를 필터링하려면 조건을 걸어줘야 함.
   const { data, error } = useSWR<IPostList[]>("/api/board", fetcher);
+  const { data: session } = useSession();
   const [currentCategory, setCurrentCategory] = useState("");
   const [postError, setPostError] = useState("");
   const [empty, setEmpty] = useState(false);
@@ -90,13 +92,15 @@ const PostList = () => {
                   className="bg-slate-300 rounded-full w-10"
                 />
                 <div className="flex flex-col items-start">
-                  <h1 className="font-semibold text-sm">{post.user.newName ? post.user.newName : post.userId}</h1>
+                  <h1 className="font-semibold text-sm">
+                    {post.user.newName ? post.user.newName : post.userId}
+                  </h1>
                   <p className="text-xs text-gray-500 dark:text-gray-900">
                     {post.createdAt}
                   </p>
                 </div>
               </div>
-              <PostMenu post={post} />
+              {session ? <PostMenu post={post} /> : null}
             </div>
             <Link
               href={`${pathname}/${post.id}`}

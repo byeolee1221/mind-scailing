@@ -19,14 +19,24 @@ export async function POST(req: Request) {
       });
     }
 
-    const updateUserName = await prismadb.user.update({
+    const checkNewName = await prismadb.user.findMany({
       where: {
-        email: session.user?.email!
-      },
-      data: {
         newName
       }
     });
+
+    if (!checkNewName) {
+      const updateUserName = await prismadb.user.update({
+        where: {
+          email: session.user?.email!
+        },
+        data: {
+          newName
+        }
+      });
+    } else {
+      return new NextResponse("이미 등록된 이름입니다.", { status: 409 });
+    }
 
     // console.log(updateUserName);
 

@@ -21,6 +21,7 @@ interface IResult {
   id: number;
   cetegory: string;
   name: string;
+  newName: string;
   post: string;
   commentCount: number;
   view: number;
@@ -136,7 +137,9 @@ const Search = () => {
                   className="bg-slate-400 rounded-full w-10"
                 />
                 <div className="flex flex-col items-start">
-                  <h2 className="font-semibold">{post.name}</h2>
+                  <h2 className="font-semibold">
+                    {post.newName ? post.newName : post.name}
+                  </h2>
                   <p className="text-gray-500">{post.createdAt}</p>
                 </div>
               </div>

@@ -21,16 +21,20 @@ const Home = () => {
 
   useEffect(() => {
     if (error) {
-      alert(error);
+      console.log("home GET 클라이언트에서 오류 발생", error);
     }
-  }, [])
+  }, []);
 
   return (
     <div className="space-y-16 mb-10 dark:bg-slate-800 dark:text-white">
       <div className="flex items-center justify-between mt-4 px-6">
         <div className="flex flex-col items-start">
           <h1 className="font-semibold">
-            {session ? data ? `${data}님, 안녕하세요!` : `${session.user?.name}님, 안녕하세요!` : "안녕하세요!"}
+            {session
+              ? data
+                ? `${data}님, 안녕하세요!`
+                : `${session.user?.name}님, 안녕하세요!`
+              : "안녕하세요!"}
           </h1>
           <p className="text-sm">오늘은 어떤 하루를 보내셨나요?</p>
         </div>

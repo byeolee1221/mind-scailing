@@ -5,6 +5,7 @@ import "./globals.css";
 import { NextAuthProvider } from "@/lib/nextauthProvider";
 import { cls } from "@/lib/styleUtil";
 import { useEffect, useState } from "react";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const NotoSansKR = Noto_Sans_KR({ subsets: ["latin"], weight: "400" });
 
@@ -14,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [theme, setTheme] = useState(false);
-  
+
   // console.log(theme);
   useEffect(() => {
     const theme = localStorage.getItem("theme");
@@ -23,22 +24,28 @@ export default function RootLayout({
     } else {
       setTheme(false);
     }
-
   }, [theme]);
-  
+
   return (
     <html lang="ko">
       <body className={NotoSansKR.className}>
-        <NextAuthProvider>
-          <div
-            className={cls(
-              "max-w-5xl text-gray-900 dark:bg-slate-800 dark:text-white transition-all",
-              theme ? "dark" : ""
-            )}
-          >
-            {children}
-          </div>
-        </NextAuthProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="class"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NextAuthProvider>
+            <div
+              className={cls(
+                "max-w-5xl text-gray-900 dark:bg-slate-800 dark:text-white transition-all",
+                theme ? "dark" : ""
+              )}
+            >
+              {children}
+            </div>
+          </NextAuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

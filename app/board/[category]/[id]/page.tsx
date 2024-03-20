@@ -6,6 +6,7 @@ import LikeBtn from "@/components/board/boardDetail/likeBtn";
 import ViewCount from "@/components/board/boardDetail/viewCount";
 import NavBar from "@/components/navBar";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -33,6 +34,7 @@ const fetcher = (url: string) =>
   axios.get(url).then((response) => response.data);
 
 const PostDetail = () => {
+  const { data: session } = useSession();
   const params = useParams<{ id: string }>();
   const [isLoading, setIsLoading] = useState(false);
   const id = params.id;
@@ -64,7 +66,12 @@ const PostDetail = () => {
               </div>
               <div className="flex items-center space-x-4">
                 <ViewCount id={id} />
-                <DetailPostMenu email={data?.user.email!} postId={data?.id!} />
+                {session ? (
+                  <DetailPostMenu
+                    email={data?.user.email!}
+                    postId={data?.id!}
+                  />
+                ) : null}
               </div>
             </div>
             <div className="flex flex-col space-y-2 w-full">

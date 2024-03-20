@@ -25,7 +25,7 @@ const fetcher = (url: string) =>
 const ActiveNameChange = () => {
   const { data: session } = useSession();
   const { data } = useSWR<string>("/api/myPage/setting", fetcher);
-  const [error, setError] = useState(false);
+  const [fetcherror, setFetchError] = useState("");
   const router = useRouter();
 
   const form = useForm<z.infer<typeof accountSchema>>({
@@ -36,6 +36,7 @@ const ActiveNameChange = () => {
   });
 
   const isLoading = form.formState.isSubmitting;
+  const formError = form.formState.errors;
 
   const onSubmit = async (values: z.infer<typeof accountSchema>) => {
     if (!session) {
@@ -53,9 +54,11 @@ const ActiveNameChange = () => {
         router.push("/myPage");
         form.reset();
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log("activeNameChange POST 클라이언트에서 오류 발생", error);
-      setError(true);
+      if (error.response.status) {
+        setFetchError(error.response.data);
+      }
     }
   };
 
@@ -96,13 +99,19 @@ const ActiveNameChange = () => {
               className="border rounded-md p-1 px-2 text-sm focus:outline-none focus:border-green-500"
               placeholder="8자리 이내로 입력"
             />
-            {form.formState.errors && <p className="text-xs text-red-500">{form.formState.errors.accountName?.message}</p>}
-            {error && <p className="text-xs text-red-500">오류가 발생하여 수정되지 않았습니다. 잠시 후 다시 시도해주세요.</p>}
+            {formError && (
+              <p className="text-xs text-red-500">
+                {formError.accountName?.message}
+              </p>
+            )}
+            {fetcherror && <p className="text-xs text-red-500">{fetcherror}</p>}
             <span className="text-xs text-red-500">
               프로필이름에 비속어 및 혐오문구, 정치 관련 표현 등이 포함되면
               계정이 정지될 수 있습니다.
             </span>
-            <Button type="submit">{!isLoading ? "이름 변경" : "변경중..."}</Button>
+            <Button type="submit">
+              {!isLoading ? "이름 변경" : "변경중..."}
+            </Button>
           </form>
         </div>
       </SheetContent>

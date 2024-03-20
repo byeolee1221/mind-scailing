@@ -4,10 +4,11 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import useSWR, { preload } from "swr";
+import useSWR from "swr";
 
 interface IUser {
   image: string;
+  newName: string;
 }
 interface ITodayPost {
   id: number;
@@ -60,7 +61,7 @@ const TodayPost = () => {
                   className="bg-white rounded-full w-7 h-7"
                 />
                 <div className="ml-2">
-                  <h2 className="font-semibold text-xs">{post.userId}</h2>
+                  <h2 className="font-semibold text-xs">{post.user.newName ? post.user.newName : post.userId}</h2>
                   <p className="text-gray-500 text-xs">{post.createdAt}</p>
                 </div>
               </div>

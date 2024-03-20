@@ -12,6 +12,7 @@ import useSWR from "swr";
 
 interface IUser {
   name: string;
+  newName: string;
   email: string;
 }
 
@@ -71,7 +72,11 @@ const MenuProfile = (props: IPost) => {
                 alt="프로필"
                 className="bg-slate-300 rounded-full w-20"
               />
-              <h1 className="font-semibold">{props.post.user.name}</h1>
+              <h1 className="font-semibold">
+                {props.post.user.newName
+                  ? props.post.user.newName
+                  : props.post.user.name}
+              </h1>
               <div className="flex flex-col space-y-1 items-center">
                 {!error && <p className="text-sm">{item?.introduce}</p>}
                 {error && (
