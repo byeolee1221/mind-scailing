@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { ClipboardEditIcon, ShieldAlert, Trash } from "lucide-react";
+import { ClipboardEditIcon, Trash } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import MenuProfile from "./menuProfile";

@@ -36,15 +36,20 @@ const Alarm = () => {
   }, []);
 
   const onDelete = async (alarmId: number) => {
-    const deleteAlarm = await axios.delete("/api/myPage/alarm", {
-      data: {
-        alarmId,
-      },
-    });
-
-    if (deleteAlarm.status === 200) {
-      alert("알림이 삭제되었습니다.");
-      router.refresh();
+    try {
+      const deleteAlarm = await axios.delete("/api/myPage/alarm", {
+        data: {
+          alarmId,
+        },
+      });
+  
+      if (deleteAlarm.status === 200) {
+        alert("알림이 삭제되었습니다.");
+        router.refresh();
+      }
+    } catch (error: any) {
+      console.log("alarm DELETE 클라이언트에서 오류 발생", error);
+      alert(error.response.data);
     }
   };
 

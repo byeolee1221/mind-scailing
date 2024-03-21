@@ -19,8 +19,6 @@ import { z } from "zod";
 import CommentList from "./commentList";
 import { mutate } from "swr";
 
-type Avatar = string;
-
 const CommentBtn = (props: any) => {
   const { data: session } = useSession();
   const [error, setError] = useState(false);

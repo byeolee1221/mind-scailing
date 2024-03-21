@@ -47,7 +47,7 @@ const MenuProfile = (props: IPost) => {
     `/api/board/boardMenu?postId=${props.post.id}`,
     fetcher
   );
-  // console.log(data);
+  // console.log(props);
 
   return (
     <Dialog>
@@ -73,7 +73,7 @@ const MenuProfile = (props: IPost) => {
                 className="bg-slate-300 rounded-full w-20"
               />
               <h1 className="font-semibold">
-                {props.post.user.newName
+                {props.post.user.newName !== null
                   ? props.post.user.newName
                   : props.post.user.name}
               </h1>

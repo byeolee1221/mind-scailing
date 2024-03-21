@@ -35,9 +35,9 @@ const MenuReport = (props: IProps) => {
       if (fetchData.status === 200) {
         alert("신고가 완료되었습니다. 감사합니다.");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log("menuReport POST 클라이언트에서 오류 발생", error);
-      alert("오류가 발생하여 신고되지 않았습니다. 잠시 후 다시 시도해주세요.");
+      alert(error.response.data);
     }
   };
 

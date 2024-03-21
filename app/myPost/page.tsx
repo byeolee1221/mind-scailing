@@ -14,7 +14,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import useSWR, { preload } from "swr";
+import useSWR from "swr";
 
 interface IMyPost {
   id: number;
@@ -37,13 +37,13 @@ const MyPost = () => {
       alert("이용하시려면 로그인해주세요!");
       router.push("/");
     }
+  }, []);
 
-    preload("/api/myPost", fetcher);
-
+  useEffect(() => {
     if (data && data.length === 0) {
       setEmpty("게시글이 아직 없습니다.");
     }
-  }, []);
+  }, [])
 
   return (
     <NavBar title="내 글" pageBack hasTabBar>

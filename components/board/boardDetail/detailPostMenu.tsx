@@ -12,16 +12,48 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import MenuReport from "../menuReport";
+import axios from "axios";
+import useSWR from "swr";
 import MenuProfile from "../menuProfile";
+import { useParams } from "next/navigation";
+
+interface IUser {
+  name: string;
+  newName: string;
+  email: string;
+}
+
+interface IDetailPostProfile {
+  id: number;
+  category: string;
+  userId: string;
+  avatar: string;
+  post: string;
+  commentCount: number;
+  view: number;
+  like: number;
+  createdAt: number;
+  user: IUser;
+}
 
 interface IProps {
   email: string;
   postId: number;
 }
 
+const fetcher = (url: string) =>
+  axios.get(url).then((response) => response.data);
+
 const DetailPostMenu = (props: IProps) => {
   const { data: session } = useSession();
+  const params = useParams<{ id: string }>();
   const [isMatch, setIsMatch] = useState(false);
+  const id = params.id;
+  // console.log(id);
+  const { data } = useSWR<IDetailPostProfile>(
+    `/api/board/boardDetail/detailPostMenu?postId=${id}`,
+    fetcher
+  );
 
   useEffect(() => {
     if (props.email === session?.user?.email) {
@@ -30,6 +62,11 @@ const DetailPostMenu = (props: IProps) => {
       setIsMatch(false);
     }
   }, [isMatch]);
+
+  if (!data) {
+    return;
+  }
+
   // console.log(props);
   return (
     <DropdownMenu>
@@ -42,7 +79,7 @@ const DetailPostMenu = (props: IProps) => {
         <DropdownMenuLabel>게시글 메뉴</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          {/* {!isMatch ? <MenuProfile post={props} /> : null} */}
+          {!isMatch ? <MenuProfile post={data} /> : null}
           {!isMatch ? <MenuReport postId={props?.postId} /> : null}
           {isMatch && (
             <>
