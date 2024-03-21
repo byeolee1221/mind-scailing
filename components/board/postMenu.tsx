@@ -3,16 +3,16 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { ClipboardEditIcon, Trash } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import MenuProfile from "./menuProfile";
 import MenuReport from "./menuReport";
+import PostDelete from "./postDelete";
+import PostEdit from "./postEdit";
 
 interface IUser {
   name: string;
@@ -26,6 +26,7 @@ interface IPostMenu {
   userId: string;
   avatar: string;
   post: string;
+  file: string | undefined;
   commentCount: number;
   view: number;
   like: number;
@@ -48,7 +49,7 @@ const PostMenu = (props: IPost) => {
     } else {
       setIsMatch(false);
     }
-  }, [isMatch]);
+  }, [props.post.user.email, session?.user?.email]);
 
   return (
     <DropdownMenu>
@@ -65,16 +66,10 @@ const PostMenu = (props: IPost) => {
           {!isMatch ? (
             <MenuReport postId={props.post.id} />
           ) : (
-            <DropdownMenuItem>
-              <Trash className="mr-2 h-4 w-4" />
-              <span>게시글 삭제</span>
-            </DropdownMenuItem>
+            <PostDelete postId={props.post.id} />
           )}
           {isMatch && (
-            <DropdownMenuItem>
-              <ClipboardEditIcon className="mr-2 h-4 w-4" />
-              <span>게시글 수정</span>
-            </DropdownMenuItem>
+            <PostEdit postId={props.post.id} post={props.post.post} file={props.post.file} />
           )}
         </DropdownMenuGroup>
       </DropdownMenuContent>

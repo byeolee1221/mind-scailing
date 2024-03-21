@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import useSWR from "swr";
 import PostMenu from "./postMenu";
 import { useSession } from "next-auth/react";
+import Providers from "@/app/reduxProvider";
 
 interface IUser {
   name: string;
@@ -19,6 +20,7 @@ interface IPostList {
   id: number;
   category: string;
   post: string;
+  file: string | undefined;
   userId: string;
   userCreatedAt: string;
   avatar: string;
@@ -72,7 +74,7 @@ const PostList = () => {
   }, [filteredPost]);
 
   return (
-    <>
+    <Providers>
       {empty && (
         <p className="text-center mt-2 bg-slate-200 dark:bg-slate-500 rounded-md p-2">
           게시글이 아직 없습니다.
@@ -157,7 +159,7 @@ const PostList = () => {
       ) : (
         <p className="text-red-500 text-sm">{postError}</p>
       )}
-    </>
+    </Providers>
   );
 };
 

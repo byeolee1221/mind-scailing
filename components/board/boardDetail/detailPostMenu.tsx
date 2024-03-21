@@ -16,6 +16,7 @@ import axios from "axios";
 import useSWR from "swr";
 import MenuProfile from "../menuProfile";
 import { useParams } from "next/navigation";
+import DetailPostDelete from "./detailPostDelete";
 
 interface IUser {
   name: string;
@@ -49,7 +50,6 @@ const DetailPostMenu = (props: IProps) => {
   const params = useParams<{ id: string }>();
   const [isMatch, setIsMatch] = useState(false);
   const id = params.id;
-  // console.log(id);
   const { data } = useSWR<IDetailPostProfile>(
     `/api/board/boardDetail/detailPostMenu?postId=${id}`,
     fetcher
@@ -61,11 +61,13 @@ const DetailPostMenu = (props: IProps) => {
     } else {
       setIsMatch(false);
     }
-  }, [isMatch]);
+  }, [props.email, session?.user?.email]);
 
   if (!data) {
     return;
   }
+
+  console.log(isMatch);
 
   // console.log(props);
   return (
@@ -83,10 +85,7 @@ const DetailPostMenu = (props: IProps) => {
           {!isMatch ? <MenuReport postId={props?.postId} /> : null}
           {isMatch && (
             <>
-              <DropdownMenuItem>
-                <Trash className="mr-2 h-4 w-4" />
-                <span>게시글 삭제</span>
-              </DropdownMenuItem>
+              <DetailPostDelete postId={props?.postId} />
               <DropdownMenuItem>
                 <ClipboardEditIcon className="mr-2 h-4 w-4" />
                 <span>게시글 수정</span>

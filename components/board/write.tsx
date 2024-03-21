@@ -80,7 +80,6 @@ const Write = () => {
     } catch (error: any) {
       console.log("board write POST 클라이언트에서 오류 발생", error);
       setFormError(error?.response?.data);
-      return;
     }
   };
 

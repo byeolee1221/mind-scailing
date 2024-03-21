@@ -73,6 +73,7 @@ export async function GET(req: Request) {
       const formattedUserDate = userCreate.toISOString().slice(0, 10);
       return {
         ...post,
+        file: post.file,
         createdAt: formattedDate,
         userId: post.user.name,
         userCreatedAt: formattedUserDate,

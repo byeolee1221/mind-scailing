@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Loading = () => {
   return (
-    <div className="h-screen flex justify-center items-center">
+    <div className="h-screen flex flex-col justify-center items-center">
       <Image
         src="/restart.png"
         alt="로딩"
@@ -10,6 +10,7 @@ const Loading = () => {
         height={50}
         className="rounded-full animate-spin"
       />
+      <p className="text-sm">잠시만 기다려주세요!</p>
     </div>
   );
 };

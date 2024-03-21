@@ -6,6 +6,8 @@ import { NextAuthProvider } from "@/lib/nextauthProvider";
 import { cls } from "@/lib/styleUtil";
 import { useEffect, useState } from "react";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
+
 
 const NotoSansKR = Noto_Sans_KR({ subsets: ["latin"], weight: "400" });
 
@@ -43,6 +45,7 @@ export default function RootLayout({
               )}
             >
               {children}
+              <Toaster />
             </div>
           </NextAuthProvider>
         </ThemeProvider>

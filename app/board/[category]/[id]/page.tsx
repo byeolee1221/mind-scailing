@@ -7,7 +7,6 @@ import ViewCount from "@/components/board/boardDetail/viewCount";
 import NavBar from "@/components/navBar";
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import useSWR, { mutate } from "swr";
@@ -54,9 +53,7 @@ const PostDetail = () => {
           <div className="flex flex-col items-start space-y-3">
             <div className="flex items-center justify-between w-full">
               <div className="flex items-center space-x-2">
-                <Link href="">
-                  <img src={data?.user.image} className="rounded-full w-10" />
-                </Link>
+                <img src={data?.user.image} className="rounded-full w-10" />
                 <div className="flex flex-col items-start">
                   <h1 className="text-sm font-semibold">
                     {data?.user.newName ? data?.user.newName : data?.user.name}
