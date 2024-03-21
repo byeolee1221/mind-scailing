@@ -26,6 +26,7 @@ export async function GET(req: Request) {
       userId: findPost?.userId,
       avatar: findPost?.user.image,
       post: findPost?.post,
+      file: findPost?.file,
       commentCount: findPost?.commentCount,
       view: findPost?.view,
       like: findPost?.like,

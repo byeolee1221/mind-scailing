@@ -7,7 +7,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ClipboardEditIcon, Trash } from "lucide-react";
+import { ClipboardEditIcon } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -17,6 +17,8 @@ import useSWR from "swr";
 import MenuProfile from "../menuProfile";
 import { useParams } from "next/navigation";
 import DetailPostDelete from "./detailPostDelete";
+import PostEdit from "../postEdit";
+import Providers from "@/app/reduxProvider";
 
 interface IUser {
   name: string;
@@ -30,6 +32,7 @@ interface IDetailPostProfile {
   userId: string;
   avatar: string;
   post: string;
+  file: string | undefined;
   commentCount: number;
   view: number;
   like: number;
@@ -67,34 +70,32 @@ const DetailPostMenu = (props: IProps) => {
     return;
   }
 
-  console.log(isMatch);
-
+  // console.log(isMatch);
   // console.log(props);
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <button className="hover:bg-slate-300 focus:outline-none rounded-full p-1 dark:invert transition-colors">
-          <Image src="/menu.png" alt="메뉴" width={30} height={30} />
-        </button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-40">
-        <DropdownMenuLabel>게시글 메뉴</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          {!isMatch ? <MenuProfile post={data} /> : null}
-          {!isMatch ? <MenuReport postId={props?.postId} /> : null}
-          {isMatch && (
-            <>
-              <DetailPostDelete postId={props?.postId} />
-              <DropdownMenuItem>
-                <ClipboardEditIcon className="mr-2 h-4 w-4" />
-                <span>게시글 수정</span>
-              </DropdownMenuItem>
-            </>
-          )}
-        </DropdownMenuGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Providers>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button className="hover:bg-slate-300 focus:outline-none rounded-full p-1 dark:invert transition-colors">
+            <Image src="/menu.png" alt="메뉴" width={30} height={30} />
+          </button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-40">
+          <DropdownMenuLabel>게시글 메뉴</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            {!isMatch ? <MenuProfile post={data} /> : null}
+            {!isMatch ? <MenuReport postId={props?.postId} /> : null}
+            {isMatch && (
+              <>
+                <DetailPostDelete postId={props?.postId} />
+                <PostEdit postId={data.id} post={data.post} file={data.file} />
+              </>
+            )}
+          </DropdownMenuGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </Providers>
   );
 };
 
