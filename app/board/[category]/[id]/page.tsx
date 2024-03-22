@@ -43,7 +43,7 @@ const PostDetail = () => {
   );
   // console.log(data);
 
-  mutate("/api/board/boardDetail?postId=${id}");
+  mutate("/api/board/boardDetail");
 
   return (
     <NavBar title="게시글" hasTabBar pageBack>

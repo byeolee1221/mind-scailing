@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import useSWR, { mutate } from "swr";
 
 interface IAlarm {
@@ -46,14 +47,17 @@ const Alarm = () => {
   
       if (deleteAlarm.status === 200) {
         alert("알림이 삭제되었습니다.");
-        mutate("/api/myPage/alarm");
         router.refresh();
       }
     } catch (error: any) {
       console.log("alarm DELETE 클라이언트에서 오류 발생", error);
-      alert(error.response.data);
+      return toast("오류 발생", {
+        description: error.response.data
+      });
     }
   };
+
+  mutate("/api/myPage/alarm");
 
   // console.log(data);
 

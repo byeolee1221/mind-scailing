@@ -8,11 +8,32 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../ui/sheet";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { Button } from "../ui/button";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const AccountDisconnect = () => {
   const { data: session } = useSession();
+  const router = useRouter();
+
+  const onClickDelete = async () => {
+    try {
+      const response = await axios.delete("/api/myPage/setting");
+
+      if (response.status === 200) {
+        alert("연결이 해제되었습니다. 이용해주셔서 감사합니다.");
+        signOut();
+        router.push("/");
+      }
+    } catch (error: any) {
+      console.log("accountDisconnect DELETE 클라이언트에서 오류 발생", error);
+      return toast("오류 발생", {
+        description: error.response.data,
+      });
+    }
+  };
 
   return (
     <Sheet>
@@ -38,9 +59,10 @@ const AccountDisconnect = () => {
             <p className="text-sm">{session?.user?.email}</p>
           </div>
           <span className="text-xs text-red-500">
-            연결 해제시 게시한 모든 게시글과 댓글을 포함한 정보가 삭제됩니다.
+            아래 버튼을 눌러 연결 해제시 즉시 게시한 모든 게시글과 댓글을 포함한
+            정보가 삭제됩니다.
           </span>
-          <Button>연결 해제</Button>
+          <Button onClick={onClickDelete}>연결 해제</Button>
         </div>
       </SheetContent>
     </Sheet>

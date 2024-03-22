@@ -8,7 +8,7 @@ export async function GET(req: Request) {
     const postUrl = req.url.split("postId=");
     const postId = postUrl[1];
     let resultData;
-    console.log(postId);
+    // console.log(postId);
 
     const findPost = await prismadb.post.findUnique({
       where: {

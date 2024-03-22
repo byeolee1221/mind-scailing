@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { toast } from "sonner";
 import { mutate } from "swr";
 
 const LikeBtn = (props: any) => {
@@ -10,24 +11,20 @@ const LikeBtn = (props: any) => {
   const { data: session } = useSession();
 
   const onClick = async () => {
-    if (session) {
-      try {
-        const response = await axios.post("/api/board/like", {
-          id,
-          userId: session?.user?.email,
-        });
-
-        if (response.status === 200) {
-          mutate("/api/board/like");
-        }
-      } catch (error: any) {
-        console.log(error);
-        alert(error.response.error);
-      }
-    } else {
-      alert("공감하시려면 로그인해주세요.");
+    try {
+      const response = await axios.post("/api/board/like", {
+        id,
+        userId: session?.user?.email,
+      });
+    } catch (error: any) {
+      console.log("LikeBtn POST 클라이언트에서 오류 발생", error);
+      return toast("오류 발생", {
+        description: error.response.data
+      });
     }
   };
+
+  mutate("/api/board/like");
 
   return (
     <>

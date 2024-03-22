@@ -58,7 +58,7 @@ export async function POST(req: Request) {
     const { introduce } = body;
 
     if (!session) {
-      return new NextResponse("수정하시려면 로그인해주세요.", { status: 401 });
+      return new NextResponse("로그인이 필요한 서비스입니다.", { status: 401 });
     }
 
     const checkProfileEmpty = await prismadb.profile.findMany({

@@ -19,7 +19,7 @@ export async function POST(req: Request) {
       });
     }
 
-    const checkNewName = await prismadb.user.findMany({
+    const checkNewName = await prismadb.user.findFirst({
       where: {
         newName
       }
@@ -69,5 +69,52 @@ export async function GET(req: Request) {
   } catch (error) {
     console.log("setting GET API에서 오류 발생", error);
     return new NextResponse("오류가 발생하여 이름을 불러오지 못했습니다.", { status: 500 });
+  }
+}
+
+export async function DELETE(req: Request) {
+  try {
+    const session = await getServerSession(authOptions);
+
+    if (!session) {
+      return new NextResponse("로그인이 필요한 서비스입니다.", { status: 401 });
+    }
+
+    const deletePost = await prismadb.post.deleteMany({
+      where: {
+        user: {
+          email: session.user?.email
+        }
+      }
+    });
+
+    const deleteComment = await prismadb.comment.deleteMany({
+      where: {
+        user: {
+          email: session.user?.email
+        }
+      }
+    });
+
+    const deleteLike = await prismadb.like.deleteMany({
+      where: {
+        user: {
+          email: session.user?.email
+        }
+      }
+    });
+
+    if (deletePost && deleteComment && deleteLike) {
+      const deleteUser = await prismadb.user.delete({
+        where: {
+          email: session.user?.email!
+        }
+      });
+    }
+
+    return NextResponse.json({ status: 200 });
+  } catch (error) {
+    console.log("setting DELETE API에서 오류 발생", error);
+    return new NextResponse("오류가 발생하여 삭제되지 않았습니다. 잠시 후 다시 시도해주세요.", { status: 500 });
   }
 }

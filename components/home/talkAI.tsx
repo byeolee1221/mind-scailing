@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { cls } from "@/lib/styleUtil";
 import { useSession } from "next-auth/react";
+import { toast } from "sonner";
 
 const TalkAI = () => {
   const { data: session } = useSession();
@@ -23,6 +24,7 @@ const TalkAI = () => {
   });
 
   const isLoading = form.formState.isSubmitting;
+  const formError = form.formState.errors;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
@@ -41,8 +43,10 @@ const TalkAI = () => {
 
       form.reset();
     } catch (error: any) {
-      console.log(error);
-      return;
+      console.log("talkAI onSubmit에서 오류 발생", error);
+      return toast("오류 발생", {
+        description: error.response.data
+      });
     }
   };
 
@@ -71,9 +75,9 @@ const TalkAI = () => {
               className="resize-none w-full border-2 rounded-lg border-slate-200 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 focus:outline-none p-2 text-sm transition-all"
               placeholder="왜 나는 잘 풀리는 게 없을까?"
             />
-            {form.formState.errors?.conversation ? (
+            {formError?.conversation ? (
               <p className="text-xs text-red-500">
-                {form.formState.errors.conversation.message}
+                {formError.conversation.message}
               </p>
             ) : null}
             <button

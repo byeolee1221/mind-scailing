@@ -16,8 +16,8 @@ import { accountSchema } from "@/app/myPage/accountSetting/constants";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { useState } from "react";
 import useSWR from "swr";
+import { toast } from "sonner";
 
 const fetcher = (url: string) =>
   axios.get(url).then((response) => response.data);
@@ -25,7 +25,6 @@ const fetcher = (url: string) =>
 const ActiveNameChange = () => {
   const { data: session } = useSession();
   const { data } = useSWR<string>("/api/myPage/setting", fetcher);
-  const [fetcherror, setFetchError] = useState("");
   const router = useRouter();
 
   const form = useForm<z.infer<typeof accountSchema>>({
@@ -39,11 +38,6 @@ const ActiveNameChange = () => {
   const formError = form.formState.errors;
 
   const onSubmit = async (values: z.infer<typeof accountSchema>) => {
-    if (!session) {
-      alert("로그인이 필요한 서비스입니다.");
-      router.push("/");
-    }
-
     try {
       const fetchData = await axios.post("/api/myPage/setting", {
         newName: values.accountName,
@@ -56,9 +50,9 @@ const ActiveNameChange = () => {
       }
     } catch (error: any) {
       console.log("activeNameChange POST 클라이언트에서 오류 발생", error);
-      if (error.response.status) {
-        setFetchError(error.response.data);
-      }
+      return toast("오류 발생", {
+        description: error.response.data
+      });
     }
   };
 
@@ -104,7 +98,6 @@ const ActiveNameChange = () => {
                 {formError.accountName?.message}
               </p>
             )}
-            {fetcherror && <p className="text-xs text-red-500">{fetcherror}</p>}
             <span className="text-xs text-red-500">
               프로필이름에 비속어 및 혐오문구, 정치 관련 표현 등이 포함되면
               계정이 정지될 수 있습니다.

@@ -13,6 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const MyIntroduce = () => {
   const { data: session } = useSession();
@@ -29,10 +30,6 @@ const MyIntroduce = () => {
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof introduceSchema>) => {
-    if (!session) {
-      alert("수정하시려면 로그인해주세요.");
-    }
-
     try {
       const postData = await axios.post("/api/myPage", {
         introduce: values.introduce,
@@ -43,11 +40,11 @@ const MyIntroduce = () => {
         form.reset();
         setClose(true);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log("myPage POST 클라이언트에서 오류 발생", error);
-      setError(
-        "오류가 발생하여 수정하지 못했습니다. 잠시 후 다시 시도해주세요."
-      );
+      return toast("오류 발생", {
+        description: error.response.data
+      });
     }
   };
 

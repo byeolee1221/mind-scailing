@@ -4,7 +4,7 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 
 interface IUser {
   image: string;
@@ -33,7 +33,9 @@ const TodayPost = () => {
     if (data && data.length === 0) {
       setEmpty("게시글이 아직 없습니다.");
     }
-  }, [data && data.length === 0]);
+  }, []);
+
+  mutate("/api/home");
 
   return (
     <div className="flex flex-col items-start px-6">
@@ -47,7 +49,7 @@ const TodayPost = () => {
         </p>
       ) : null}
       {!error ? (
-        <div className="grid grid-cols-2 gap-x-5">
+        <div className="grid grid-cols-2 gap-x-5 w-full">
           {data?.map((post: ITodayPost) => (
             <Link
               key={post.id}

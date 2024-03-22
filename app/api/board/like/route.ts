@@ -9,6 +9,7 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { id, userId } = body;
     // console.log(id, userId);
+
     // 유저 확인
     if (!session) {
       return new NextResponse("로그인이 필요한 서비스입니다.", {
@@ -22,6 +23,7 @@ export async function POST(req: Request) {
       },
     });
     // console.log(post);
+
     // 좋아요 누른 유저가 이미 좋아요를 눌렀는지 먼저 확인
     if (post) {
       const existingLike = await prismadb.like.findUnique({
@@ -33,6 +35,7 @@ export async function POST(req: Request) {
         },
       });
       // console.log(existingLike);
+
       // 이미 좋아요를 누르면 좋아요가 취소되도록 함. 그게 아니라면 좋아요가 1 증가하도록 함.
       if (existingLike) {
         const likeCancel = await prismadb.like.delete({
@@ -72,7 +75,8 @@ export async function POST(req: Request) {
             },
           },
         });
-        console.log(updatePost);
+        // console.log(updatePost);
+
         const createAlarm = await prismadb.alarm.create({
           data: {
             toUser: updatePost.userId,
@@ -86,7 +90,7 @@ export async function POST(req: Request) {
             post: true,
           },
         });
-        console.log(createAlarm);
+        // console.log(createAlarm);
       }
     }
 
