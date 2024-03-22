@@ -1,6 +1,6 @@
 "use client";
 
-import CommentBtn from "@/components/board/boardDetail/commentBtn";
+import CommentBtn from "@/components/board/boardDetail/comment/commentBtn";
 import DetailPostMenu from "@/components/board/boardDetail/detailPostMenu";
 import LikeBtn from "@/components/board/boardDetail/likeBtn";
 import ViewCount from "@/components/board/boardDetail/viewCount";
@@ -42,7 +42,7 @@ const PostDetail = () => {
     fetcher
   );
   // console.log(data);
-  
+
   mutate("/api/board/boardDetail?postId=${id}");
 
   return (

@@ -67,6 +67,10 @@ export async function POST(req: Request) {
       return new NextResponse("로그인이 필요한 서비스입니다.", { status: 401 });
     }
 
+    if (!postId) {
+      return new NextResponse("게시글 정보를 찾을 수 없습니다. 새로고침 후 다시 시도해주세요.", { status: 400 });
+    }
+
     const findPost = await prismadb.post.findUnique({
       where: {
         id: postId,

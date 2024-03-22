@@ -10,6 +10,8 @@ import Image from "next/image";
 import CommentDelete from "./commentDelete";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import CommentUserProfile from "./commentUserProfile";
+import CommentReport from "./commentReport";
 
 interface IProps {
   id: number;
@@ -47,8 +49,12 @@ const CommentMenu = (props: IProps) => {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           {isMatch && (
+            <CommentDelete commentId={props.id} postId={props.postId} />
+          )}
+          {!isMatch && (
             <>
-              <CommentDelete commentId={props.id} postId={props.postId} />
+              <CommentUserProfile commentId={props.id} />
+              <CommentReport commentId={props.id} />
             </>
           )}
         </DropdownMenuGroup>

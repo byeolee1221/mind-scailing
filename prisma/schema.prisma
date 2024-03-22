@@ -165,6 +165,7 @@ model Report {
   targetId   String
   fromUserId String
   postId     Int
+  commentId  Int?
   targetUser User     @relation(fields: [targetId], references: [id], onDelete: Cascade)
   post       Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   createdAt  DateTime @default(now())

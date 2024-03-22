@@ -1,5 +1,3 @@
-import { ShieldAlert } from "lucide-react";
-import { DropdownMenuItem } from "../ui/dropdown-menu";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,40 +8,45 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../ui/alert-dialog";
+} from "@/components/ui/alert-dialog";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import axios from "axios";
+import { ShieldAlert } from "lucide-react";
+import { toast } from "sonner";
 
 interface IProps {
-  postId: number;
+  commentId: number;
 }
 
-const MenuReport = (props: IProps) => {
+const CommentReport = (props: IProps) => {
   const onReport = async () => {
     try {
-      const fetchData = await axios.post("/api/board/boardMenu", {
-        postId: props.postId,
+      const response = await axios.post("/api/board/boardDetail/commentMenu", {
+        commentId: props.commentId
       });
 
-      if (fetchData.status === 200) {
+      if (response.status === 200) {
         alert("신고가 완료되었습니다. 감사합니다.");
       }
     } catch (error: any) {
-      console.log("menuReport POST 클라이언트에서 오류 발생", error);
-      alert(error.response.data);
+      console.log("commentReport POST 클라이언트에서 오류 발생", error);
+      return toast("오류 발생", {
+        description: error.response.data
+      });
     }
-  };
+  }
 
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
           <ShieldAlert className="mr-2 h-4 w-4" />
-          <span>게시글 신고</span>
+          <span>댓글 신고</span>
         </DropdownMenuItem>
       </AlertDialogTrigger>
       <AlertDialogContent className="w-[90%] rounded-md">
         <AlertDialogHeader>
-          <AlertDialogTitle>게시글 신고</AlertDialogTitle>
+          <AlertDialogTitle>댓글 신고</AlertDialogTitle>
           <AlertDialogDescription>
             신고하시면 운영진이 검토 후 신속히 처리하겠습니다.
           </AlertDialogDescription>
@@ -57,4 +60,4 @@ const MenuReport = (props: IProps) => {
   );
 };
 
-export default MenuReport;
+export default CommentReport;

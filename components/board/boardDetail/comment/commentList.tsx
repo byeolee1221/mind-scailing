@@ -65,7 +65,13 @@ const CommentList = (props: IProps) => {
                   <p className="text-sm">{comment.comment}</p>
                 </div>
               </div>
-              {session && <CommentMenu id={comment.id} userEmail={comment.userEmail} postId={postId} />}
+              {session && (
+                <CommentMenu
+                  id={comment.id}
+                  userEmail={comment.userEmail}
+                  postId={postId}
+                />
+              )}
             </div>
           ))}
         </div>
