@@ -7,6 +7,7 @@ import { cls } from "@/lib/styleUtil";
 import { useEffect, useState } from "react";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import Footer from "./footer/page";
 
 
 const NotoSansKR = Noto_Sans_KR({ subsets: ["latin"], weight: "400" });
@@ -46,6 +47,7 @@ export default function RootLayout({
             >
               {children}
               <Toaster />
+              <Footer />
             </div>
           </NextAuthProvider>
         </ThemeProvider>

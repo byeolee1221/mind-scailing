@@ -36,7 +36,7 @@ const Home = () => {
   }, [alarmCount]);
 
   return (
-    <div className="space-y-16 mb-10 dark:bg-slate-800 dark:text-white">
+    <div className="space-y-16 dark:bg-slate-800 dark:text-white">
       <div className="flex items-center justify-between mt-4 px-6">
         <div className="flex flex-col items-start">
           <h1 className="font-semibold">

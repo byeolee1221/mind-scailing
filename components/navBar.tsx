@@ -85,7 +85,7 @@ const NavBar = ({ title, pageBack, hasTabBar, children }: INavbar) => {
       <div
         className={cls(
           "pt-14 dark:bg-slate-800",
-          hasTabBar ? "pb-20 dark:bg-slate-800" : ""
+          hasTabBar ? "pb-10 dark:bg-slate-800" : ""
         )}
       >
         {children}
