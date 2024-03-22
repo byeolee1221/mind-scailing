@@ -88,6 +88,7 @@ export async function DELETE(req: Request) {
           id: findAlarm.id,
         },
       });
+
     }
 
     return NextResponse.json({ status: 200 });

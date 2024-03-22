@@ -54,7 +54,7 @@ export async function POST(req: Request) {
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
     console.log(error);
-    return new NextResponse("잠시 후 다시 시도해주세요.", { status: 500 });
+    return new NextResponse("오류가 발생하였으니 잠시 후 다시 검색해주세요.", { status: 500 });
   }
 }
 

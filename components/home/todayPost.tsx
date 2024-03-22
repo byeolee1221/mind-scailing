@@ -33,7 +33,7 @@ const TodayPost = () => {
     if (data && data.length === 0) {
       setEmpty("게시글이 아직 없습니다.");
     }
-  }, []);
+  }, [data && data.length === 0]);
 
   return (
     <div className="flex flex-col items-start px-6">
@@ -61,7 +61,9 @@ const TodayPost = () => {
                   className="bg-white rounded-full w-7 h-7"
                 />
                 <div className="ml-2">
-                  <h2 className="font-semibold text-xs">{post.user.newName ? post.user.newName : post.userId}</h2>
+                  <h2 className="font-semibold text-xs">
+                    {post.user.newName ? post.user.newName : post.userId}
+                  </h2>
                   <p className="text-gray-500 text-xs">{post.createdAt}</p>
                 </div>
               </div>

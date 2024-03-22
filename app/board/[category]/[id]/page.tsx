@@ -42,9 +42,8 @@ const PostDetail = () => {
     fetcher
   );
   // console.log(data);
-  useEffect(() => {
-    mutate("/api/board/boardDetail?postId=${id}");
-  }, []);
+  
+  mutate("/api/board/boardDetail?postId=${id}");
 
   return (
     <NavBar title="게시글" hasTabBar pageBack>

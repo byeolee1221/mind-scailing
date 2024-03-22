@@ -17,11 +17,11 @@ const MypageMenu = () => {
 
   return (
     <div className="border-t w-full dark:border-white dark:text-white">
-      <div className="flex flex-col px-8 py-4 divide-y-[1px] space-y-5">
+      <div className="flex flex-col px-8 py-4 divide-y-[1px] dark:divide-slate-500 space-y-5">
         <div className="flex items-center justify-between">
           <label htmlFor="dark" className="flex items-center space-x-5">
             <Image src="/moon.png" alt="다크모드" width={30} height={30} />
-            <p>다크모드 전환</p>
+            <p>테마 전환</p>
           </label>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

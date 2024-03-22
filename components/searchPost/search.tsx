@@ -11,6 +11,7 @@ import SearchReset from "./searchReset";
 import useSWR, { preload } from "swr";
 import { cls } from "@/lib/styleUtil";
 import Link from "next/link";
+import { toast } from "sonner";
 
 interface ISearchList {
   id: number;
@@ -57,17 +58,24 @@ const Search = () => {
       }
 
       form.reset();
-    } catch (error) {
-      console.log("search 클라이언트에서 오류 발생", error);
+    } catch (error: any) {
+      console.log("search post 클라이언트에서 오류 발생", error);
+      return toast("오류 발생", {
+        description: error.response.data,
+      });
     }
   };
-  // console.log(empty);
-  // console.log(data);
+
+  const onClick = (data: string) => {
+    form.setValue("search", data);
+  };
 
   useEffect(() => {
     preload("/api/search", fetcher);
+  }, []);
 
-    if (data?.length === 0) {
+  useEffect(() => {
+    if (data && data.length === 0) {
       setEmpty(true);
     } else {
       setEmpty(false);
@@ -96,13 +104,14 @@ const Search = () => {
         <div className="w-full flex flex-col space-y-1 px-1">
           {!empty ? (
             <div className="flex flex-col items-start border-b pb-1.5 px-2">
-              <h1 className="text-sm text-gray-500 dark:text-gray-300">
+              <h1 className="text-sm text-gray-500 dark:text-gray-300 px-1">
                 검색내역
               </h1>
               {data?.map((search: ISearchList) => (
                 <button
+                  onClick={() => onClick(search.search)}
                   key={search.id}
-                  className="hover:bg-slate-200 w-full cursor-default text-sm py-1"
+                  className="hover:bg-slate-200 dark:hover:bg-slate-600 w-full cursor-pointer text-sm py-1 px-1"
                 >
                   {search ? (
                     <p className="text-start dark:text-white">

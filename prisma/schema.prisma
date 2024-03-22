@@ -150,6 +150,7 @@ model Alarm {
   toUser     String
   fromUserId String
   fromEmail  String
+  commentId  Int?
   postId     Int
   user       User     @relation(name: "user", fields: [toUser], references: [id], onDelete: Cascade)
   fromUser   User     @relation(name: "fromUser", fields: [fromUserId], references: [id], onDelete: Cascade)

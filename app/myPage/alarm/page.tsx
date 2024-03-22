@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 
 interface IAlarm {
   alarmId: number;
@@ -27,6 +27,7 @@ const Alarm = () => {
   const [empty, setEmpty] = useState(false);
   const router = useRouter();
   // console.log(data);
+
   useEffect(() => {
     if (data && data.length === 0) {
       setEmpty(true);
@@ -45,6 +46,7 @@ const Alarm = () => {
   
       if (deleteAlarm.status === 200) {
         alert("알림이 삭제되었습니다.");
+        mutate("/api/myPage/alarm");
         router.refresh();
       }
     } catch (error: any) {

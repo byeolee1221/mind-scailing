@@ -1,14 +1,16 @@
 "use client";
 
 import axios from "axios";
-import Image from "next/image";
 import { useState } from "react";
 import useSWR, { mutate } from "swr";
+import CommentMenu from "./commentMenu";
+import { useSession } from "next-auth/react";
 
 interface ICommentList {
   avatar: string;
   userName: string;
   userNewName: string;
+  userEmail: string;
   comment: string;
   id: number;
   createdAt: string;
@@ -26,6 +28,7 @@ const CommentList = (props: IProps) => {
   const postId = props.id;
   const { data, error } = useSWR<ICommentList[]>("/api/board/comment", fetcher);
   const [commentError, setCommentError] = useState("");
+  const { data: session } = useSession();
   let filteredComment;
 
   if (error) {
@@ -53,22 +56,16 @@ const CommentList = (props: IProps) => {
                 <div className="flex flex-col items-start">
                   <div className="flex items-center space-x-2">
                     <h1 className="font-semibold text-sm">
-                      {comment.userNewName ? comment.userNewName : comment.userName}
+                      {comment.userNewName
+                        ? comment.userNewName
+                        : comment.userName}
                     </h1>
                     <p className="text-gray-500 text-xs">{comment.createdAt}</p>
                   </div>
                   <p className="text-sm">{comment.comment}</p>
                 </div>
               </div>
-              <button>
-                <Image
-                  src="/menu.png"
-                  alt="메뉴"
-                  width={30}
-                  height={30}
-                  className="p-1 rounded-full hover:bg-slate-300 transition-colors"
-                />
-              </button>
+              {session && <CommentMenu id={comment.id} userEmail={comment.userEmail} postId={postId} />}
             </div>
           ))}
         </div>
