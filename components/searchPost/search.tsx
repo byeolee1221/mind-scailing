@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import Image from "next/image";
 import SearchReset from "./searchReset";
-import useSWR, { preload } from "swr";
+import useSWR, { mutate, preload } from "swr";
 import { cls } from "@/lib/styleUtil";
 import Link from "next/link";
 import { toast } from "sonner";
@@ -82,6 +82,8 @@ const Search = () => {
     }
   }, []);
 
+  mutate("/api/search");
+
   return (
     <div className="w-full min-h-screen">
       <div className="flex flex-col items-start space-y-1">
@@ -152,15 +154,6 @@ const Search = () => {
                   <p className="text-gray-500">{post.createdAt}</p>
                 </div>
               </div>
-              <button className="hover:bg-slate-300 p-1 rounded-full transition-colors">
-                <Image
-                  src="/menu.png"
-                  alt="메뉴바"
-                  width={20}
-                  height={20}
-                  className="dark:invert"
-                />
-              </button>
             </div>
             <p>{post.post}</p>
             <div className="flex items-center justify-between w-full">

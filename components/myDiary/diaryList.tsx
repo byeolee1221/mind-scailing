@@ -12,6 +12,7 @@ import {
 import { AlertDialogAction } from "@radix-ui/react-alert-dialog";
 import useSWR, { preload } from "swr";
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
 interface IDiaryList {
   id: number;
@@ -24,7 +25,8 @@ interface IDiaryList {
 const fetcher = (url: string) =>
   axios.get(url).then((response) => response.data);
 
-const DiaryList = (props: any) => {
+const DiaryList = () => {
+  const { data: session } = useSession();
   const { data } = useSWR<IDiaryList[]>("/api/myDiary", fetcher);
   const [empty, setEmpty] = useState(false);
   const [resError, setResError] = useState("");
@@ -36,7 +38,7 @@ const DiaryList = (props: any) => {
 
   if (data) {
     filteredDiary = data.filter(
-      (diary: IDiaryList) => diary.userEmail === props.session.user.email
+      (diary: IDiaryList) => diary.userEmail === session?.user?.email
     );
   }
 

@@ -18,11 +18,14 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import DiaryList from "./diaryList";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { showModal } from "@/slice/modalSlice";
+import { toast } from "sonner";
 
 const DiaryWrite = () => {
   const [file, setFile] = useState<File | null>(null);
-  const [formError, setFormError] = useState("");
-  const [close, setClose] = useState(false);
+  const modalDispatch = useAppDispatch();
+  const modal = useAppSelector((state) => state.modal.modal);
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -54,28 +57,23 @@ const DiaryWrite = () => {
   });
 
   const isLoading = form.formState.isSubmitting;
+  const formError = form.formState.errors;
 
   const onSubmit = async (values: z.infer<typeof diarySchema>) => {
-    if (!session || !values.diary) {
-      setFormError("내용을 입력해주세요.");
-    }
-
     try {
       const response = await axios.post("/api/myDiary", {
         diary: values.diary,
         file,
-        user: {
-          name: session?.user?.name,
-          email: session?.user?.email,
-        },
       });
 
       if (response.status === 200) {
-        setClose(true);
+        modalDispatch(showModal());
       }
     } catch (error: any) {
       console.log("dirayWrite 클라이언트에서 오류 발생", error);
-      alert(error.response.data);
+      return toast("오류 발생", {
+        description: error.response.data
+      });
     }
   };
 
@@ -96,7 +94,7 @@ const DiaryWrite = () => {
                 일기를 쓰려면 여기를 클릭하세요.
               </button>
             </DialogTrigger>
-            {!close ? (
+            {!modal ? (
               <DialogContent className="w-[90%] rounded-xl">
                 <DialogHeader>
                   <DialogTitle className="text-start">
@@ -117,13 +115,10 @@ const DiaryWrite = () => {
                     className="w-full resize-none p-1 border focus:outline-none focus:ring-2 focus:ring-green-500 rounded-md text-sm"
                     rows={10}
                   />
-                  {form.formState.errors.diary ? (
+                  {formError.diary ? (
                     <p className="text-red-500 text-sm">
-                      {form.formState.errors.diary.message}
+                      {formError.diary.message}
                     </p>
-                  ) : null}
-                  {formError ? (
-                    <p className="text-red-500 text-xs">{formError}</p>
                   ) : null}
                   <div className="flex items-center justify-between w-full">
                     <button
@@ -152,7 +147,7 @@ const DiaryWrite = () => {
           </Dialog>
         </div>
       </div>
-      <DiaryList session={session} />
+      <DiaryList />
     </>
   );
 };

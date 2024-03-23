@@ -14,7 +14,7 @@ export async function POST(req: Request) {
     const searchData = await prismadb.search.create({
       data: {
         search,
-      },
+      }
     });
 
     if (searchData) {

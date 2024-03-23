@@ -57,6 +57,8 @@ export async function POST(req: Request) {
             },
           },
         });
+
+        return new NextResponse("공감이 취소되었습니다.", { status: 422 });
       } else {
         const createLike = await prismadb.like.create({
           data: {

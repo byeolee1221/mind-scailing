@@ -1,11 +1,29 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { mutate } from "swr";
 
 const SearchReset = () => {
   const router = useRouter();
   const onDelete = async () => {
-    const deleteSearch = await axios.delete("/api/search");
+    try {
+      const deleteSearch = await axios.delete("/api/search");
+      
+      if (deleteSearch.status === 200) {
+        router.refresh();
+        return toast("초기화 완료", {
+          description: "검색 기록이 초기화되었습니다."
+        });
+      }
+    } catch (error: any) {
+      console.log("searchReset DELETE 클라이언트에서 오류 발생", error);
+      return toast("오류 발생", {
+        description: error.response.data
+      });
+    }
   };
+
+  mutate("/api/search");
 
   return (
     <div className="flex flex-col items-start px-2">

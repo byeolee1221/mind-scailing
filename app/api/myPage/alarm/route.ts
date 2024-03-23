@@ -27,15 +27,15 @@ export async function GET(req: Request) {
     });
 
     const findFromUser = findAlarm.map((data) => data.fromEmail);
-    // console.log(findFromUser);
-    
+    console.log(findFromUser);
+
     const fromUserInfo = await prismadb.user.findUnique({
       where: {
         email: findFromUser.join("")
-      }
-    })
+      },
+    });
 
-    // console.log(fromUserInfo);
+    console.log(fromUserInfo);
     if (findAlarm) {
       resultData = findAlarm.map((data) => {
         const date = new Date(data.createdAt);
@@ -88,7 +88,6 @@ export async function DELETE(req: Request) {
           id: findAlarm.id,
         },
       });
-
     }
 
     return NextResponse.json({ status: 200 });

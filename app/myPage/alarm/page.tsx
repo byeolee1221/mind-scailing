@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import useSWR, { mutate } from "swr";
+import useSWR, { mutate, preload } from "swr";
 
 interface IAlarm {
   alarmId: number;
@@ -27,7 +27,7 @@ const Alarm = () => {
   const { data, error } = useSWR<IAlarm[]>("/api/myPage/alarm", fetcher);
   const [empty, setEmpty] = useState(false);
   const router = useRouter();
-  // console.log(data);
+  console.log(data);
 
   useEffect(() => {
     if (data && data.length === 0) {
@@ -37,6 +37,10 @@ const Alarm = () => {
     }
   }, []);
 
+  useEffect(() => {
+    preload("/api/myPage/alarm", fetcher);
+  }, []);
+
   const onDelete = async (alarmId: number) => {
     try {
       const deleteAlarm = await axios.delete("/api/myPage/alarm", {
@@ -44,7 +48,7 @@ const Alarm = () => {
           alarmId,
         },
       });
-  
+
       if (deleteAlarm.status === 200) {
         alert("알림이 삭제되었습니다.");
         router.refresh();
@@ -52,7 +56,7 @@ const Alarm = () => {
     } catch (error: any) {
       console.log("alarm DELETE 클라이언트에서 오류 발생", error);
       return toast("오류 발생", {
-        description: error.response.data
+        description: error.response.data,
       });
     }
   };

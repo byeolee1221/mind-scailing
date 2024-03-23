@@ -7,10 +7,14 @@ export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions);
     const body = await req.json();
-    const { diary, file, user } = body;
+    const { diary, file } = body;
 
     if (!session) {
-      return new NextResponse("이용하시려면 로그인해주세요!", { status: 401 });
+      return new NextResponse("로그인이 필요한 서비스입니다.", { status: 401 });
+    }
+
+    if (!diary) {
+      return new NextResponse("입력하신 내용을 다시 확인해주세요.", { status: 400 });
     }
 
     const createDiary = await prismadb.diary.create({
@@ -19,7 +23,7 @@ export async function POST(req: Request) {
         file,
         user: {
           connect: {
-            email: user.email,
+            email: session.user?.email!,
           },
         },
       },
@@ -42,7 +46,7 @@ export async function DELETE(req: Request) {
     const { id } = body;
 
     if (!session) {
-      return new NextResponse("삭제하시려면 로그인해주세요.", { status: 401 });
+      return new NextResponse("로그인이 필요한 서비스입니다.", { status: 401 });
     }
 
     const deleteDiary = await prismadb.diary.delete({
@@ -67,7 +71,7 @@ export async function GET(req: Request) {
     let resultData;
 
     if (!session) {
-      return new NextResponse("이용하시려면 로그인해주세요.", { status: 401 });
+      return new NextResponse("로그인이 필요한 서비스입니다.", { status: 401 });
     }
 
     const findDiary = await prismadb.diary.findMany({

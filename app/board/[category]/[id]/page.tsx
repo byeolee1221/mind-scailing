@@ -8,7 +8,7 @@ import NavBar from "@/components/navBar";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useSWR, { mutate } from "swr";
 
 interface IUser {
@@ -37,6 +37,7 @@ const PostDetail = () => {
   const params = useParams<{ id: string }>();
   const [isLoading, setIsLoading] = useState(false);
   const id = params.id;
+
   const { data } = useSWR<IPostDetail>(
     `/api/board/boardDetail?postId=${id}`,
     fetcher
