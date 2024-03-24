@@ -4,7 +4,7 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import useSWR, { mutate } from "swr";
+import useSWR, { mutate, preload } from "swr";
 
 interface IUser {
   image: string;
@@ -28,6 +28,10 @@ const fetcher = (url: string) =>
 const TodayPost = () => {
   const { data, error } = useSWR("/api/home", fetcher);
   const [empty, setEmpty] = useState("");
+
+  useEffect(() => {
+    preload("/api/home", fetcher);
+  }, [])
 
   useEffect(() => {
     if (data && data.length === 0) {

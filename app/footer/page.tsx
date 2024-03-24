@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className="w-full border-t flex flex-col space-y-5 px-6 pt-8 bg-slate-100 h-80 mb-10 dark:bg-slate-600">
       <div className="flex items-center space-x-2">
-        <Image src="/pill.png" alt="로고" width={30} height={30} />
+        <Image src="/icon.png" alt="로고" width={30} height={30} />
         <h2 className="font-semibold">마인드스케일링</h2>
       </div>
       <div className="flex flex-col space-y-2">

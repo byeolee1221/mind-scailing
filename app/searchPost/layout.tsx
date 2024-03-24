@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "검색 | Mind Scaling",
+  title: "검색",
 };
 
 const SearchLayout = ({ children }: { children: React.ReactNode }) => {

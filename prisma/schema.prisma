@@ -137,7 +137,7 @@ model Diary {
 
 model Profile {
   id        Int      @id @default(autoincrement())
-  introduce String?
+  introduce String   @default("자기소개")
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())

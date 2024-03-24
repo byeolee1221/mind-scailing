@@ -9,13 +9,10 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import useSWR, { mutate } from "swr";
 
-interface IFromUser {
-  name: string;
-  newName: string;
-}
 interface IAlarm {
   alarmId: number;
-  fromUser: IFromUser;
+  name: string;
+  newName: string;
   createdAt: string;
   category: string;
   postCategory: string;
@@ -88,9 +85,9 @@ const Alarm = () => {
                   <p className="text-sm">{item?.createdAt}</p>
                   <p className="text-sm">
                     <span className="font-semibold">
-                      {item.fromUser?.newName !== null
-                        ? item.fromUser?.newName
-                        : item.fromUser.name}
+                      {item.newName !== null
+                        ? item.newName
+                        : item.name}
                     </span>
                     {item.category === "댓글" &&
                       "님이 회원님의 게시글에 댓글을 남겼습니다."}

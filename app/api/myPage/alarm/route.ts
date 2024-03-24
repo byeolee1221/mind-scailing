@@ -51,7 +51,8 @@ export async function GET(req: Request) {
         const formattedDate = date.toISOString().slice(0, 10);
         return {
           alarmId: data.id,
-          ...resultFromUser,
+          name: resultFromUser[0].name,
+          newName: resultFromUser[1].newName,
           createdAt: formattedDate,
           category: data.category,
           postCategory: data.post.category,
