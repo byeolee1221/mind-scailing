@@ -76,89 +76,95 @@ const PostList = () => {
   return (
     <Providers>
       {empty && (
-        <p className="text-center mt-2 bg-slate-200 dark:bg-slate-500 rounded-md p-2">
+        <p className="text-center mt-2 bg-slate-200 dark:bg-slate-500 rounded-md p-2 lg:text-xl">
           게시글이 아직 없습니다.
         </p>
       )}
-      {!error ? (
-        filteredPost?.map((post: IPostList) => (
-          <div
-            key={post.id}
-            className="flex flex-col items-start p-3 space-y-5 border-2 border-green-500 rounded-md shadow-sm dark:bg-slate-700 dark:text-white"
-          >
-            <div className="flex items-center justify-between w-full">
-              <div className="flex items-center space-x-2">
-                <img
-                  src={post.avatar}
-                  alt="프로필"
-                  className="bg-slate-300 rounded-full w-10"
-                />
-                <div className="flex flex-col items-start">
-                  <h1 className="font-semibold text-sm">
-                    {post.user.newName ? post.user.newName : post.userId}
-                  </h1>
-                  <p className="text-xs text-gray-500 dark:text-gray-900">
-                    {post.createdAt}
-                  </p>
-                </div>
-              </div>
-              {session ? <PostMenu post={post} /> : null}
-            </div>
-            <Link
-              href={`${pathname}/${post.id}`}
-              className="flex flex-col items-start w-full"
+      <div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-4">
+        {!error ? (
+          filteredPost?.map((post: IPostList) => (
+            <div
+              key={post.id}
+              className="items-start p-3 space-y-5 border-2 border-green-500 rounded-md shadow-sm dark:bg-slate-700 dark:text-white"
             >
-              <p className="text-sm h-10 text-ellipsis overflow-hidden">
-                {post.post}
-              </p>
-              <div className="w-full">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <Image
-                      src="/like.png"
-                      alt="좋아요"
-                      width={20}
-                      height={20}
-                      className="dark:invert"
-                    />
-                    <span className="font-semibold text-sm">공감</span>
-                    <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm">
-                      {post.like}
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Image
-                      src="/comment.png"
-                      alt="댓글"
-                      width={20}
-                      height={20}
-                      className="dark:invert"
-                    />
-                    <span className="font-semibold text-sm">댓글</span>
-                    <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm">
-                      {post.commentCount}
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Image
-                      src="/view.png"
-                      alt="조회"
-                      width={20}
-                      height={20}
-                      className="dark:invert"
-                    />
-                    <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm">
-                      {post.view}
-                    </span>
+              <div className="flex items-center justify-between w-full">
+                <div className="flex items-center space-x-2">
+                  <img
+                    src={post.avatar}
+                    alt="프로필"
+                    className="bg-slate-300 rounded-full w-10 lg:w-14"
+                  />
+                  <div className="flex flex-col items-start">
+                    <h1 className="font-semibold text-sm lg:text-xl">
+                      {post.user.newName ? post.user.newName : post.userId}
+                    </h1>
+                    <p className="text-xs lg:text-lg text-gray-500 dark:text-gray-900">
+                      {post.createdAt}
+                    </p>
                   </div>
                 </div>
+                {session ? <PostMenu post={post} /> : null}
               </div>
-            </Link>
-          </div>
-        ))
-      ) : (
-        <p className="text-red-500 text-sm">{postError}</p>
-      )}
+              <Link
+                href={`${pathname}/${post.id}`}
+                className="flex flex-col items-start w-full"
+              >
+                <p className="text-sm lg:text-lg h-10 text-ellipsis overflow-hidden">
+                  {post.post}
+                </p>
+                <div className="w-full">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <Image
+                        src="/like.png"
+                        alt="좋아요"
+                        width={20}
+                        height={20}
+                        className="dark:invert lg:w-8"
+                      />
+                      <span className="font-semibold text-sm lg:text-xl">
+                        공감
+                      </span>
+                      <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm lg:text-xl">
+                        {post.like}
+                      </span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Image
+                        src="/comment.png"
+                        alt="댓글"
+                        width={20}
+                        height={20}
+                        className="dark:invert lg:w-8"
+                      />
+                      <span className="font-semibold text-sm lg:text-xl">
+                        댓글
+                      </span>
+                      <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm lg:text-xl">
+                        {post.commentCount}
+                      </span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Image
+                        src="/view.png"
+                        alt="조회"
+                        width={20}
+                        height={20}
+                        className="dark:invert lg:w-8"
+                      />
+                      <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm lg:text-xl">
+                        {post.view}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          ))
+        ) : (
+          <p className="text-red-500 text-sm">{postError}</p>
+        )}
+      </div>
     </Providers>
   );
 };

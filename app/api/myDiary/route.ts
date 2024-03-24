@@ -27,8 +27,11 @@ export async function POST(req: Request) {
           },
         },
       },
+      include: {
+        user: true
+      }
     });
-
+    // console.log(createDiary);
     return NextResponse.json({ status: 200 });
   } catch (error) {
     console.log("myDiary POST API에서 오류 발생", error);
@@ -97,7 +100,8 @@ export async function GET(req: Request) {
         diary: data.diary,
         id: data.id,
         userId: data.userId,
-        userEmail: data.user.email
+        userEmail: data.user.email,
+        avatar: data.user.image
       };
     });
 

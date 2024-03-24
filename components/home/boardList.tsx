@@ -51,7 +51,7 @@ const BoardList = () => {
   return (
     <div className="flex flex-col items-start px-6">
       <h1 className="font-bold">이야기 공간</h1>
-      <p className="text-gray-500 text-sm">
+      <p className="text-gray-500 text-sm lg:text-xl">
         고민을 나누고 이야기하며 기분을 풀어봐요
       </p>
       <div className="flex items-center justify-around mt-4 w-full">
@@ -66,9 +66,9 @@ const BoardList = () => {
               alt={item.alt}
               width={45}
               height={45}
-              className="bg-slate-200 hover:bg-slate-300 rounded-full p-2 transition-colors"
+              className="bg-slate-200 hover:bg-slate-300 rounded-full p-2 transition-colors lg:w-20"
             />
-            <p className="text-sm">{item.text}</p>
+            <p className="text-sm lg:text-xl">{item.text}</p>
           </Link>
         ))}
       </div>

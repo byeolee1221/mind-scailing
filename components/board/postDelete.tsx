@@ -46,8 +46,8 @@ const PostDelete = (props: IProps) => {
       <AlertDialogTrigger asChild>
         <button className="w-full">
           <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-            <Trash className="mr-2 h-4 w-4" />
-            <span>게시글 삭제</span>
+            <Trash className="mr-2 h-4 w-4 lg:h-6 lg:w-6" />
+            <span className="lg:text-lg">게시글 삭제</span>
           </DropdownMenuItem>
         </button>
       </AlertDialogTrigger>

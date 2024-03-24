@@ -27,11 +27,11 @@ const Board = () => {
 
   return (
     <NavBar title={name} hasTabBar pageBack>
-      <div className="px-8 space-y-6 mt-4 mb-10 min-h-screen overflow-auto">
+      <div className="px-6 space-y-6 mt-4 lg:mt-8 mb-10 min-h-screen overflow-auto">
         {session ? (
           <Write />
         ) : (
-          <p className="text-center bg-slate-300 p-2 text-sm rounded-md">
+          <p className="text-center bg-slate-300 p-2 text-sm lg:text-xl rounded-md">
             글을 게시하려면 로그인해주세요.
           </p>
         )}

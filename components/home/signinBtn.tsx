@@ -45,7 +45,7 @@ const SigninBtn = () => {
       </DialogTrigger>
       {!session ? (
         <DialogContent className="w-[90%] rounded-md">
-          <DialogHeader>
+          <DialogHeader className="lg:text-center">
             <DialogTitle>마인드스케일링 로그인</DialogTitle>
             <DialogDescription>
               아래 방법으로 로그인할 수 있습니다.
@@ -54,10 +54,10 @@ const SigninBtn = () => {
           <div className="flex flex-col items-center space-y-4">
             <button
               onClick={onSignin}
-              className="flex items-center space-x-11 rounded-md border-2 px-3 py-2 w-full"
+              className="flex items-center space-x-11 lg:justify-center lg:space-x-3 rounded-md border-2 px-3 py-2 w-full lg:w-3/5"
             >
               <Image src="/g-logo.png" alt="구글" width={30} height={30} />
-              <p>구글로 로그인하기</p>
+              <p className="lg:text-lg">구글로 로그인하기</p>
             </button>
           </div>
         </DialogContent>

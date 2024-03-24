@@ -52,6 +52,7 @@ const PostEdit = (props: IProps) => {
   });
 
   const isLoading = form.formState.isSubmitting;
+  const formError = form.formState.errors;
 
   const onSubmit = async (values: z.infer<typeof editPostSchema>) => {
     try {
@@ -78,8 +79,8 @@ const PostEdit = (props: IProps) => {
     <Dialog>
       <DialogTrigger asChild>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-          <ClipboardEditIcon className="mr-2 h-4 w-4" />
-          <span>게시글 수정</span>
+          <ClipboardEditIcon className="mr-2 h-4 w-4 lg:h-6 lg:w-6" />
+          <span className="lg:text-lg">게시글 수정</span>
         </DropdownMenuItem>
       </DialogTrigger>
       {!modal ? (
@@ -98,11 +99,13 @@ const PostEdit = (props: IProps) => {
               {...form.register("post", {
                 required: "수정하실 내용을 입력해주세요.",
               })}
-              className="w-full resize-none p-1 border focus:outline-none focus:ring-2 focus:ring-green-500 rounded-md text-sm"
+              className="w-full resize-none p-1 border focus:outline-none focus:ring-2 focus:ring-green-500 rounded-md text-sm lg:text-lg"
               rows={10}
             />
             <div className="w-full flex flex-col space-y-1">
-              <h2 className="text-sm font-semibold">현재 업로드된 사진</h2>
+              <h2 className="text-sm lg:text-lg font-semibold">
+                현재 업로드된 사진
+              </h2>
               {props.file !== null ? (
                 <img
                   src={props.file}
@@ -110,28 +113,28 @@ const PostEdit = (props: IProps) => {
                   className="w-full h-24 object-fill"
                 />
               ) : (
-                <span className="text-xs">없음</span>
+                <span className="text-xs lg:text-base">없음</span>
               )}
             </div>
-            <p className="text-red-500 text-xs text-start">
+            <p className="text-red-500 text-xs lg:text-base text-start">
               상호 비방, 허가받지 않은 광고 등 관련이 없는 글은 예고없이 삭제될
               수 있습니다.
             </p>
-            {form.formState.errors.post ? (
-              <p className="text-red-500 text-sm">
-                {form.formState.errors.post.message}
+            {formError.post ? (
+              <p className="text-red-500 text-sm lg:text-base">
+                {formError.post.message}
               </p>
             ) : null}
             <div className="flex items-center justify-between w-full">
               <button
                 type="submit"
-                className="bg-green-500 hover:bg-green-600 px-6 py-2 rounded-lg font-bold transition-colors shadow-md"
+                className="bg-green-500 hover:bg-green-600 px-6 py-2 rounded-lg font-bold transition-colors shadow-md lg:text-xl"
               >
                 {isLoading ? "업로드하는 중..." : "업로드하기"}
               </button>
               <label
                 htmlFor="photo"
-                className="bg-white dark:bg-slate-500 hover:bg-slate-200 dark:hover:bg-slate-600 border-2 border-green-500 px-6 py-2 rounded-lg font-bold transition-colors shadow-md cursor-pointer"
+                className="bg-white dark:bg-slate-500 hover:bg-slate-200 dark:hover:bg-slate-600 border-2 border-green-500 px-6 py-2 rounded-lg font-bold transition-colors shadow-md cursor-pointer lg:text-xl"
               >
                 {file ? "사진 추가됨 😊" : "사진 변경"}
               </label>

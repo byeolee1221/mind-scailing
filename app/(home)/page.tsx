@@ -36,7 +36,7 @@ const Home = () => {
   }, [alarmCount]);
 
   return (
-    <div className="space-y-16 dark:bg-slate-800 dark:text-white">
+    <div className="space-y-16 dark:bg-slate-800 dark:text-white lg:text-2xl">
       <div className="flex items-center justify-between mt-4 px-6">
         <div className="flex flex-col items-start">
           <h1 className="font-semibold">
@@ -46,14 +46,20 @@ const Home = () => {
                 : `${session.user?.name}님, 안녕하세요!`
               : "안녕하세요!"}
           </h1>
-          <p className="text-sm">오늘은 어떤 하루를 보내셨나요?</p>
+          <p className="text-sm lg:text-xl">오늘은 어떤 하루를 보내셨나요?</p>
         </div>
         <Link
           href="/myPage/alarm"
-          className="bg-slate-200 p-2 rounded-full hover:bg-slate-300 transition-colors relative w-10 h-10"
+          className="bg-slate-200 p-2 rounded-full hover:bg-slate-300 transition-colors relative w-10 h-10 lg:w-16 lg:h-16 flex items-center justify-center"
           onSelect={() => setAlarmPing(false)}
         >
-          <Image src="/notifications.png" alt="알림" width={30} height={30} />
+          <Image
+            src="/notifications.png"
+            alt="알림"
+            width={30}
+            height={30}
+            className="lg:w-10 lg:h-10"
+          />
           {alarmPing ? (
             <span className="relative flex h-3 w-3 bottom-8 left-5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
@@ -62,8 +68,8 @@ const Home = () => {
           ) : null}
         </Link>
       </div>
-      <div className="bg-green-500 mx-6 rounded-3xl shadow-xl p-5 space-y-2">
-        <div className="space-y-2 text-sm">
+      <div className="bg-green-500 mx-6 rounded-3xl shadow-xl p-5 space-y-2 lg:w-[70%] lg:m-auto">
+        <div className="space-y-2 text-sm lg:text-xl">
           <p>오늘 하루는 잘 보내셨나요?</p>
           <p className="tracking-tight">
             혹시 오늘 스트레스를 많이 받지는 않으셨나요?

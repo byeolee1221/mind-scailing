@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import {
   Dialog,
@@ -17,21 +15,34 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import DiaryList from "./diaryList";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { showModal } from "@/slice/modalSlice";
 import { toast } from "sonner";
+import useSWR from "swr";
+
+interface IDiaryWrite {
+  id: number;
+  diary: string;
+  createdAt: number;
+  userId: string;
+  userEmail: string;
+  avatar: string;
+}
+
+const fetcher = (url: string) =>
+  axios.get(url).then((response) => response.data);
 
 const DiaryWrite = () => {
   const [file, setFile] = useState<File | null>(null);
+  const { data } = useSWR<IDiaryWrite[]>("/api/myDiary", fetcher);
   const modalDispatch = useAppDispatch();
   const modal = useAppSelector((state) => state.modal.modal);
   const { data: session } = useSession();
   const router = useRouter();
-
+  // console.log(data);
   useEffect(() => {
     if (!session) {
-      alert("이용하시려면 로그인해주세요!");
+      alert("로그인이 필요한 서비스입니다.");
       router.push("/");
     }
   }, []);
@@ -72,7 +83,7 @@ const DiaryWrite = () => {
     } catch (error: any) {
       console.log("dirayWrite 클라이언트에서 오류 발생", error);
       return toast("오류 발생", {
-        description: error.response.data
+        description: error.response.data,
       });
     }
   };
@@ -81,16 +92,16 @@ const DiaryWrite = () => {
     <>
       <div className="flex flex-col items-start space-y-2 border rounded-lg py-2 px-3 shadow-sm w-full dark:border-white">
         <div className="flex items-center space-x-2 border-b w-full pb-2 dark:border-white">
-          <Image
-            src="/user.png"
-            alt="프로필"
-            width={35}
-            height={35}
-            className="p-2 bg-slate-300 rounded-full"
-          />
+          {data?.map((item) => (
+            <img
+              src={item.avatar}
+              alt="프로필"
+              className="bg-slate-300 rounded-full w-10 lg:w-12"
+            />
+          ))}
           <Dialog>
             <DialogTrigger asChild>
-              <button className="text-gray-400 text-sm">
+              <button className="text-gray-400 text-sm lg:text-lg w-full text-start">
                 일기를 쓰려면 여기를 클릭하세요.
               </button>
             </DialogTrigger>
@@ -112,24 +123,24 @@ const DiaryWrite = () => {
                     {...form.register("diary", {
                       required: "내용을 입력해주세요.",
                     })}
-                    className="w-full resize-none p-1 border focus:outline-none focus:ring-2 focus:ring-green-500 rounded-md text-sm"
+                    className="w-full resize-none p-1 border focus:outline-none focus:ring-2 focus:ring-green-500 rounded-md text-sm lg:text-lg"
                     rows={10}
                   />
                   {formError.diary ? (
-                    <p className="text-red-500 text-sm">
+                    <p className="text-red-500 text-sm lg:text-base">
                       {formError.diary.message}
                     </p>
                   ) : null}
                   <div className="flex items-center justify-between w-full">
                     <button
                       type="submit"
-                      className="bg-green-500 hover:bg-green-600 px-6 py-2 rounded-lg font-bold transition-colors shadow-md"
+                      className="bg-green-500 hover:bg-green-600 px-6 py-2 rounded-lg font-bold transition-colors shadow-md lg:text-xl"
                     >
                       {isLoading ? "업로드하는 중..." : "업로드하기"}
                     </button>
                     <label
                       htmlFor="photo"
-                      className="bg-white dark:bg-slate-500 hover:bg-slate-200 dark:hover:bg-slate-600 border-2 border-green-500 px-6 py-2 rounded-lg font-bold transition-colors shadow-md"
+                      className="bg-white dark:bg-slate-500 hover:bg-slate-200 dark:hover:bg-slate-600 border-2 border-green-500 px-6 py-2 rounded-lg font-bold transition-colors shadow-md lg:text-xl"
                     >
                       {file ? "사진 추가됨 😊" : "사진 추가"}
                     </label>
@@ -147,7 +158,6 @@ const DiaryWrite = () => {
           </Dialog>
         </div>
       </div>
-      <DiaryList />
     </>
   );
 };

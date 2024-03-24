@@ -36,7 +36,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <NextAuthProvider>
-            <div className="max-w-5xl text-gray-900 dark:bg-slate-800 dark:text-white transition-all">
+            <div className="text-gray-900 dark:bg-slate-800 dark:text-white transition-all">
               {children}
               <Toaster />
               <Footer />
