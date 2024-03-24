@@ -7,12 +7,15 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import useSWR, { mutate, preload } from "swr";
+import useSWR, { mutate } from "swr";
 
-interface IAlarm {
-  alarmId: number;
+interface IFromUser {
   name: string;
   newName: string;
+}
+interface IAlarm {
+  alarmId: number;
+  fromUser: IFromUser;
   createdAt: string;
   category: string;
   postCategory: string;
@@ -37,9 +40,9 @@ const Alarm = () => {
     }
   }, []);
 
-  useEffect(() => {
-    preload("/api/myPage/alarm", fetcher);
-  }, []);
+  // useEffect(() => {
+  //   preload("/api/myPage/alarm", fetcher);
+  // }, []);
 
   const onDelete = async (alarmId: number) => {
     try {
@@ -85,7 +88,9 @@ const Alarm = () => {
                   <p className="text-sm">{item?.createdAt}</p>
                   <p className="text-sm">
                     <span className="font-semibold">
-                      {item.newName ? item.newName : item.name}
+                      {item.fromUser?.newName !== null
+                        ? item.fromUser?.newName
+                        : item.fromUser.name}
                     </span>
                     {item.category === "댓글" &&
                       "님이 회원님의 게시글에 댓글을 남겼습니다."}

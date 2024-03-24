@@ -25,25 +25,33 @@ export async function GET(req: Request) {
         post: true,
       },
     });
+    // console.log(findAlarm);
 
-    const findFromUser = findAlarm.map((data) => data.fromEmail);
-    console.log(findFromUser);
+    const fromUser = findAlarm.map((data) => data.fromEmail);
 
-    const fromUserInfo = await prismadb.user.findUnique({
+    const findFromUser = await prismadb.user.findMany({
       where: {
-        email: findFromUser.join("")
+        email: {
+          in: fromUser,
+        },
       },
     });
 
-    console.log(fromUserInfo);
+    const resultFromUser = findFromUser.map((data) => {
+      return {
+        name: data.name,
+        newName: data.newName
+      };
+    });
+
+    // console.log(resultFromUser);
     if (findAlarm) {
       resultData = findAlarm.map((data) => {
         const date = new Date(data.createdAt);
         const formattedDate = date.toISOString().slice(0, 10);
         return {
           alarmId: data.id,
-          name: fromUserInfo?.name,
-          newName: fromUserInfo?.newName,
+          ...resultFromUser,
           createdAt: formattedDate,
           category: data.category,
           postCategory: data.post.category,

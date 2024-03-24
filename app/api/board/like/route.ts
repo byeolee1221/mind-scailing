@@ -7,8 +7,8 @@ export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions);
     const body = await req.json();
-    const { id, userId } = body;
-    // console.log(id, userId);
+    const { id } = body;
+    // console.log(id);
 
     // 유저 확인
     if (!session) {
@@ -16,6 +16,12 @@ export async function POST(req: Request) {
         status: 401,
       });
     }
+
+    const findLikeUser = await prismadb.user.findUnique({
+      where: {
+        email: session.user?.email!,
+      },
+    });
     // 게시글 확인
     const post = await prismadb.post.findUnique({
       where: {
@@ -30,42 +36,21 @@ export async function POST(req: Request) {
         where: {
           postId_userId: {
             postId: +id,
-            userId,
+            userId: findLikeUser?.id!,
           },
         },
       });
-      // console.log(existingLike);
+      console.log(existingLike);
 
       // 이미 좋아요를 누르면 좋아요가 취소되도록 함. 그게 아니라면 좋아요가 1 증가하도록 함.
-      if (existingLike) {
-        const likeCancel = await prismadb.like.delete({
-          where: {
-            postId_userId: {
-              postId: +id,
-              userId,
-            },
-          },
-        });
-
-        await prismadb.post.update({
-          where: {
-            id: +id,
-          },
-          data: {
-            like: {
-              decrement: 1,
-            },
-          },
-        });
-
-        return new NextResponse("공감이 취소되었습니다.", { status: 422 });
-      } else {
+      if (!existingLike) {
         const createLike = await prismadb.like.create({
           data: {
-            userId,
+            userId: findLikeUser?.id!,
             postId: +id,
           },
         });
+        // console.log(createLike);
 
         const updatePost = await prismadb.post.update({
           where: {
@@ -85,14 +70,51 @@ export async function POST(req: Request) {
             category: "공감",
             postId: updatePost.id,
             fromUserId: createLike.userId,
-            fromEmail: session.user?.email!
+            fromEmail: session.user?.email!,
           },
           include: {
             user: true,
             post: true,
           },
         });
-        // console.log(createAlarm);
+      }
+
+      if (existingLike) {
+        const likeCancel = await prismadb.like.delete({
+          where: {
+            postId_userId: {
+              postId: +id,
+              userId: findLikeUser?.id!,
+            },
+          },
+        });
+
+        await prismadb.post.update({
+          where: {
+            id: +id,
+          },
+          data: {
+            like: {
+              decrement: 1,
+            },
+          },
+        });
+
+        // 이미 알람이 존재할 것이기 때문에 알람 제거
+        const findAlarm = await prismadb.alarm.findFirst({
+          where: {
+            fromUserId: existingLike.userId,
+            category: "공감"
+          },
+        });
+
+        const deleteAlarm = await prismadb.alarm.delete({
+          where: {
+            id: findAlarm?.id
+          }
+        });
+
+        return new NextResponse("공감이 취소되었습니다.", { status: 422 });
       }
     }
 

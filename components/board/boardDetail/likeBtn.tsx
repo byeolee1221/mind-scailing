@@ -1,8 +1,6 @@
 "use client";
 
 import axios from "axios";
-import { Heart } from "lucide-react";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -14,14 +12,12 @@ interface IProps {
 
 const LikeBtn = (props: IProps) => {
   const id = props.id;
-  const { data: session } = useSession();
   const router = useRouter();
 
   const onClick = async () => {
     try {
       const response = await axios.post("/api/board/like", {
         id,
-        userId: session?.user?.email,
       });
 
       if (response.status === 200) {
