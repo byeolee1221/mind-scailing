@@ -68,7 +68,7 @@ const Home = () => {
           ) : null}
         </Link>
       </div>
-      <div className="xl:flex xl:items-center xl:justify-between xl:space-x-14 space-y-16 xl:space-y-0">
+      <div className="xl:flex xl:items-center xl:justify-between xl:space-x-14 space-y-16 xl:space-y-0 px-6">
         <div className="bg-green-500 mx-6 rounded-3xl shadow-xl p-5 space-y-2 text-sm lg:text-base lg:w-2/5 xl:mx-auto">
           <p>오늘 하루는 잘 보내셨나요?</p>
           <p className="tracking-tight">
