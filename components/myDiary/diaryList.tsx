@@ -10,9 +10,10 @@ import {
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
 import { AlertDialogAction } from "@radix-ui/react-alert-dialog";
-import useSWR, { preload } from "swr";
+import useSWR, { mutate, preload } from "swr";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface IDiaryList {
   id: number;
@@ -30,6 +31,7 @@ const DiaryList = () => {
   const { data } = useSWR<IDiaryList[]>("/api/myDiary", fetcher);
   const [empty, setEmpty] = useState(false);
   const [resError, setResError] = useState("");
+  const router = useRouter();
   let filteredDiary: any;
 
   useEffect(() => {
@@ -59,12 +61,15 @@ const DiaryList = () => {
 
       if (response.status === 200) {
         alert("일기가 삭제되었습니다.");
+        router.refresh();
       }
     } catch (error: any) {
       console.log("myDiary DELETE 클라이언트에서 오류 발생", error);
       setResError(error.response.data);
     }
   };
+
+  mutate("/api/myDiary");
 
   return (
     <div className="flex flex-col space-y-3 w-full">

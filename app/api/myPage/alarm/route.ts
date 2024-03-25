@@ -40,7 +40,7 @@ export async function GET(req: Request) {
     const resultFromUser = findFromUser.map((data) => {
       return {
         name: data.name,
-        newName: data.newName
+        newName: data.newName,
       };
     });
 
@@ -52,7 +52,7 @@ export async function GET(req: Request) {
         return {
           alarmId: data.id,
           name: resultFromUser[0].name,
-          newName: resultFromUser[1].newName,
+          newName: resultFromUser[1]?.newName,
           createdAt: formattedDate,
           category: data.category,
           postCategory: data.post.category,
@@ -61,7 +61,7 @@ export async function GET(req: Request) {
       });
     }
 
-    // console.log(resultData);
+    console.log(resultData);
     return NextResponse.json(resultData, { status: 200 });
   } catch (error) {
     console.log("alarm GET API에서 오류 발생", error);

@@ -9,6 +9,7 @@ import {
 import { DropdownMenuItem } from "../ui/dropdown-menu";
 import axios from "axios";
 import useSWR from "swr";
+import { useEffect, useState } from "react";
 
 interface IUser {
   name: string;
@@ -47,7 +48,16 @@ const MenuProfile = (props: IPost) => {
     `/api/board/boardMenu?postId=${props.post.id}`,
     fetcher
   );
+  const [empty, setEmpty] = useState(false);
   // console.log(props);
+
+  useEffect(() => {
+    if (data && data.length === 0) {
+      setEmpty(true);
+    } else {
+      setEmpty(false);
+    }
+  }, [])
 
   return (
     <Dialog>
@@ -61,7 +71,7 @@ const MenuProfile = (props: IPost) => {
         <DialogHeader>
           <DialogTitle>회원 프로필</DialogTitle>
         </DialogHeader>
-        {data?.map((item) => (
+        {!empty ? data?.map((item) => (
           <div
             key={item.introduce}
             className="w-full flex flex-col px-2 space-y-3"
@@ -102,7 +112,7 @@ const MenuProfile = (props: IPost) => {
               </div>
             </div>
           </div>
-        ))}
+        )) : <p className="text-center">회원이 프로필을 등록하면 확인하실 수 있습니다.</p>}
       </DialogContent>
     </Dialog>
   );

@@ -12,7 +12,7 @@ import useSWR, { mutate } from "swr";
 interface IAlarm {
   alarmId: number;
   name: string;
-  newName: string;
+  newName: string | undefined;
   createdAt: string;
   category: string;
   postCategory: string;
@@ -67,7 +67,7 @@ const Alarm = () => {
 
   return (
     <NavBar title="내 알림" pageBack hasTabBar>
-      <div className="w-full min-h-screen divide-y flex flex-col space-y-2 px-2 dark:text-white">
+      <div className="w-full min-h-screen divide-y flex flex-col space-y-2 px-2 dark:text-white xl:mt-16">
         {empty && (
           <p className="text-center mt-8 lg:text-lg">
             받은 알림이 아직 없습니다.

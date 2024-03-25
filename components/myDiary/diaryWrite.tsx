@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   Dialog,
   DialogContent,
@@ -39,7 +38,7 @@ const DiaryWrite = () => {
   const modal = useAppSelector((state) => state.modal.modal);
   const { data: session } = useSession();
   const router = useRouter();
-  // console.log(data);
+  console.log(data);
   useEffect(() => {
     if (!session) {
       alert("로그인이 필요한 서비스입니다.");
@@ -94,7 +93,7 @@ const DiaryWrite = () => {
         <div className="flex items-center space-x-2 border-b w-full pb-2 dark:border-white">
           {data?.map((item) => (
             <img
-              src={item.avatar}
+              src={session?.user?.image!}
               alt="프로필"
               className="bg-slate-300 rounded-full w-10 lg:w-12"
             />

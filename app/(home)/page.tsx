@@ -69,7 +69,7 @@ const Home = () => {
         </Link>
       </div>
       <div className="xl:flex xl:items-center xl:justify-between xl:space-x-14 space-y-16 xl:space-y-0">
-        <div className="bg-green-500 mx-6 rounded-3xl shadow-xl p-5 space-y-2 text-sm lg:text-base lg:w-2/5 xl:w-2/4">
+        <div className="bg-green-500 mx-6 rounded-3xl shadow-xl p-5 space-y-2 text-sm lg:text-base lg:w-2/5 xl:mx-auto">
           <p>오늘 하루는 잘 보내셨나요?</p>
           <p className="tracking-tight">
             혹시 오늘 스트레스를 많이 받지는 않으셨나요?

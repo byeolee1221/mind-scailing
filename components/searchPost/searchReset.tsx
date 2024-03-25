@@ -27,12 +27,12 @@ const SearchReset = () => {
 
   return (
     <div className="flex flex-col items-start px-2">
-      <h1 className="text-sm lg:text-lg text-gray-500 dark:text-gray-300 px-1">
+      <h1 className="text-sm lg:text-base text-gray-500 dark:text-gray-300 px-1">
         검색결과 관리
       </h1>
       <button
         onClick={onDelete}
-        className="hover:bg-slate-200 dark:hover:bg-slate-600 w-full text-sm lg:text-lg py-1 text-start cursor-pointer dark:text-white px-1"
+        className="hover:bg-slate-200 dark:hover:bg-slate-600 w-full text-sm lg:text-base py-1 text-start cursor-pointer dark:text-white px-1"
       >
         검색결과 초기화
       </button>

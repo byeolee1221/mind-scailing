@@ -25,7 +25,7 @@ const LikePost = () => {
   const { data: session } = useSession();
   const [empty, setEmpty] = useState(false);
   const router = useRouter();
-  // console.log(data);
+  console.log(data);
 
   useEffect(() => {
     if (!session) {
@@ -42,14 +42,14 @@ const LikePost = () => {
 
   return (
     <NavBar title="내가 공감한 글" hasTabBar pageBack>
-      <div className="w-full min-h-screen divide-y flex flex-col space-y-2">
+      <div className="w-full min-h-screen divide-y flex flex-col space-y-2 xl:w-4/5 xl:m-auto xl:mt-16">
         {!error ? (
           !empty ? (
             data?.map((post: ILikePost) => (
               <Link
                 key={post.id}
                 href={`/board/${post.category}/${post.id}`}
-                className="w-full pt-2 px-2 flex space-x-2 hover:bg-slate-200"
+                className="w-full pt-2 px-2 flex space-x-2 hover:bg-slate-200 rounded-sm transition-colors"
               >
                 <img
                   src={post.avatar}

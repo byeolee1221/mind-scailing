@@ -10,13 +10,11 @@ import {
 import { z } from "zod";
 import { introduceSchema } from "@/app/myPage/constants";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSession } from "next-auth/react";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "sonner";
 
 const MyIntroduce = () => {
-  const { data: session } = useSession();
   const [error, setError] = useState("");
   const [close, setClose] = useState(false);
 

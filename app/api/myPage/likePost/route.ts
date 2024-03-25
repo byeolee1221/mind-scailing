@@ -14,7 +14,9 @@ export async function GET(req: Request) {
 
     const findLike = await prismadb.like.findMany({
       where: {
-        userId: session.user?.email!
+        user: {
+          email: session.user?.email!
+        }
       },
     });
     // console.log(findLike);
