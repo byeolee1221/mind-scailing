@@ -36,8 +36,8 @@ const Home = () => {
   }, [alarmCount]);
 
   return (
-    <div className="space-y-16 dark:bg-slate-800 dark:text-white lg:text-xl lg:px-12">
-      <div className="flex items-center justify-between mt-8 px-6">
+    <div className="space-y-16 dark:bg-slate-800 dark:text-white lg:text-lg lg:px-12 xl:w-4/5 xl:m-auto">
+      <div className="flex items-center justify-between mt-8 xl:mt-16 px-6">
         <div className="flex flex-col items-start">
           <h1 className="font-semibold">
             {session
@@ -46,7 +46,7 @@ const Home = () => {
                 : `${session.user?.name}님, 안녕하세요!`
               : "안녕하세요!"}
           </h1>
-          <p className="text-sm lg:text-lg">오늘은 어떤 하루를 보내셨나요?</p>
+          <p className="text-sm lg:text-base">오늘은 어떤 하루를 보내셨나요?</p>
         </div>
         <Link
           href="/myPage/alarm"
@@ -68,8 +68,8 @@ const Home = () => {
           ) : null}
         </Link>
       </div>
-      <div className="bg-green-500 mx-6 rounded-3xl shadow-xl p-5 space-y-2 lg:w-2/5 lg:m-auto">
-        <div className="space-y-2 text-sm lg:text-lg">
+      <div className="xl:flex xl:items-center xl:justify-between xl:space-x-14 space-y-16 xl:space-y-0">
+        <div className="bg-green-500 mx-6 rounded-3xl shadow-xl p-5 space-y-2 text-sm lg:text-base lg:w-2/5 xl:w-2/4">
           <p>오늘 하루는 잘 보내셨나요?</p>
           <p className="tracking-tight">
             혹시 오늘 스트레스를 많이 받지는 않으셨나요?
@@ -78,8 +78,8 @@ const Home = () => {
           <p>그럼 여기서 이야기를 맘껏 나눠봐요!</p>
           <SigninBtn />
         </div>
+        <BoardList />
       </div>
-      <BoardList />
       <TodayPost />
       <TalkAI />
     </div>

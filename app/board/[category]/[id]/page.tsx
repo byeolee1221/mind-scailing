@@ -49,19 +49,19 @@ const PostDetail = () => {
   return (
     <NavBar title="게시글" hasTabBar pageBack>
       {!isLoading ? (
-        <div className="px-6 lg:px-12 mt-8 space-y-6 mb-10 min-h-screen dark:text-white">
+        <div className="px-6 lg:px-12 mt-8 space-y-6 mb-10 min-h-screen dark:text-white xl:w-4/5 xl:m-auto xl:mt-16">
           <div className="flex flex-col items-start space-y-3">
             <div className="flex items-center justify-between w-full">
               <div className="flex items-center space-x-2">
                 <img
                   src={data?.user.image}
-                  className="rounded-full w-10 lg:w-14"
+                  className="rounded-full w-10 lg:w-12"
                 />
                 <div className="flex flex-col items-start">
-                  <h1 className="text-sm lg:text-xl font-semibold">
+                  <h1 className="text-sm lg:text-base font-semibold">
                     {data?.user.newName ? data?.user.newName : data?.user.name}
                   </h1>
-                  <p className="text-xs lg:text-lg text-gray-500">
+                  <p className="text-xs lg:text-sm text-gray-500">
                     {data?.formattedDate}
                   </p>
                 </div>
@@ -77,7 +77,7 @@ const PostDetail = () => {
               </div>
             </div>
             <div className="flex flex-col space-y-2 w-full">
-              <p className="whitespace-pre-line lg:text-lg">{data?.post}</p>
+              <p className="whitespace-pre-line lg:text-base">{data?.post}</p>
               {data?.file ? (
                 <img
                   src={data?.file}

@@ -58,7 +58,7 @@ const CommentList = (props: IProps) => {
                 />
                 <div className="flex flex-col items-start">
                   <div className="flex items-center space-x-2">
-                    <h1 className="font-semibold text-sm lg:text-lg">
+                    <h1 className="font-semibold text-sm lg:text-base">
                       {comment.userNewName
                         ? comment.userNewName
                         : comment.userName}

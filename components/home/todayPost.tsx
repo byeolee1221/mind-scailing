@@ -44,7 +44,7 @@ const TodayPost = () => {
   return (
     <div className="flex flex-col items-start px-6">
       <h1 className="font-bold">오늘의 고민 글</h1>
-      <p className="text-sm lg:text-xl text-gray-500">
+      <p className="text-sm lg:text-base text-gray-500">
         고민을 함께하고 위로나 격로를 해주세요.
       </p>
       {empty ? (
@@ -53,7 +53,7 @@ const TodayPost = () => {
         </p>
       ) : null}
       {!error ? (
-        <div className="grid grid-cols-2 gap-x-5 w-full lg:w-4/5 lg:mx-auto">
+        <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-5 w-full lg:w-4/5 xl:w-full lg:mx-auto">
           {data?.map((post: ITodayPost) => (
             <Link
               key={post.id}
@@ -64,18 +64,18 @@ const TodayPost = () => {
                 <img
                   src={post.user.image}
                   alt="프로필"
-                  className="bg-white rounded-full w-7 h-7 lg:w-14 lg:h-14"
+                  className="bg-white rounded-full w-7 h-7 lg:w-12 lg:h-12"
                 />
                 <div className="ml-2">
-                  <h2 className="font-semibold text-xs lg:text-xl">
+                  <h2 className="font-semibold text-xs lg:text-base">
                     {post.user.newName ? post.user.newName : post.userId}
                   </h2>
-                  <p className="text-gray-500 text-xs lg:text-lg">
+                  <p className="text-gray-500 text-xs lg:text-sm">
                     {post.createdAt}
                   </p>
                 </div>
               </div>
-              <p className="text-sm lg:text-lg border-b-2 border-green-600 pb-2 h-12 text-ellipsis overflow-hidden w-full ...">
+              <p className="text-sm border-b-2 border-green-600 pb-2 h-12 text-ellipsis overflow-hidden w-full ...">
                 {post.post}
               </p>
               <div className="flex items-center justify-between w-full">
@@ -85,9 +85,9 @@ const TodayPost = () => {
                     alt="댓글"
                     width={20}
                     height={20}
-                    className="lg:w-8 lg:h-8"
+                    className="lg:w-6 lg:h-6"
                   />
-                  <p className="text-sm lg:text-xl">{post.commentCount}</p>
+                  <p className="text-sm lg:text-base">{post.commentCount}</p>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Image
@@ -95,16 +95,16 @@ const TodayPost = () => {
                     alt="조회"
                     width={20}
                     height={20}
-                    className="lg:w-8 lg:h-8"
+                    className="lg:w-6 lg:h-6"
                   />
-                  <p className="text-sm lg:text-xl">{post.view}</p>
+                  <p className="text-sm lg:text-base">{post.view}</p>
                 </div>
               </div>
             </Link>
           ))}
         </div>
       ) : (
-        <p className="text-red-500 text-sm">
+        <p className="text-red-500 text-sm lg:text-base">
           오류가 발생하여 게시글을 불러오지 못했습니다.
         </p>
       )}

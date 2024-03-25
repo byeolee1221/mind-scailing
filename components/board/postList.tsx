@@ -76,11 +76,11 @@ const PostList = () => {
   return (
     <Providers>
       {empty && (
-        <p className="text-center mt-2 bg-slate-200 dark:bg-slate-500 rounded-md p-2 lg:text-xl">
+        <p className="text-center mt-2 bg-slate-200 dark:bg-slate-500 rounded-md p-2 lg:text-lg">
           게시글이 아직 없습니다.
         </p>
       )}
-      <div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-6 lg:w-4/5 lg:mx-auto">
+      <div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-5 lg:w-4/5 lg:mx-auto">
         {!error ? (
           filteredPost?.map((post: IPostList) => (
             <div
@@ -92,13 +92,13 @@ const PostList = () => {
                   <img
                     src={post.avatar}
                     alt="프로필"
-                    className="bg-slate-300 rounded-full w-10 lg:w-14"
+                    className="bg-slate-300 rounded-full w-10 lg:w-12"
                   />
                   <div className="flex flex-col items-start">
-                    <h1 className="font-semibold text-sm lg:text-lg">
+                    <h1 className="font-semibold text-sm lg:text-base">
                       {post.user.newName ? post.user.newName : post.userId}
                     </h1>
-                    <p className="text-xs lg:text-base text-gray-500 dark:text-gray-900">
+                    <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-900">
                       {post.createdAt}
                     </p>
                   </div>
@@ -109,7 +109,7 @@ const PostList = () => {
                 href={`${pathname}/${post.id}`}
                 className="flex flex-col items-start w-full"
               >
-                <p className="text-sm lg:text-lg h-10 text-ellipsis overflow-hidden">
+                <p className="text-sm lg:text-base h-10 text-ellipsis overflow-hidden">
                   {post.post}
                 </p>
                 <div className="w-full">
@@ -120,12 +120,12 @@ const PostList = () => {
                         alt="좋아요"
                         width={20}
                         height={20}
-                        className="dark:invert lg:w-7"
+                        className="dark:invert lg:w-6"
                       />
-                      <span className="font-semibold text-sm lg:text-lg">
+                      <span className="font-semibold text-sm lg:text-base">
                         공감
                       </span>
-                      <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm lg:text-lg">
+                      <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm lg:text-base">
                         {post.like}
                       </span>
                     </div>
@@ -135,12 +135,12 @@ const PostList = () => {
                         alt="댓글"
                         width={20}
                         height={20}
-                        className="dark:invert lg:w-7"
+                        className="dark:invert lg:w-6"
                       />
-                      <span className="font-semibold text-sm lg:text-lg">
+                      <span className="font-semibold text-sm lg:text-base">
                         댓글
                       </span>
-                      <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm lg:text-lg">
+                      <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm lg:text-base">
                         {post.commentCount}
                       </span>
                     </div>
@@ -150,9 +150,9 @@ const PostList = () => {
                         alt="조회"
                         width={20}
                         height={20}
-                        className="dark:invert lg:w-7"
+                        className="dark:invert lg:w-6"
                       />
-                      <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm lg:text-lg">
+                      <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm lg:text-base">
                         {post.view}
                       </span>
                     </div>

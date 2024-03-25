@@ -96,7 +96,7 @@ const Write = () => {
         />
         <Dialog>
           <DialogTrigger asChild>
-            <button className="text-gray-400 text-sm lg:text-xl w-full text-start">
+            <button className="text-gray-400 text-sm lg:text-lg w-full text-start">
               글을 쓰려면 여기를 클릭하세요.
             </button>
           </DialogTrigger>
@@ -113,7 +113,7 @@ const Write = () => {
             >
               <textarea
                 {...form.register("post", { required: "내용을 입력해주세요." })}
-                className="w-full resize-none p-1 border focus:outline-none focus:ring-2 focus:ring-green-500 rounded-md text-sm lg:text-lg"
+                className="w-full resize-none p-1 border focus:outline-none focus:ring-2 focus:ring-green-500 rounded-md text-sm lg:text-base"
                 rows={10}
               />
               <p className="text-red-500 text-xs lg:text-base text-start">
@@ -128,13 +128,13 @@ const Write = () => {
               <div className="flex items-center justify-between w-full">
                 <button
                   type="submit"
-                  className="bg-green-500 hover:bg-green-600 px-6 py-2 rounded-lg font-bold transition-colors shadow-md lg:text-xl"
+                  className="bg-green-500 hover:bg-green-600 px-6 py-2 rounded-lg font-bold transition-colors shadow-md lg:text-lg"
                 >
                   {isLoading ? "업로드하는 중..." : "업로드하기"}
                 </button>
                 <label
                   htmlFor="photo"
-                  className="bg-white dark:bg-slate-500 hover:bg-slate-200 dark:hover:bg-slate-600 border-2 border-green-500 px-6 py-2 rounded-lg font-bold transition-colors shadow-md cursor-pointer lg:text-xl"
+                  className="bg-white dark:bg-slate-500 hover:bg-slate-200 dark:hover:bg-slate-600 border-2 border-green-500 px-6 py-2 rounded-lg font-bold transition-colors shadow-md cursor-pointer lg:text-lg"
                 >
                   {file ? "사진 추가됨 😊" : "사진 추가"}
                 </label>
@@ -150,7 +150,7 @@ const Write = () => {
           </DialogContent>
         </Dialog>
       </div>
-      <p className="text-xs lg:text-lg text-green-500">
+      <p className="text-xs lg:text-base text-green-500">
         오늘의 한마디: 당신은 혼자가 아니에요. 힘내세요!
       </p>
     </div>

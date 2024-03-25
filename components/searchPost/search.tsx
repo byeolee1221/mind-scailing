@@ -85,7 +85,7 @@ const Search = () => {
   mutate("/api/search");
 
   return (
-    <div className="w-full min-h-screen mt-3">
+    <div className="w-full min-h-screen mt-8 xl:mt-14 xl:w-4/5 xl:m-auto">
       <div className="flex flex-col items-start space-y-1">
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
           <div className="flex items-center space-x-1 pl-2 border-b dark:bg-slate-500">
@@ -96,7 +96,7 @@ const Search = () => {
               name="search"
               placeholder="검색할 내용을 입력하세요."
               className={cls(
-                "w-full p-2 text-sm lg:text-xl focus:outline-none dark:bg-slate-500 dark:text-white",
+                "w-full p-2 text-sm lg:text-base focus:outline-none dark:bg-slate-500 dark:text-white",
                 error ? "bg-red-200" : ""
               )}
             />
@@ -106,17 +106,17 @@ const Search = () => {
         <div className="w-full flex flex-col space-y-1 px-1">
           {!empty ? (
             <div className="flex flex-col items-start border-b pb-1.5 px-2">
-              <h1 className="text-sm lg:text-lg text-gray-500 dark:text-gray-300 px-1">
+              <h1 className="text-sm lg:text-base text-gray-500 dark:text-gray-300 px-1">
                 검색내역
               </h1>
               {data?.map((search: ISearchList) => (
                 <button
                   onClick={() => onClick(search.search)}
                   key={search.id}
-                  className="hover:bg-slate-200 dark:hover:bg-slate-600 w-full cursor-pointer text-sm lg:text-lg py-1 px-1"
+                  className="hover:bg-slate-200 dark:hover:bg-slate-600 w-full cursor-pointer text-sm lg:text-base py-1 px-1"
                 >
                   {search ? (
-                    <p className="text-start lg:text-lg dark:text-white">
+                    <p className="text-start lg:text-base dark:text-white">
                       {search.search}
                     </p>
                   ) : (
@@ -126,14 +126,14 @@ const Search = () => {
               ))}
             </div>
           ) : (
-            <p className="text-center text-sm lg:text-lg mt-2 dark:text-white">
+            <p className="text-center text-sm lg:text-base mt-2 dark:text-white">
               검색내역 없음
             </p>
           )}
           {!empty && <SearchReset />}
         </div>
       </div>
-      <div className="px-6 mt-7 text-sm lg:text-lg dark:text-white gap-4 lg:grid lg:grid-cols-2">
+      <div className="px-6 mt-7 text-sm lg:text-base dark:text-white gap-4 lg:grid lg:grid-cols-2 lg:w-4/5 lg:mx-auto">
         {result?.map((post: IResult) => (
           <Link
             href={`/board/${post.cetegory}/${post.id}`}
@@ -145,10 +145,10 @@ const Search = () => {
                 <img
                   src={post.avatar}
                   alt="유저프로필"
-                  className="bg-slate-400 rounded-full w-10 lg:w-14"
+                  className="bg-slate-400 rounded-full w-10 lg:w-12"
                 />
                 <div className="flex flex-col items-start">
-                  <h2 className="font-semibold lg:text-xl">
+                  <h2 className="font-semibold">
                     {post.newName ? post.newName : post.name}
                   </h2>
                   <p className="text-gray-500">{post.createdAt}</p>
@@ -164,11 +164,9 @@ const Search = () => {
                     alt="좋아요"
                     width={20}
                     height={20}
-                    className="dark:invert lg:w-8"
+                    className="dark:invert lg:w-6"
                   />
-                  <span className="font-medium lg:text-xl">
-                    공감 {post.like}
-                  </span>
+                  <span className="font-medium">공감 {post.like}</span>
                   <span className="bg-slate-200 px-1 rounded-sm shadow-sm select-none"></span>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -177,11 +175,9 @@ const Search = () => {
                     alt="댓글"
                     width={20}
                     height={20}
-                    className="dark:invert lg:w-8"
+                    className="dark:invert lg:w-6"
                   />
-                  <span className="font-medium lg:text-xl">
-                    댓글 {post.commentCount}
-                  </span>
+                  <span className="font-medium">댓글 {post.commentCount}</span>
                   <span className="bg-slate-200 px-1 rounded-sm shadow-sm select-none"></span>
                 </div>
               </div>
@@ -191,9 +187,9 @@ const Search = () => {
                   alt="조회"
                   width={20}
                   height={20}
-                  className="dark:invert lg:w-8"
+                  className="dark:invert lg:w-6"
                 />
-                <span className="lg:text-xl">{post.view}</span>
+                <span>{post.view}</span>
               </div>
             </div>
           </Link>

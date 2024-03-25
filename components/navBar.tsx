@@ -20,32 +20,37 @@ const NavBar = ({ title, pageBack, hasTabBar, children }: INavbar) => {
       link: "/",
       imageSrc: "/home.png",
       imageAlt: "홈",
-      className: "p-3 dark:invert",
+      menuName: "메인페이지",
+      className: "p-3 sm:dark:invert xl:dark:invert-0 xl:dark:text-white",
     },
     {
       link: "/myPost",
       imageSrc: "/post.png",
       imageAlt: "내 글",
-      className: "p-3 dark:invert",
+      menuName: "내 글 확인하기",
+      className: "p-3 dark:invert xl:dark:invert-0 xl:dark:text-white",
     },
     {
       link: "/searchPost",
       imageSrc: "/search.png",
       imageAlt: "검색",
+      menuName: "게시물 검색",
       className:
-        "p-3 bg-green-500 hover:bg-green-600 rounded-xl shadow-md transition-colors",
+        "p-3 bg-green-500 xl:bg-inherit hover:bg-green-600 xl:hover:bg-inherit rounded-xl xl:rounded-none shadow-md xl:shadow-none transition-colors xl:dark:text-white",
     },
     {
       link: `/myDiary`,
       imageSrc: "/diary.png",
       imageAlt: "나만의 일기장",
-      className: "p-3 dark:invert",
+      menuName: "나만의 일기장",
+      className: "p-3 dark:invert xl:dark:invert-0 xl:dark:text-white",
     },
     {
       link: "/myPage",
       imageSrc: "/user.png",
       imageAlt: "프로필",
-      className: "p-3 dark:invert",
+      menuName: "프로필",
+      className: "p-3 dark:invert xl:dark:invert-0 xl:dark:text-white",
     },
   ];
 
@@ -57,7 +62,7 @@ const NavBar = ({ title, pageBack, hasTabBar, children }: INavbar) => {
     <div>
       <div
         className={cls(
-          "bg-white w-full text-lg lg:text-3xl font-medium px-10 py-3 fixed text-gray-900 border-b top-0 flex items-center z-20 dark:bg-slate-800 dark:text-white dark:border-gray-900",
+          "bg-white w-full text-lg lg:text-xl font-medium px-10 py-3 fixed text-gray-900 border-b top-0 flex items-center z-30 dark:bg-slate-800 dark:text-white dark:border-gray-900",
           pageBack ? "justify-between" : "justify-center"
         )}
       >
@@ -71,7 +76,7 @@ const NavBar = ({ title, pageBack, hasTabBar, children }: INavbar) => {
               alt="뒤로가기"
               width={20}
               height={20}
-              className="dark:invert lg:w-8 lg:h-8"
+              className="dark:invert lg:w-5 lg:h-5"
             />
           </button>
         ) : (
@@ -82,6 +87,13 @@ const NavBar = ({ title, pageBack, hasTabBar, children }: INavbar) => {
         </div>
         {pageBack ? <div className="w-8 h-8" /> : null}
       </div>
+      <nav className="bg-white text-gray-800 border-b fixed top-10 pt-4 hidden xl:flex items-center justify-center space-x-5 w-full dark:bg-slate-800 xl:dark:bg-none dark:border-gray-900 z-20">
+        {navBarMenu.map((item, i) => (
+          <Link key={i} href={item.link} className={item.className}>
+            {item.menuName}
+          </Link>
+        ))}
+      </nav>
       <div
         className={cls(
           "pt-14 dark:bg-slate-800",
@@ -90,7 +102,7 @@ const NavBar = ({ title, pageBack, hasTabBar, children }: INavbar) => {
       >
         {children}
       </div>
-      <nav className="bg-white text-gray-800 border-t fixed bottom-0 pb-5 pt-3 flex justify-around items-center w-full dark:bg-slate-800 dark:border-gray-900">
+      <nav className="bg-white text-gray-800 border-t fixed bottom-0 pb-5 pt-3 flex justify-around items-center w-full dark:bg-slate-800 dark:border-gray-900 xl:hidden">
         {navBarMenu.map((item, i) => (
           <Link key={i} href={item.link} className={item.className}>
             <Image

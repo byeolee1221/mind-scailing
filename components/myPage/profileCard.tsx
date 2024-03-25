@@ -23,7 +23,7 @@ const ProfileCard = () => {
   const { data: session } = useSession();
 
   return (
-    <div className="bg-white overflow-hidden rounded-3xl w-full h-72 shadow-xl dark:bg-slate-600 dark:text-white lg:w-2/5 lg:m-auto">
+    <div className="bg-white overflow-hidden rounded-3xl w-full h-72 shadow-xl dark:bg-slate-600 dark:text-white lg:w-2/5 lg:m-auto xl:mt-16">
       <div className="bg-green-500 h-20"></div>
       <div className="rounded-3xl py-6 bg-white dark:bg-slate-600 relative -top-5">
         <div className="flex flex-col items-start space-y-4 absolute p-2 px-4 -top-9 w-full">
@@ -43,7 +43,7 @@ const ProfileCard = () => {
             />
           )}
           <div className="flex items-center justify-between w-full select-none px-4">
-            <h1 className="font-bold lg:text-lg">
+            <h1 className="font-bold">
               {session
                 ? data?.newName
                   ? data.newName

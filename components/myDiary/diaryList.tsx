@@ -73,7 +73,7 @@ const DiaryList = () => {
           filteredDiary?.map((data: IDiaryList) => (
             <div
               key={data.id}
-              className="border p-2 rounded-md flex flex-col space-y-2 text-sm lg:text-lg shadow-md dark:bg-slate-700 dark:text-white"
+              className="border p-2 rounded-md flex flex-col space-y-2 text-sm lg:text-base shadow-md dark:bg-slate-700 dark:text-white"
             >
               <h1>{data.createdAt}</h1>
               <p>{data.diary}</p>

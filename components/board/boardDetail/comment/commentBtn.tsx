@@ -63,7 +63,7 @@ const CommentBtn = (props: any) => {
             alt="댓글"
             width={25}
             height={25}
-            className="dark:invert lg:w-7"
+            className="dark:invert lg:w-6"
           />
         </button>
       </DrawerTrigger>

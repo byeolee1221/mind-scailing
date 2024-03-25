@@ -47,11 +47,11 @@ const MyPost = () => {
 
   return (
     <NavBar title="내 글" pageBack hasTabBar>
-      <div className="w-full flex flex-col space-y-3 border-t dark:bg-slate-800 dark:text-white min-h-screen">
-        <div className="border p-2 mt-8 flex flex-col">
+      <div className="w-full flex flex-col space-y-3 dark:bg-slate-800 dark:text-white min-h-screen xl:w-4/5 xl:m-auto xl:mt-16">
+        <div className="border dark:border-slate-900 p-2 mt-8 flex flex-col">
           <Table>
             <TableHeader>
-              <TableRow className="text-sm lg:text-xl tracking-tighter">
+              <TableRow className="text-sm lg:text-base tracking-tighter dark:border-slate-900">
                 <TableHead>번호</TableHead>
                 <TableHead>제목</TableHead>
                 <TableHead className="text-right">조회 수</TableHead>
@@ -59,7 +59,10 @@ const MyPost = () => {
             </TableHeader>
             <TableBody>
               {data?.map((post: IMyPost) => (
-                <TableRow key={post.id} className="lg:text-lg">
+                <TableRow
+                  key={post.id}
+                  className="lg:text-sm dark:border-slate-900"
+                >
                   <TableCell>{post.id}</TableCell>
                   <Link
                     key={post.id}
@@ -73,7 +76,7 @@ const MyPost = () => {
             </TableBody>
           </Table>
           {empty ? (
-            <p className="text-center text-sm lg:text-lg mt-2 w-full">
+            <p className="text-center text-sm lg:text-base mt-8 xl:mt-16 w-full">
               {empty}
             </p>
           ) : null}

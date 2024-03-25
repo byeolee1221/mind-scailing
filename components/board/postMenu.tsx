@@ -58,10 +58,8 @@ const PostMenu = (props: IPost) => {
           <Image src="/menu.png" alt="메뉴" width={20} height={20} />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-40 lg:w-60">
-        <DropdownMenuLabel className="lg:text-lg">
-          게시글 메뉴
-        </DropdownMenuLabel>
+      <DropdownMenuContent className="w-40">
+        <DropdownMenuLabel>게시글 메뉴</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           {!isMatch ? <MenuProfile post={props.post} /> : null}

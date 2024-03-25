@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { cls } from "@/lib/styleUtil";
 import Link from "next/link";
@@ -8,11 +8,11 @@ const TermsMenu = () => {
   const pathname = usePathname();
   return (
     <>
-      <div className="mt-10 flex flex-col">
+      <div className="mt-10 xl:mt-16 flex flex-col">
         <h1 className="text-2xl font-bold">LEGAL</h1>
         <p className="text-sm text-gray-500">마지막 업데이트: 2024.03.24</p>
       </div>
-      <div className="flex items-center space-x-10 border-b pb-2">
+      <div className="flex items-center space-x-10 border-b dark:border-slate-900 pb-2">
         <Link
           href="/useTerms"
           className={cls(
