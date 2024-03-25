@@ -27,21 +27,21 @@ const CommentDelete = (props: IProps) => {
       const response = await axios.delete("/api/board/comment", {
         data: {
           commentId: props.commentId,
-          postId: props.postId
-        }
+          postId: props.postId,
+        },
       });
 
       if (response.status === 200) {
         alert("댓글이 삭제되었습니다.");
         router.refresh();
-      };
+      }
     } catch (error: any) {
       console.log("commentDelete DELETE 클라이언트에서 오류 발생", error);
       return toast("오류 발생", {
-        description: error.response.data
+        description: error.response.data,
       });
     }
-  }
+  };
 
   return (
     <AlertDialog>

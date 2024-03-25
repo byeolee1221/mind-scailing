@@ -69,7 +69,9 @@ const Alarm = () => {
     <NavBar title="내 알림" pageBack hasTabBar>
       <div className="w-full min-h-screen divide-y flex flex-col space-y-2 px-2 dark:text-white">
         {empty && (
-          <p className="text-center mt-2">받은 알림이 아직 없습니다.</p>
+          <p className="text-center mt-8 lg:text-lg">
+            받은 알림이 아직 없습니다.
+          </p>
         )}
         {session ? (
           !error ? (
@@ -82,12 +84,10 @@ const Alarm = () => {
                   href={`/board/${item.postCategory}/${item.postId}`}
                   className="flex flex-col"
                 >
-                  <p className="text-sm">{item?.createdAt}</p>
-                  <p className="text-sm">
+                  <p className="text-sm lg:text-base">{item?.createdAt}</p>
+                  <p className="text-sm lg:text-base">
                     <span className="font-semibold">
-                      {item.newName !== null
-                        ? item.newName
-                        : item.name}
+                      {item.newName !== null ? item.newName : item.name}
                     </span>
                     {item.category === "댓글" &&
                       "님이 회원님의 게시글에 댓글을 남겼습니다."}

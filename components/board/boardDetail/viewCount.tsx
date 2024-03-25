@@ -37,9 +37,9 @@ const ViewCount = (props: IView) => {
         alt="조회"
         width={20}
         height={20}
-        className="select-none dark:invert"
+        className="select-none dark:invert lg:w-7"
       />
-      <span className="text-sm">{view}</span>
+      <span className="text-sm lg:text-xl">{view}</span>
     </div>
   );
 };

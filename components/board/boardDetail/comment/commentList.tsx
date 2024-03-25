@@ -52,17 +52,22 @@ const CommentList = (props: IProps) => {
               className="flex items-center justify-between w-full pt-3"
             >
               <div className="flex items-center space-x-3">
-                <img src={comment.avatar} className="rounded-full w-10" />
+                <img
+                  src={comment.avatar}
+                  className="rounded-full w-10 lg:w-12"
+                />
                 <div className="flex flex-col items-start">
                   <div className="flex items-center space-x-2">
-                    <h1 className="font-semibold text-sm">
+                    <h1 className="font-semibold text-sm lg:text-lg">
                       {comment.userNewName
                         ? comment.userNewName
                         : comment.userName}
                     </h1>
-                    <p className="text-gray-500 text-xs">{comment.createdAt}</p>
+                    <p className="text-gray-500 text-xs lg:text-sm">
+                      {comment.createdAt}
+                    </p>
                   </div>
-                  <p className="text-sm">{comment.comment}</p>
+                  <p className="text-sm lg:text-base">{comment.comment}</p>
                 </div>
               </div>
               {session && (
@@ -76,7 +81,9 @@ const CommentList = (props: IProps) => {
           ))}
         </div>
       ) : (
-        <p className="text-sm text-red-500 text-center">{commentError}</p>
+        <p className="text-sm lg:text-base text-red-500 text-center">
+          {commentError}
+        </p>
       )}
     </>
   );

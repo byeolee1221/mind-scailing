@@ -10,7 +10,7 @@ const Loading = () => {
         height={50}
         className="rounded-full animate-spin"
       />
-      <p className="text-sm">잠시만 기다려주세요!</p>
+      <p className="text-sm lg:text-lg">잠시만 기다려주세요!</p>
     </div>
   );
 };

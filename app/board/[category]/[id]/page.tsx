@@ -49,16 +49,21 @@ const PostDetail = () => {
   return (
     <NavBar title="게시글" hasTabBar pageBack>
       {!isLoading ? (
-        <div className="px-6 mt-4 space-y-6 mb-10 min-h-screen dark:text-white">
+        <div className="px-6 lg:px-12 mt-8 space-y-6 mb-10 min-h-screen dark:text-white">
           <div className="flex flex-col items-start space-y-3">
             <div className="flex items-center justify-between w-full">
               <div className="flex items-center space-x-2">
-                <img src={data?.user.image} className="rounded-full w-10" />
+                <img
+                  src={data?.user.image}
+                  className="rounded-full w-10 lg:w-14"
+                />
                 <div className="flex flex-col items-start">
-                  <h1 className="text-sm font-semibold">
+                  <h1 className="text-sm lg:text-xl font-semibold">
                     {data?.user.newName ? data?.user.newName : data?.user.name}
                   </h1>
-                  <p className="text-xs text-gray-500">{data?.formattedDate}</p>
+                  <p className="text-xs lg:text-lg text-gray-500">
+                    {data?.formattedDate}
+                  </p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
@@ -72,7 +77,7 @@ const PostDetail = () => {
               </div>
             </div>
             <div className="flex flex-col space-y-2 w-full">
-              <p className="whitespace-pre-line">{data?.post}</p>
+              <p className="whitespace-pre-line lg:text-lg">{data?.post}</p>
               {data?.file ? (
                 <img
                   src={data?.file}
@@ -84,7 +89,7 @@ const PostDetail = () => {
                   <LikeBtn id={id} />
                   <CommentBtn id={id} />
                 </div>
-                <div className="flex items-center space-x-3 text-sm text-gray-500 dark:text-white select-none">
+                <div className="flex items-center space-x-3 text-sm lg:text-lg text-gray-500 dark:text-white select-none">
                   <p>공감 {data?.like}개</p>
                   <p>댓글 {data?.commentCount}개</p>
                 </div>

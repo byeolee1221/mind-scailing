@@ -44,7 +44,7 @@ const LikeBtn = (props: IProps) => {
           alt="공감"
           width={25}
           height={25}
-          className="dark:invert"
+          className="dark:invert lg:w-7"
         />
       </button>
     </>

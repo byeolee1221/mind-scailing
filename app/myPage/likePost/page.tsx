@@ -57,18 +57,24 @@ const LikePost = () => {
                 />
                 <div className="flex flex-col">
                   <div className="flex space-x-2 items-center">
-                    <h1 className="text-sm font-semibold">{post.name}</h1>
-                    <p className="text-xs text-gray-500">{post.createdAt}</p>
+                    <h1 className="text-sm lg:text-lg font-semibold">
+                      {post.name}
+                    </h1>
+                    <p className="text-xs lg:text-base text-gray-500">
+                      {post.createdAt}
+                    </p>
                   </div>
-                  <p className="text-sm">{post.post}</p>
+                  <p className="text-sm lg:text-base">{post.post}</p>
                 </div>
               </Link>
             ))
           ) : (
-            <p className="text-center mt-2">공감한 게시글이 없습니다.</p>
+            <p className="text-center mt-8 lg:text-lg">
+              공감한 게시글이 없습니다.
+            </p>
           )
         ) : (
-          <p className="text-center mt-2">
+          <p className="text-center mt-8 lg:text-lg">
             오류가 발생하여 불러오지 못했습니다.
           </p>
         )}

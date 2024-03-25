@@ -7,7 +7,7 @@ const MyPage = () => {
   return (
     <NavBar title="내 프로필" pageBack hasTabBar>
       <StoreProvider>
-        <div className="flex flex-col space-y-16 items-start mt-4 mb-10">
+        <div className="flex flex-col space-y-16 items-start mt-8 mb-10">
           <ProfileCard />
           <MypageMenu />
         </div>

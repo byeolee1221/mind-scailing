@@ -81,7 +81,7 @@ const TalkAI = () => {
               </p>
             ) : null}
             <button
-              className="bg-green-500 hover:bg-green-600 px-5 py-2 rounded-lg shadow-md transition-colors text-sm lg:text-lg"
+              className="bg-green-500 hover:bg-green-600 px-5 py-2 rounded-lg shadow-md transition-colors text-sm lg:text-lg font-semibold"
               disabled={isLoading}
             >
               {isLoading ? "답변 생각중..." : "AI와 대화하기"}
@@ -133,7 +133,7 @@ const TalkAI = () => {
           </div>
         </div>
       ) : (
-        <p className="text-sm text-green-500 mt-4 text-center w-full">
+        <p className="text-sm lg:text-lg text-green-500 mt-4 text-center w-full">
           AI와 대화하시려면 로그인해주세요.
         </p>
       )}

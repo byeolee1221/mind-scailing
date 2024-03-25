@@ -53,8 +53,8 @@ const MenuProfile = (props: IPost) => {
     <Dialog>
       <DialogTrigger asChild>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-          <User className="mr-2 h-4 w-4" />
-          <span>프로필 보기</span>
+          <User className="mr-2 h-4 w-4 lg:h-6 lg:w-6" />
+          <span className="lg:text-base">프로필 보기</span>
         </DropdownMenuItem>
       </DialogTrigger>
       <DialogContent className="w-[90%] rounded-md">
@@ -72,19 +72,21 @@ const MenuProfile = (props: IPost) => {
                 alt="프로필"
                 className="bg-slate-300 rounded-full w-20"
               />
-              <h1 className="font-semibold">
+              <h1 className="font-semibold lg:text-xl">
                 {props.post.user.newName !== null
                   ? props.post.user.newName
                   : props.post.user.name}
               </h1>
               <div className="flex flex-col space-y-1 items-center">
-                {!error && <p className="text-sm">{item?.introduce}</p>}
+                {!error && (
+                  <p className="text-sm lg:text-lg">{item?.introduce}</p>
+                )}
                 {error && (
-                  <p className="text-sm text-red-500">
+                  <p className="text-sm lg:text-base text-red-500">
                     오류가 발생하여 불러오지 못했습니다.
                   </p>
                 )}
-                <p className="text-xs text-gray-500">
+                <p className="text-xs lg:text-base text-gray-500">
                   가입일: {props.post.createdAt}
                 </p>
               </div>
@@ -92,11 +94,11 @@ const MenuProfile = (props: IPost) => {
             <div className="grid grid-cols-2 bg-slate-200 dark:bg-slate-900 p-2 rounded-md text-center">
               <div className="flex flex-col space-y-1 border-r-2 border-gray-300">
                 <p className="font-semibold">{item.postCount}</p>
-                <h2 className="text-sm">게시글 수</h2>
+                <h2 className="text-sm lg:text-base">게시글 수</h2>
               </div>
               <div className="flex flex-col space-y-1">
                 <p className="font-semibold">{item.commentCount}</p>
-                <h2 className="text-sm">댓글 수</h2>
+                <h2 className="text-sm lg:text-base">댓글 수</h2>
               </div>
             </div>
           </div>

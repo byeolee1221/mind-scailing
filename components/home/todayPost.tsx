@@ -53,7 +53,7 @@ const TodayPost = () => {
         </p>
       ) : null}
       {!error ? (
-        <div className="grid grid-cols-2 gap-x-5 w-full">
+        <div className="grid grid-cols-2 gap-x-5 w-full lg:w-4/5 lg:mx-auto">
           {data?.map((post: ITodayPost) => (
             <Link
               key={post.id}

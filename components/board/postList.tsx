@@ -80,7 +80,7 @@ const PostList = () => {
           게시글이 아직 없습니다.
         </p>
       )}
-      <div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-4">
+      <div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-6 lg:w-4/5 lg:mx-auto">
         {!error ? (
           filteredPost?.map((post: IPostList) => (
             <div
@@ -95,10 +95,10 @@ const PostList = () => {
                     className="bg-slate-300 rounded-full w-10 lg:w-14"
                   />
                   <div className="flex flex-col items-start">
-                    <h1 className="font-semibold text-sm lg:text-xl">
+                    <h1 className="font-semibold text-sm lg:text-lg">
                       {post.user.newName ? post.user.newName : post.userId}
                     </h1>
-                    <p className="text-xs lg:text-lg text-gray-500 dark:text-gray-900">
+                    <p className="text-xs lg:text-base text-gray-500 dark:text-gray-900">
                       {post.createdAt}
                     </p>
                   </div>
@@ -120,12 +120,12 @@ const PostList = () => {
                         alt="좋아요"
                         width={20}
                         height={20}
-                        className="dark:invert lg:w-8"
+                        className="dark:invert lg:w-7"
                       />
-                      <span className="font-semibold text-sm lg:text-xl">
+                      <span className="font-semibold text-sm lg:text-lg">
                         공감
                       </span>
-                      <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm lg:text-xl">
+                      <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm lg:text-lg">
                         {post.like}
                       </span>
                     </div>
@@ -135,12 +135,12 @@ const PostList = () => {
                         alt="댓글"
                         width={20}
                         height={20}
-                        className="dark:invert lg:w-8"
+                        className="dark:invert lg:w-7"
                       />
-                      <span className="font-semibold text-sm lg:text-xl">
+                      <span className="font-semibold text-sm lg:text-lg">
                         댓글
                       </span>
-                      <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm lg:text-xl">
+                      <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm lg:text-lg">
                         {post.commentCount}
                       </span>
                     </div>
@@ -150,9 +150,9 @@ const PostList = () => {
                         alt="조회"
                         width={20}
                         height={20}
-                        className="dark:invert lg:w-8"
+                        className="dark:invert lg:w-7"
                       />
-                      <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm lg:text-xl">
+                      <span className="bg-slate-200 dark:bg-slate-400 px-1 rounded-sm shadow-sm select-none text-sm lg:text-lg">
                         {post.view}
                       </span>
                     </div>

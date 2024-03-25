@@ -37,8 +37,8 @@ const MenuReport = (props: IProps) => {
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-          <ShieldAlert className="mr-2 h-4 w-4" />
-          <span>게시글 신고</span>
+          <ShieldAlert className="mr-2 h-4 w-4 lg:h-6 lg:w-6" />
+          <span className="lg:text-base">게시글 신고</span>
         </DropdownMenuItem>
       </AlertDialogTrigger>
       <AlertDialogContent className="w-[90%] rounded-md">

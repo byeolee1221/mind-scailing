@@ -17,11 +17,11 @@ const MypageMenu = () => {
 
   return (
     <div className="border-t w-full dark:border-white dark:text-white">
-      <div className="flex flex-col px-8 py-4 divide-y-[1px] dark:divide-slate-500 space-y-5">
+      <div className="flex flex-col px-8 py-4 divide-y dark:divide-slate-500 space-y-5">
         <div className="flex items-center justify-between">
           <label htmlFor="dark" className="flex items-center space-x-5">
             <Image src="/moon.png" alt="다크모드" width={30} height={30} />
-            <p>테마 전환</p>
+            <p className="lg:text-lg">테마 전환</p>
           </label>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -46,7 +46,7 @@ const MypageMenu = () => {
         </div>
         <div className="flex items-center space-x-5 pt-4">
           <Image src="/board.png" alt="게시글" width={30} height={30} />
-          <Link href="/myPost">내 글 관리</Link>
+          <Link href="/myPost" className="lg:text-lg">내 글 관리</Link>
         </div>
         <div className="flex items-center space-x-5 pt-4">
           <Image
@@ -55,15 +55,17 @@ const MypageMenu = () => {
             width={30}
             height={30}
           />
-          <Link href="/myPage/likePost">내가 공감한 글</Link>
+          <Link href="/myPage/likePost" className="lg:text-lg">
+            내가 공감한 글
+          </Link>
         </div>
         <div className="flex items-center space-x-5 pt-4">
           <Image src="/alarm.png" alt="알림" width={30} height={30} />
-          <Link href="/myPage/alarm">알림</Link>
+          <Link href="/myPage/alarm" className="lg:text-lg">알림</Link>
         </div>
         <div className="flex items-center space-x-5 pt-4">
           <Image src="/setting.png" alt="회원관리" width={30} height={30} />
-          <Link href="/myPage/accountSetting">계정관리</Link>
+          <Link href="/myPage/accountSetting" className="lg:text-lg">계정관리</Link>
         </div>
       </div>
     </div>

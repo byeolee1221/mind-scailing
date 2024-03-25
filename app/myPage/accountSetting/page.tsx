@@ -20,7 +20,7 @@ const AccountSetting = () => {
 
   return (
     <NavBar title="계정관리" hasTabBar pageBack>
-      <div className="px-6 w-full min-h-screen mt-4 flex flex-col space-y-5">
+      <div className="px-6 w-full min-h-screen mt-8 flex flex-col space-y-5">
         <ActiveNameChange />
         <AccountDisconnect />
       </div>
