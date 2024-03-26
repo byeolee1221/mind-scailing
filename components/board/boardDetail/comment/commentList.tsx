@@ -54,6 +54,7 @@ const CommentList = (props: IProps) => {
               <div className="flex items-center space-x-3">
                 <img
                   src={comment.avatar}
+                  alt="프로필이미지"
                   className="rounded-full w-10 lg:w-12"
                 />
                 <div className="flex flex-col items-start">
