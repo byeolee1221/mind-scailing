@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     let postLink;
 
     if (!session) {
-      return new NextResponse("업로드하시려면 로그인해주세요.", {
+      return new NextResponse("로그인이 필요한 서비스입니다.", {
         status: 401,
       });
     }

@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     const { message } = body;
 
     if (!session) {
-      return new NextResponse("로그인 해주세요.", { status: 401 });
+      return new NextResponse("로그인이 필요한 서비스입니다.", { status: 401 });
     }
 
     if (!openai.apiKey) {

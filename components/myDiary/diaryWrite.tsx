@@ -38,7 +38,8 @@ const DiaryWrite = () => {
   const modal = useAppSelector((state) => state.modal.modal);
   const { data: session } = useSession();
   const router = useRouter();
-  console.log(data);
+  // console.log(data);
+
   useEffect(() => {
     if (!session) {
       alert("로그인이 필요한 서비스입니다.");

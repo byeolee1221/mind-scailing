@@ -90,14 +90,17 @@ $ npm run dev
 ## 주요기능별 시퀀스 다이어그램
 
 - 커뮤니티
+![Alt text](/public/communitySequence.png)
 - AI와의 고민 이야기
+![Alt text](/public/taliAISequence.png)
 - 나만의 일기장
+![Alt text](/public/myDiarySequence.png)
 
 ## 웹사이트 특징
 
 - Tailwind CSS와 Shadcn-UI를 이용하여 반응형 디자인을 적용하였습니다.
 - 모바일버전 디자인은 앱디자인처럼 레이아웃을 구성하였습니다.
-- 직접 웹사이트 내에서 가입을 진행하는 대신, OAuth로 다른 사이트의 계정을 연동하는 방식으로 가입하도록 했습니다.
+- 직접 웹사이트 내에서 가입을 진행하는 대신, Next-auth로 다른 사이트의 계정을 연동하는 방식으로 가입하도록 했습니다.
 - 일부 기능에서의 모달창 open-close를 Redux로 상태관리를 하였습니다.
 - vitess를 기반으로 하는 서버리스 MySQL을 사용함으로써 사용자가 증가하여 데이터베이스의 확장이 필요할 때 자동적으로 확장할 수 있습니다.
 - Prisma를 이용하여 API에서 복잡한 로직없이 데이터의 CRUD를 구현하였습니다.
