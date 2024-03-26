@@ -17,23 +17,9 @@ import axios from "axios";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { showModal } from "@/slice/modalSlice";
 import { toast } from "sonner";
-import useSWR from "swr";
-
-interface IDiaryWrite {
-  id: number;
-  diary: string;
-  createdAt: number;
-  userId: string;
-  userEmail: string;
-  avatar: string;
-}
-
-const fetcher = (url: string) =>
-  axios.get(url).then((response) => response.data);
 
 const DiaryWrite = () => {
   const [file, setFile] = useState<File | null>(null);
-  const { data } = useSWR<IDiaryWrite[]>("/api/myDiary", fetcher);
   const modalDispatch = useAppDispatch();
   const modal = useAppSelector((state) => state.modal.modal);
   const { data: session } = useSession();
@@ -92,13 +78,11 @@ const DiaryWrite = () => {
     <>
       <div className="flex flex-col items-start space-y-2 border rounded-lg py-2 px-3 shadow-sm w-full dark:border-white">
         <div className="flex items-center space-x-2 border-b w-full pb-2 dark:border-white">
-          {data?.map((item) => (
-            <img
-              src={session?.user?.image!}
-              alt="프로필"
-              className="bg-slate-300 rounded-full w-10 lg:w-12"
-            />
-          ))}
+          <img
+            src={session?.user?.image!}
+            alt="프로필"
+            className="bg-slate-300 rounded-full w-10 lg:w-12"
+          />
           <Dialog>
             <DialogTrigger asChild>
               <button className="text-gray-400 text-sm lg:text-base w-full text-start">
