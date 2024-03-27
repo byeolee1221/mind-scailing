@@ -17,4 +17,12 @@ export const authOptions: NextAuthOptions = {
     maxAge: 60 * 60,
     updateAge: 30 * 60,
   },
+  callbacks: {
+    redirect({ url, baseUrl }) {
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      else if (new URL(url).origin === baseUrl)
+        return "https://mind-scailing.vercel.app/";
+      return baseUrl;
+    },
+  },
 };
