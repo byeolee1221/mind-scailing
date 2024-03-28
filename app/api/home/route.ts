@@ -25,7 +25,7 @@ export async function GET(req: Request) {
 
     return NextResponse.json(formattedPosts, { status: 200 });
   } catch (error) {
-    console.log(error);
+    console.log("home GET API에서 오류 발생", error);
     return new NextResponse("오류가 발생하여 게시글을 가져오지 못했습니다.", {
       status: 500,
     });

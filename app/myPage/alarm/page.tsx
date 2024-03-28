@@ -27,7 +27,7 @@ const Alarm = () => {
   const { data, error } = useSWR<IAlarm[]>("/api/myPage/alarm", fetcher);
   const [empty, setEmpty] = useState(false);
   const router = useRouter();
-  console.log(data);
+  // console.log(data);
 
   useEffect(() => {
     if (data && data.length === 0) {
@@ -36,10 +36,6 @@ const Alarm = () => {
       setEmpty(false);
     }
   }, []);
-
-  // useEffect(() => {
-  //   preload("/api/myPage/alarm", fetcher);
-  // }, []);
 
   const onDelete = async (alarmId: number) => {
     try {
