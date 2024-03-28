@@ -80,7 +80,7 @@ const PostList = () => {
           게시글이 아직 없습니다.
         </p>
       )}
-      <div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-5 lg:w-4/5 lg:mx-auto">
+      <div className="flex flex-col space-y-5 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-5 lg:w-4/5 lg:mx-auto">
         {!error ? (
           filteredPost?.map((post: IPostList) => (
             <div

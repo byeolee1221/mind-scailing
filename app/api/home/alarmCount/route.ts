@@ -8,7 +8,7 @@ export async function GET(req: Request) {
     const session = await getServerSession(authOptions);
 
     if (!session) {
-      return;
+      return new NextResponse("", { status: 401 });
     }
 
     const getAlarmCount = await prismadb.alarm.count({
