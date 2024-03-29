@@ -22,7 +22,7 @@ const UseTerms = () => {
               운영하는 사이트의 접속 주소는 아래와 같습니다.
             </p>
             <Link href="/" className="indent-3">
-              <li className="list-disc">localhost:3000</li>
+              <li className="list-disc">https://mind-scailing.vercel.app/</li>
             </Link>
             <p>
               ② &quot;서비스&quot;라 함은 평소 어떤 원인에 의해 고민을 가지고 계셨던

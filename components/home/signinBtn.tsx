@@ -56,7 +56,13 @@ const SigninBtn = () => {
               onClick={onSignin}
               className="flex items-center space-x-11 lg:justify-center lg:space-x-3 rounded-md border-2 px-3 py-2 w-full lg:w-3/5"
             >
-              <Image src="/g-logo.png" alt="구글" width={30} height={30} />
+              <Image
+                src="/g-logo.png"
+                alt="구글"
+                width={30}
+                height={30}
+                className="rounded-full"
+              />
               <p className="lg:text-base">구글로 로그인하기</p>
             </button>
           </div>

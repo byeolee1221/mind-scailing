@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: { template: "%s | Mind-Scaling", default: "마인드스케일링" },
   description: "마음이 가벼워 지는 곳, 마인드스케일링",
   icons: { icon: "/icon.png", shortcut: "/icon.png" },
-  metadataBase: new URL("http://localhost:3000"),
+  metadataBase: new URL("https://mind-scailing.vercel.app/"),
   openGraph: {
     title: "마인드스케일링 | Mind-Scaling",
     description: "마음이 가벼워 지는 곳, 마인드스케일링",
     images: "/icon.png",
-    url: "http://localhost:3000",
+    url: "https://mind-scailing.vercel.app/",
   },
 };
 
