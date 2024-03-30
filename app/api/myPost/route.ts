@@ -8,7 +8,7 @@ export async function GET(req: Request) {
     const session = await getServerSession(authOptions);
 
     if (!session) {
-      return new NextResponse("확인하시려면 로그인해주세요.", { status: 401 });
+      return new NextResponse("로그인이 필요한 서비스입니다.", { status: 401 });
     }
 
     const getPost = await prismadb.post.findMany({
@@ -24,8 +24,8 @@ export async function GET(req: Request) {
 
     return NextResponse.json(getPost, { status: 200 });
   } catch (error) {
-    console.log(error);
-    return new NextResponse("오류가 발생하여 불러오지 못했습니다.", {
+    console.log("myPOST GET API에서 오류 발생", error);
+    return new NextResponse("오류가 발생하여 게시글을 불러오지 못했습니다.", {
       status: 500,
     });
   }

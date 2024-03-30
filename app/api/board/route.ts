@@ -17,11 +17,11 @@ export async function POST(req: Request) {
     }
 
     if (!userId) {
-      return new NextResponse("잘못된 접근입니다.", { status: 400 });
+      return new NextResponse("잘못된 접근입니다.", { status: 403 });
     }
 
     if (!post) {
-      return new NextResponse("내용을 입력해주세요.", { status: 400 });
+      return new NextResponse("내용을 입력해주세요.", { status: 404 });
     }
 
     const userCheck = await prismadb.user.findUnique({

@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     }
 
     if (!comment) {
-      return new NextResponse("댓글을 입력해주세요", { status: 400 });
+      return new NextResponse("댓글을 입력해주세요", { status: 404 });
     }
 
     const userCheck = await prismadb.user.findUnique({
@@ -81,7 +81,7 @@ export async function POST(req: Request) {
         // console.log(sendAlarm)
       } else {
         return new NextResponse("해당 게시글을 찾을 수 없습니다.", {
-          status: 500,
+          status: 404,
         });
       }
     }
@@ -144,7 +144,7 @@ export async function DELETE(req: Request) {
     }
   
     if (!commentId || !postId) {
-      return new NextResponse("댓글정보가 없습니다. 관리자에게 문의하세요.", { status: 400 });
+      return new NextResponse("댓글정보가 없습니다. 관리자에게 문의하세요.", { status: 404 });
     }
   
     const deleteComment = await prismadb.comment.delete({

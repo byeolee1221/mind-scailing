@@ -26,12 +26,12 @@ export async function POST(req: Request) {
 
     if (!openai.apiKey) {
       return new NextResponse("OpenAi api key를 다시 확인해주세요.", {
-        status: 500,
+        status: 404,
       });
     }
 
     if (!message) {
-      return new NextResponse("전달된 메세지가 없습니다.", { status: 400 });
+      return new NextResponse("전달된 메세지가 없습니다.", { status: 404 });
     }
 
     const response = await openai.chat.completions.create({

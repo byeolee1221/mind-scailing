@@ -14,7 +14,7 @@ export async function POST(req: Request) {
     }
 
     if (!diary) {
-      return new NextResponse("입력하신 내용을 다시 확인해주세요.", { status: 400 });
+      return new NextResponse("입력하신 내용을 다시 확인해주세요.", { status: 404 });
     }
 
     const createDiary = await prismadb.diary.create({

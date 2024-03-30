@@ -68,7 +68,7 @@ export async function POST(req: Request) {
     }
 
     if (!postId) {
-      return new NextResponse("게시글 정보를 찾을 수 없습니다. 새로고침 후 다시 시도해주세요.", { status: 400 });
+      return new NextResponse("게시글 정보를 찾을 수 없습니다. 새로고침 후 다시 시도해주세요.", { status: 404 });
     }
 
     const findPost = await prismadb.post.findUnique({

@@ -8,7 +8,7 @@ export async function POST(req: Request) {
     let findPost;
 
     if (!search) {
-      return new NextResponse("입력한 내용이 없습니다.", { status: 401 });
+      return new NextResponse("입력한 내용이 없습니다.", { status: 404 });
     }
 
     const searchData = await prismadb.search.create({
@@ -53,7 +53,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
-    console.log(error);
+    console.log("search POST API에서 오류 발생", error);
     return new NextResponse("오류가 발생하였으니 잠시 후 다시 검색해주세요.", { status: 500 });
   }
 }
@@ -70,7 +70,7 @@ export async function GET(req: Request) {
 
     return NextResponse.json(resultData, { status: 200 });
   } catch (error) {
-    console.log(error);
+    console.log("search GET API에서 오류 발생", error);
     return new NextResponse("잠시 후 다시 시도해주세요.", { status: 500 });
   }
 }
@@ -82,7 +82,7 @@ export async function DELETE(req: Request) {
     // console.log(deleteSearch)
     return NextResponse.json({ status: 200 });
   } catch (error) {
-    console.log(error);
+    console.log("search DELETE API에서 오류 발생", error);
     return new NextResponse("잠시 후 다시 시도해주세요.", { status: 500 });
   }
 }

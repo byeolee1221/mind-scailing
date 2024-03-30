@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     }
 
     if (!newPost || !postId) {
-      return new NextResponse("수정사항을 올바르게 입력하셨는지 다시 확인해주세요.", { status: 400 });
+      return new NextResponse("수정사항을 올바르게 입력하셨는지 다시 확인해주세요.", { status: 404 });
     }
 
     const updatePost = await prismadb.post.update({

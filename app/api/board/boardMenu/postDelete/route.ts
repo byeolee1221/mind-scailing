@@ -15,7 +15,7 @@ export async function DELETE(req: Request) {
 
     if (!postId) {
       return new NextResponse("새로고침 후 다시 시도해주세요.", {
-        status: 400,
+        status: 404,
       });
     }
 

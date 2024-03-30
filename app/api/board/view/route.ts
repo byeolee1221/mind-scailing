@@ -6,8 +6,9 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { id } = body;
     let viewCount;
+
     if (!id) {
-      return new NextResponse("게시글을 찾을 수 없습니다.", { status: 401 });
+      return new NextResponse("게시글을 찾을 수 없습니다.", { status: 404 });
     }
 
     const findPost = await prismadb.post.findUnique({

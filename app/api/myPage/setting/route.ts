@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 
     if (!newName) {
       return new NextResponse("변경한 이름을 다시 확인해주세요.", {
-        status: 400,
+        status: 404,
       });
     }
 

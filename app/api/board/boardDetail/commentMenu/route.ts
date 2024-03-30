@@ -18,7 +18,7 @@ export async function GET(req: Request) {
     if (!commentId) {
       return new NextResponse(
         "댓글을 찾을 수 없습니다. 새로고침 후 다시 시도해주세요.",
-        { status: 400 }
+        { status: 404 }
       );
     }
 
@@ -88,7 +88,7 @@ export async function POST(req: Request) {
     if (!commentId) {
       return new NextResponse(
         "댓글을 찾을 수 없습니다. 새로고침 후 다시 시도해주세요.",
-        { status: 400 }
+        { status: 404 }
       );
     }
 
