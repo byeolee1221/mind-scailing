@@ -109,8 +109,8 @@ const NavBar = ({ title, pageBack, hasTabBar, children }: INavbar) => {
       </div>
       <nav className="bg-white text-gray-800 border-t fixed bottom-0 pb-5 pt-3 flex justify-around items-center w-full dark:bg-slate-800 dark:border-gray-900 xl:hidden">
         {navBarMenu.map((item, i) => (
-          <div className="flex flex-col items-center space-y-1">
-            <Link key={i} href={item.link} className={item.className}>
+          <div key={i} className="flex flex-col items-center space-y-1">
+            <Link href={item.link} className={item.className}>
               <Image
                 src={item.imageSrc}
                 alt={item.imageAlt}
