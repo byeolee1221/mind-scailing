@@ -48,10 +48,10 @@ const MyPost = () => {
   return (
     <NavBar title="내 글" pageBack hasTabBar>
       <div className="w-full flex flex-col space-y-3 dark:bg-slate-800 dark:text-white min-h-screen xl:w-4/5 xl:m-auto xl:mt-16">
-        <div className="border dark:border-slate-900 p-2 mt-8 flex flex-col">
+        <div className="border dark:border-gray-500 p-2 mt-8 flex flex-col">
           <Table>
             <TableHeader>
-              <TableRow className="text-sm lg:text-base tracking-tighter dark:border-slate-900">
+              <TableRow className="text-sm lg:text-base tracking-tighter dark:border-gray-500">
                 <TableHead>번호</TableHead>
                 <TableHead>제목</TableHead>
                 <TableHead className="text-right">조회 수</TableHead>
@@ -61,7 +61,7 @@ const MyPost = () => {
               {data?.map((post: IMyPost) => (
                 <TableRow
                   key={post.id}
-                  className="lg:text-sm dark:border-slate-900"
+                  className="lg:text-sm dark:border-gray-500"
                 >
                   <TableCell>{post.id}</TableCell>
                   <Link

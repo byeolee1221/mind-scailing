@@ -61,7 +61,7 @@ export async function GET(req: Request) {
       });
     }
 
-    console.log(resultData);
+    // console.log(resultData);
     return NextResponse.json(resultData, { status: 200 });
   } catch (error) {
     console.log("alarm GET API에서 오류 발생", error);

@@ -61,6 +61,7 @@ model User {
   AlarmToUser   Alarm[]   @relation(name: "user")
   AlarmFromUser Alarm[]   @relation(name: "fromUser")
   Report        Report[]
+  Notice        Notice[]
 }
 
 model VerificationToken {
@@ -137,7 +138,7 @@ model Diary {
 
 model Profile {
   id        Int      @id @default(autoincrement())
-  introduce String?   
+  introduce String?
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
@@ -170,4 +171,14 @@ model Report {
   post       Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+}
+
+model Notice {
+  id        Int      @id @default(autoincrement())
+  title     String
+  notice    String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

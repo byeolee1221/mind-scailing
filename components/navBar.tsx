@@ -21,13 +21,15 @@ const NavBar = ({ title, pageBack, hasTabBar, children }: INavbar) => {
       imageSrc: "/home.png",
       imageAlt: "홈",
       menuName: "메인페이지",
-      className: "p-3 sm:dark:invert xl:dark:invert-0 xl:dark:text-white",
+      shortName: "홈",
+      className: "p-3 dark:invert xl:dark:invert-0 xl:dark:text-white",
     },
     {
       link: "/myPost",
       imageSrc: "/post.png",
       imageAlt: "내 글",
       menuName: "내 글 확인하기",
+      shortName: "내 글",
       className: "p-3 dark:invert xl:dark:invert-0 xl:dark:text-white",
     },
     {
@@ -35,6 +37,7 @@ const NavBar = ({ title, pageBack, hasTabBar, children }: INavbar) => {
       imageSrc: "/search.png",
       imageAlt: "검색",
       menuName: "게시물 검색",
+      shortName: "검색",
       className:
         "p-3 bg-green-500 xl:bg-inherit hover:bg-green-600 xl:hover:bg-inherit rounded-xl xl:rounded-none shadow-md xl:shadow-none transition-colors xl:dark:text-white",
     },
@@ -43,6 +46,7 @@ const NavBar = ({ title, pageBack, hasTabBar, children }: INavbar) => {
       imageSrc: "/diary.png",
       imageAlt: "나만의 일기장",
       menuName: "나만의 일기장",
+      shortName: "일기장",
       className: "p-3 dark:invert xl:dark:invert-0 xl:dark:text-white",
     },
     {
@@ -50,6 +54,7 @@ const NavBar = ({ title, pageBack, hasTabBar, children }: INavbar) => {
       imageSrc: "/user.png",
       imageAlt: "프로필",
       menuName: "프로필",
+      shortName: "프로필",
       className: "p-3 dark:invert xl:dark:invert-0 xl:dark:text-white",
     },
   ];
@@ -104,15 +109,20 @@ const NavBar = ({ title, pageBack, hasTabBar, children }: INavbar) => {
       </div>
       <nav className="bg-white text-gray-800 border-t fixed bottom-0 pb-5 pt-3 flex justify-around items-center w-full dark:bg-slate-800 dark:border-gray-900 xl:hidden">
         {navBarMenu.map((item, i) => (
-          <Link key={i} href={item.link} className={item.className}>
-            <Image
-              src={item.imageSrc}
-              alt={item.imageAlt}
-              width={25}
-              height={25}
-              className="lg:w-10"
-            />
-          </Link>
+          <div className="flex flex-col items-center space-y-1">
+            <Link key={i} href={item.link} className={item.className}>
+              <Image
+                src={item.imageSrc}
+                alt={item.imageAlt}
+                width={25}
+                height={25}
+                className="lg:w-10"
+              />
+            </Link>
+            <h2 className="text-xs font-semibold dark:text-white">
+              {item.shortName}
+            </h2>
+          </div>
         ))}
       </nav>
     </div>

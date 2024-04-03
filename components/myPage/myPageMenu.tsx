@@ -45,6 +45,10 @@ const MypageMenu = () => {
           </DropdownMenu>
         </div>
         <div className="flex items-center space-x-5 pt-4">
+          <Image src="/notice.png" alt="공지" width={30} height={30} />
+          <Link href="/notice" className="lg:text-lg">공지사항</Link>
+        </div>
+        <div className="flex items-center space-x-5 pt-4">
           <Image src="/board.png" alt="게시글" width={30} height={30} />
           <Link href="/myPost" className="lg:text-lg">내 글 관리</Link>
         </div>
