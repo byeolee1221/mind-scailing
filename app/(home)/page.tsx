@@ -16,8 +16,12 @@ const fetcher = (url: string) =>
 
 const Home = () => {
   const { data: session } = useSession();
-  const { data, error } = useSWR("/api/myPage/setting", fetcher);
-  const { data: alarmCount } = useSWR("/api/home/alarmCount", fetcher);
+  const { data, error } = useSWR("/api/myPage/setting", fetcher, {
+    refreshInterval: 0,
+  });
+  const { data: alarmCount } = useSWR("/api/home/alarmCount", fetcher, {
+    refreshInterval: 0,
+  });
   const [alarmPing, setAlarmPing] = useState(false);
   // console.log(alarmCount, alarmPing);
 
@@ -36,7 +40,7 @@ const Home = () => {
   }, [alarmCount]);
 
   return (
-    <div className="space-y-16 dark:bg-slate-800 dark:text-white lg:text-lg lg:px-12 xl:w-4/5 xl:m-auto">
+    <div className="space-y-16 dark:bg-slate-800 dark:text-white lg:text-lg xl:m-auto max-w-screen-xl">
       <div className="flex items-center justify-between mt-8 xl:mt-16 px-6">
         <div className="flex flex-col items-start">
           <h1 className="font-semibold">
@@ -69,7 +73,7 @@ const Home = () => {
         </Link>
       </div>
       <div className="xl:flex xl:items-center xl:justify-between xl:space-x-14 space-y-16 xl:space-y-0 px-6">
-        <div className="bg-green-500 mx-6 rounded-3xl shadow-xl p-5 space-y-2 text-sm lg:text-base lg:w-2/5 xl:mx-auto">
+        <div className="bg-green-500 mx-6 rounded-3xl shadow-xl p-5 space-y-2 text-sm lg:text-base lg:w-2/5 lg:mx-auto">
           <p>오늘 하루는 잘 보내셨나요?</p>
           <p className="tracking-tight">
             혹시 오늘 스트레스를 많이 받지는 않으셨나요?

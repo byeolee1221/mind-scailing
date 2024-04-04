@@ -116,7 +116,7 @@ const Write = () => {
                 className="w-full resize-none p-1 border focus:outline-none focus:ring-2 focus:ring-green-500 rounded-md text-sm lg:text-base"
                 rows={10}
               />
-              <p className="text-red-500 text-xs lg:text-base text-start">
+              <p className="text-red-500 text-xs lg:text-sm text-start tracking-tighter">
                 상호 비방, 허가받지 않은 광고 등 관련이 없는 글은 예고없이
                 삭제될 수 있습니다.
               </p>

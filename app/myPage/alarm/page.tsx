@@ -24,7 +24,7 @@ const fetcher = (url: string) =>
 
 const Alarm = () => {
   const { data: session } = useSession();
-  const { data, error } = useSWR<IAlarm[]>("/api/myPage/alarm", fetcher);
+  const { data, error } = useSWR<IAlarm[]>("/api/myPage/alarm", fetcher, {refreshInterval: 0});
   const [empty, setEmpty] = useState(false);
   const router = useRouter();
   // console.log(data);
@@ -89,6 +89,8 @@ const Alarm = () => {
                       "님이 회원님의 게시글에 댓글을 남겼습니다."}
                     {item.category === "공감" &&
                       "님이 회원님의 게시글에 공감을 눌렀습니다."}
+                    {item.category === "공지" &&
+                      "새로운 공지사항이 등록되었습니다. 여기를 눌러 확인해주세요."}
                   </p>
                 </Link>
                 <button

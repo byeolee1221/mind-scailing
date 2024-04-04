@@ -27,7 +27,9 @@ const fetcher = (url: string) =>
   axios.get(url).then((response) => response.data);
 
 const MyPost = () => {
-  const { data } = useSWR<IMyPost[]>("/api/myPost", fetcher);
+  const { data } = useSWR<IMyPost[]>("/api/myPost", fetcher, {
+    refreshInterval: 0,
+  });
   const { data: session } = useSession();
   const router = useRouter();
   const [empty, setEmpty] = useState("");
@@ -47,8 +49,9 @@ const MyPost = () => {
 
   return (
     <NavBar title="내 글" pageBack hasTabBar>
-      <div className="w-full flex flex-col space-y-3 dark:bg-slate-800 dark:text-white min-h-screen xl:w-4/5 xl:m-auto xl:mt-16">
-        <div className="border dark:border-gray-500 p-2 mt-8 flex flex-col">
+      <div className="mt-8 px-6 flex flex-col space-y-5 min-h-screen max-w-screen-xl xl:w-4/5 xl:m-auto xl:mt-16">
+        <h1 className="font-semibold lg:text-lg">내가 게시한 글</h1>
+        <div className="p-1 border dark:border-gray-500 rounded-md">
           <Table>
             <TableHeader>
               <TableRow className="text-sm lg:text-base tracking-tighter dark:border-gray-500">

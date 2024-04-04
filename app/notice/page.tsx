@@ -13,7 +13,6 @@ import {
 import axios from "axios";
 import Link from "next/link";
 import useSWR from "swr";
-import Providers from "../reduxProvider";
 
 interface INotice {
   id: number;

@@ -26,7 +26,7 @@ const fetcher = (url: string) =>
 
 const CommentList = (props: IProps) => {
   const postId = props.id;
-  const { data, error } = useSWR<ICommentList[]>("/api/board/comment", fetcher);
+  const { data, error } = useSWR<ICommentList[]>("/api/board/comment", fetcher, {refreshInterval: 0});
   const [commentError, setCommentError] = useState("");
   const { data: session } = useSession();
   let filteredComment;

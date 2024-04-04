@@ -77,7 +77,7 @@ const DiaryWrite = () => {
   return (
     <>
       <div className="flex flex-col items-start space-y-2 border rounded-lg py-2 px-3 shadow-sm w-full dark:border-white">
-        <div className="flex items-center space-x-2 border-b w-full pb-2 dark:border-white">
+        <div className="flex items-center space-x-2 border-b w-full pb-2 dark:border-gray-500">
           <img
             src={session?.user?.image!}
             alt="프로필"

@@ -55,7 +55,7 @@ const DetailPostMenu = (props: IProps) => {
   const id = params.id;
   const { data } = useSWR<IDetailPostProfile>(
     `/api/board/boardDetail/detailPostMenu?postId=${id}`,
-    fetcher
+    fetcher, {refreshInterval: 0}
   );
 
   useEffect(() => {

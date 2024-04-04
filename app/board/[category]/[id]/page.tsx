@@ -40,7 +40,7 @@ const PostDetail = () => {
 
   const { data } = useSWR<IPostDetail>(
     `/api/board/boardDetail?postId=${id}`,
-    fetcher
+    fetcher, {refreshInterval: 0}
   );
   // console.log(data);
 

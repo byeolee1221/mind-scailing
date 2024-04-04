@@ -11,12 +11,12 @@ export async function POST(req: Request) {
 
     if (!session) {
       return new NextResponse("로그인이 필요한 서비스입니다.", { status: 401 });
-    };
+    }
 
     const userRole = await prismadb.user.findUnique({
       where: {
-        email: session.user?.email!
-      }
+        email: session.user?.email!,
+      },
     });
 
     if (userRole?.role !== "ADMIN") {
@@ -29,18 +29,46 @@ export async function POST(req: Request) {
         notice,
         user: {
           connect: {
-            email: userRole?.email!
-          }
-        }
+            email: userRole?.email!,
+          },
+        },
+      },
+      include: {
+        user: true
       }
     });
 
-    console.log(createNotice);
+    // console.log(createNotice);
+
+    // if (createNotice) {
+    //   const findUsers = await prismadb.user.findMany({
+    //     select: {
+    //       id: true
+    //     }
+    //   });
+
+    //   const findUsersId = findUsers.map((data) => data); 
+
+    //   console.log(...findUsersId);
+
+    //   const sendAlarm = await prismadb.alarm.create({
+    //     data: {
+    //       category: "공지",
+    //       fromUserId: createNotice.userId,
+    //       postId: createNotice.id,
+    //       fromEmail: createNotice.user.email!,
+    //       toUser: 
+    //     }
+    //   })
+    // }
 
     return NextResponse.json(createNotice.id, { status: 200 });
   } catch (error) {
     console.log("notice POST API에서 오류 발생", error);
-    return new NextResponse("오류가 발생하여 업로드하지 못했습니다. 잠시 후 다시 시도해주세요.", { status: 500 });
+    return new NextResponse(
+      "오류가 발생하여 업로드하지 못했습니다. 잠시 후 다시 시도해주세요.",
+      { status: 500 }
+    );
   }
 }
 
@@ -48,11 +76,11 @@ export async function GET(req: Request) {
   try {
     const getNotice = await prismadb.notice.findMany({
       orderBy: {
-        createdAt: "desc"
+        createdAt: "desc",
       },
       include: {
-        user: true
-      }
+        user: true,
+      },
     });
 
     // console.log(getNotice);
@@ -64,12 +92,14 @@ export async function GET(req: Request) {
         id: data.id,
         title: data.title,
         createdAt: formattedDate,
-      }
+      };
     });
 
     return NextResponse.json(resultData, { status: 200 });
   } catch (error) {
     console.log("notice GET API에서 오류 발생", error);
-    return new NextResponse("오류가 발생하여 공지사항을 불러오지 못했습니다.", { status: 500 });
+    return new NextResponse("오류가 발생하여 공지사항을 불러오지 못했습니다.", {
+      status: 500,
+    });
   }
 }

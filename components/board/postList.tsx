@@ -36,7 +36,7 @@ const fetcher = (url: string) =>
 
 const PostList = () => {
   // useSWR 훅은 데이터를 비동기적으로 가져옴. 따라서 가져온 데이터를 필터링하려면 조건을 걸어줘야 함.
-  const { data, error } = useSWR<IPostList[]>("/api/board", fetcher);
+  const { data, error } = useSWR<IPostList[]>("/api/board", fetcher, {refreshInterval: 0});
   const { data: session } = useSession();
   const [currentCategory, setCurrentCategory] = useState("");
   const [postError, setPostError] = useState("");

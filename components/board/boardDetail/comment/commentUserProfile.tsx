@@ -31,7 +31,7 @@ const fetcher = (url: string) =>
 const CommentUserProfile = (props: IProps) => {
   const { data, error } = useSWR<IProfileData>(
     `/api/board/boardDetail/commentMenu?commentId=${props.commentId}`,
-    fetcher
+    fetcher, {refreshInterval: 0}
   );
 
   useEffect(() => {

@@ -21,7 +21,7 @@ const fetcher = (url: string) =>
   axios.get(url).then((response) => response.data);
 
 const LikePost = () => {
-  const { data, error } = useSWR("/api/myPage/likePost", fetcher);
+  const { data, error } = useSWR("/api/myPage/likePost", fetcher, {refreshInterval: 0});
   const { data: session } = useSession();
   const [empty, setEmpty] = useState(false);
   const router = useRouter();

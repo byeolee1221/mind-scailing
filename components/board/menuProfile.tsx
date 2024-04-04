@@ -46,7 +46,7 @@ const fetcher = (url: string) =>
 const MenuProfile = (props: IPost) => {
   const { data, error } = useSWR<IProfileData[]>(
     `/api/board/boardMenu?postId=${props.post.id}`,
-    fetcher
+    fetcher, {refreshInterval: 0}
   );
   const [empty, setEmpty] = useState(false);
   // console.log(props);

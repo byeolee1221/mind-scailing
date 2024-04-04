@@ -26,7 +26,7 @@ const fetcher = (url: string) =>
   axios.get(url).then((response) => response.data);
 
 const TodayPost = () => {
-  const { data, error } = useSWR("/api/home", fetcher);
+  const { data, error } = useSWR("/api/home", fetcher, {refreshInterval: 0});
   const [empty, setEmpty] = useState("");
 
   useEffect(() => {

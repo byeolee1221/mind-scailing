@@ -54,7 +54,9 @@ const NoticeDetail = () => {
               />
             </button>
           </div>
-          <h2 className="font-semibold border-b pb-1">{data?.title}</h2>
+          <h2 className="font-semibold border-b dark:border-gray-500 pb-1">
+            {data?.title}
+          </h2>
           <p className="text-sm">{data?.notice}</p>
         </div>
       ) : (
