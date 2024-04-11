@@ -4,7 +4,7 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import useSWR, { mutate, preload } from "swr";
+import useSWR, { preload } from "swr";
 
 interface IUser {
   image: string;
@@ -38,8 +38,6 @@ const TodayPost = () => {
       setEmpty("게시글이 아직 없습니다.");
     }
   }, []);
-
-  mutate("/api/home");
 
   return (
     <div className="flex flex-col items-start px-6">

@@ -27,6 +27,7 @@ const Notice = () => {
   const { data, error } = useSWR<INotice[]>("/api/notice", fetcher, {
     refreshInterval: 0,
   });
+
   // console.log(data);
 
   return (
@@ -55,7 +56,7 @@ const Notice = () => {
             </TableBody>
           </Table>
           {error && (
-            <p className="text-xs text-center">
+            <p className="text-sm text-center p-2">
               오류가 발생하여 공지사항을 불러오지 못했습니다.
             </p>
           )}
