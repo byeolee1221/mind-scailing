@@ -19,7 +19,7 @@
     ![](https://img.shields.io/badge/TailwindCSS-06B6D4?style=flat-square&logo=TailwindCSS&logoColor=white)
   - 백엔드 및 호스팅
     ![](https://img.shields.io/badge/Prisma-2D3748?style=flat-square&logo=Prisma&logoColor=white)
-    ![](https://img.shields.io/badge/PlanetScale-000000?style=flat-square&logo=PlanetScale&logoColor=white)
+    ![](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=MongoDB&logoColor=white)
     ![](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=Vercel&logoColor=white)
   - AI
     ![](https://img.shields.io/badge/OpenAI-412991?style=flat-square&logo=OpenAI&logoColor=white)
@@ -34,6 +34,7 @@
 - Redux 5.0.1
 - react-redux 9.1.0
 - swr 2.2.5
+- React-Hook-Form 7.50.1
 - zod 3.22.4
 - axios 1.6.7
 - Prisma 5.10.2
@@ -102,7 +103,7 @@ $ npm run dev
 - 모바일버전 디자인은 앱디자인처럼 레이아웃을 구성하였습니다.
 - 직접 웹사이트 내에서 가입을 진행하는 대신, Next-auth로 다른 사이트의 계정을 연동하는 방식으로 가입하도록 했습니다.
 - 일부 기능에서의 모달창 open-close를 Redux로 상태관리를 하였습니다.
-- vitess를 기반으로 하는 서버리스 MySQL을 사용함으로써 사용자가 증가하여 데이터베이스의 확장이 필요할 때 자동적으로 확장할 수 있습니다.
+- vitess를 기반으로 하는 서버리스 MySQL을 사용하였다가 요금제 제한으로 인해 Mongo DB로 migration 하였습니다.
 - Prisma를 이용하여 API에서 복잡한 로직없이 데이터의 CRUD를 구현하였습니다.
 
 ## 프로젝트 진행 과정에서 생긴 문제와 해결방법
@@ -125,3 +126,4 @@ $ npm run dev
 - 공지사항 게시판을 만들고 글쓰기와 글읽기를 가능하게 했습니다. (2024.04.04)
 - 모바일 하단메뉴에 메뉴이름을 넣어 사용자가 메뉴를 직관적으로 알 수 있도록 수정했습니다. (2024.04.04)
 - 불필요한 로딩을 막기 위해 반복로딩이 필요없는 페이지에서 useSWR의 폴링을 비활성화하는 코드를 추가하였습니다. (2024.04.04)
+- planet Scale에서 Mongo DB로 마이그레이션하였습니다. (2024.05.16)

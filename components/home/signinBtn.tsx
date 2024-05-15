@@ -54,7 +54,7 @@ const SigninBtn = () => {
           <div className="flex flex-col items-center space-y-4">
             <button
               onClick={onSignin}
-              className="flex items-center space-x-11 lg:justify-center lg:space-x-3 rounded-md border-2 px-3 py-2 w-full lg:w-3/5"
+              className="flex items-center justify-center lg:justify-center lg:space-x-3 rounded-md border-2 px-3 py-2 w-full lg:w-3/5"
             >
               <Image
                 src="/g-logo.png"
