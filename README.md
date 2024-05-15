@@ -14,7 +14,7 @@
   - 프론트엔드
     ![](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white)
     ![](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white)
-    ![](https://img.shields.io/badge/NextJS-000000?style=flat-square&logo=NextJS&logoColor=white)
+    ![](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=Next.js&logoColor=white)
     ![](https://img.shields.io/badge/Typescript-3178C6?style=flat-square&logo=Typescript&logoColor=white)
     ![](https://img.shields.io/badge/TailwindCSS-06B6D4?style=flat-square&logo=TailwindCSS&logoColor=white)
   - 백엔드 및 호스팅
@@ -91,7 +91,7 @@ $ npm run dev
 ## 주요기능별 시퀀스 다이어그램
 
 - 커뮤니티
-![Alt text](/public/communitySequence.png)
+![Alt text](/public/communitySequence-mongodb.png)
 - AI와의 고민 이야기
 ![Alt text](/public/taliAISequence.png)
 - 나만의 일기장
