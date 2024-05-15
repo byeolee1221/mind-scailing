@@ -15,7 +15,7 @@ import { ShieldAlert } from "lucide-react";
 import { toast } from "sonner";
 
 interface IProps {
-  commentId: number;
+  commentId: string;
 }
 
 const CommentReport = (props: IProps) => {

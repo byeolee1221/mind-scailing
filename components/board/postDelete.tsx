@@ -16,7 +16,7 @@ import {
 import { useRouter } from "next/navigation";
 
 interface IProps {
-  postId: number;
+  postId: string;
 }
 
 const PostDelete = (props: IProps) => {

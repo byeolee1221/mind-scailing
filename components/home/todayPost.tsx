@@ -11,7 +11,7 @@ interface IUser {
   newName: string;
 }
 interface ITodayPost {
-  id: number;
+  id: string;
   userId: string;
   category: string;
   post: string;

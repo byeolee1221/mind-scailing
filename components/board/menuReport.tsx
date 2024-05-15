@@ -14,7 +14,7 @@ import {
 import axios from "axios";
 
 interface IProps {
-  postId: number;
+  postId: string;
 }
 
 const MenuReport = (props: IProps) => {

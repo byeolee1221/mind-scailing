@@ -15,7 +15,7 @@ import Link from "next/link";
 import useSWR from "swr";
 
 interface INotice {
-  id: number;
+  id: string;
   title: string;
   createdAt: string;
 }

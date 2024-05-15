@@ -10,13 +10,13 @@ import { toast } from "sonner";
 import useSWR, { mutate } from "swr";
 
 interface IAlarm {
-  alarmId: number;
+  alarmId: string;
   name: string;
   newName: string | undefined;
   createdAt: string;
   category: string;
   postCategory: string;
-  postId: number;
+  postId: string;
 }
 
 const fetcher = (url: string) =>
@@ -37,7 +37,7 @@ const Alarm = () => {
     }
   }, []);
 
-  const onDelete = async (alarmId: number) => {
+  const onDelete = async (alarmId: string) => {
     try {
       const deleteAlarm = await axios.delete("/api/myPage/alarm", {
         data: {

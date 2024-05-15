@@ -8,7 +8,7 @@ export async function POST(req: Request) {
 
     const data = await prismadb.post.findUnique({
       where: {
-        id: +id,
+        id: id,
       },
       include: {
         user: true,
@@ -38,7 +38,7 @@ export async function GET(req: Request) {
 
     const findPost = await prismadb.post.findUnique({
       where: {
-        id: +postId,
+        id: postId,
       },
       include: {
         user: true,

@@ -17,7 +17,7 @@ interface IUser {
 }
 
 interface IPostList {
-  id: number;
+  id: string;
   category: string;
   post: string;
   file: string | undefined;

@@ -21,7 +21,7 @@ interface IUser {
 }
 
 interface IPostMenu {
-  id: number;
+  id: string;
   category: string;
   userId: string;
   avatar: string;

@@ -18,7 +18,7 @@ interface IUser {
 }
 
 interface IPostProfile {
-  id: number;
+  id: string;
   category: string;
   userId: string;
   avatar: string;

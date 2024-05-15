@@ -8,7 +8,7 @@ export async function GET(req: Request) {
 
     const findNotice = await prismadb.notice.findUnique({
       where: {
-        id: +noticeId,
+        id: noticeId,
       },
     });
 

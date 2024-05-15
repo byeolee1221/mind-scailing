@@ -9,7 +9,7 @@ export async function GET(req: Request) {
 
     const findPost = await prismadb.post.findUnique({
       where: {
-        id: +postId,
+        id: postId,
       },
       include: {
         user: true,

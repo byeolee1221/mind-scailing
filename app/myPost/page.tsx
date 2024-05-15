@@ -17,7 +17,7 @@ import { useEffect, useState } from "react";
 import useSWR from "swr";
 
 interface IMyPost {
-  id: number;
+  id: string;
   post: string;
   view: number;
   category: string;
@@ -61,12 +61,12 @@ const MyPost = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data?.map((post: IMyPost) => (
+              {data?.map((post: IMyPost, i) => (
                 <TableRow
                   key={post.id}
                   className="lg:text-sm dark:border-gray-500"
                 >
-                  <TableCell>{post.id}</TableCell>
+                  <TableCell>{i+1}</TableCell>
                   <Link
                     key={post.id}
                     href={`/board/${post.category}/${post.id}`}

@@ -27,7 +27,7 @@ interface IUser {
 }
 
 interface IDetailPostProfile {
-  id: number;
+  id: string;
   category: string;
   userId: string;
   avatar: string;
@@ -42,7 +42,7 @@ interface IDetailPostProfile {
 
 interface IProps {
   email: string;
-  postId: number;
+  postId: string;
 }
 
 const fetcher = (url: string) =>

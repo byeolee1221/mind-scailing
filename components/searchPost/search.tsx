@@ -14,12 +14,12 @@ import Link from "next/link";
 import { toast } from "sonner";
 
 interface ISearchList {
-  id: number;
+  id: string;
   search: string;
 }
 
 interface IResult {
-  id: number;
+  id: string;
   cetegory: string;
   name: string;
   newName: string;

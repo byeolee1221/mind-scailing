@@ -16,7 +16,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 interface IDiaryList {
-  id: number;
+  id: string;
   diary: string;
   createdAt: number;
   userId: string;
@@ -51,7 +51,7 @@ const DiaryList = () => {
   }, [filteredDiary]);
 
   // console.log(filteredDiary);
-  const onDelete = async (id: number) => {
+  const onDelete = async (id: string) => {
     try {
       const response = await axios.delete("/api/myDiary", {
         data: {

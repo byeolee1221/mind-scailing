@@ -13,7 +13,7 @@ export async function POST(req: Request) {
 
     const findPost = await prismadb.post.findUnique({
       where: {
-        id: +id,
+        id: id,
       },
     });
 
@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     if (findPost) {
       const viewUpdate = await prismadb.post.update({
         where: {
-          id: +id,
+          id: id,
         },
         data: {
           view: {

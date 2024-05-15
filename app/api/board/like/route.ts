@@ -25,7 +25,7 @@ export async function POST(req: Request) {
     // 게시글 확인
     const post = await prismadb.post.findUnique({
       where: {
-        id: +id,
+        id: id,
       },
     });
     // console.log(post);
@@ -35,7 +35,7 @@ export async function POST(req: Request) {
       const existingLike = await prismadb.like.findUnique({
         where: {
           postId_userId: {
-            postId: +id,
+            postId: id,
             userId: findLikeUser?.id!,
           },
         },
@@ -47,14 +47,14 @@ export async function POST(req: Request) {
         const createLike = await prismadb.like.create({
           data: {
             userId: findLikeUser?.id!,
-            postId: +id,
+            postId: id,
           },
         });
         // console.log(createLike);
 
         const updatePost = await prismadb.post.update({
           where: {
-            id: +id,
+            id: id,
           },
           data: {
             like: {
@@ -83,7 +83,7 @@ export async function POST(req: Request) {
         const likeCancel = await prismadb.like.delete({
           where: {
             postId_userId: {
-              postId: +id,
+              postId: id,
               userId: findLikeUser?.id!,
             },
           },
@@ -91,7 +91,7 @@ export async function POST(req: Request) {
 
         await prismadb.post.update({
           where: {
-            id: +id,
+            id: id,
           },
           data: {
             like: {

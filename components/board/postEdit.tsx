@@ -20,7 +20,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { showModal } from "@/slice/modalSlice";
 
 interface IProps {
-  postId: number;
+  postId: string;
   post: string;
   file: string | undefined;
 }

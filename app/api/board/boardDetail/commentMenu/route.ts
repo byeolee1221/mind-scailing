@@ -24,7 +24,7 @@ export async function GET(req: Request) {
 
     const findComment = await prismadb.comment.findUnique({
       where: {
-        id: +commentId,
+        id: commentId,
       },
       include: {
         user: true,

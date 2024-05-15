@@ -12,7 +12,7 @@ import { useEffect } from "react";
 import useSWR from "swr";
 
 interface IProps {
-  commentId: number;
+  commentId: string;
 }
 
 interface IProfileData {

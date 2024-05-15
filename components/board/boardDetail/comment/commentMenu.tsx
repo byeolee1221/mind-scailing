@@ -14,7 +14,7 @@ import CommentUserProfile from "./commentUserProfile";
 import CommentReport from "./commentReport";
 
 interface IProps {
-  id: number;
+  id: string;
   userEmail: string;
   postId: string;
 }

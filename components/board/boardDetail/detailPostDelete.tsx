@@ -16,7 +16,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 interface IProps {
-  postId: number;
+  postId: string;
 }
 
 const DetailPostDelete = (props: IProps) => {

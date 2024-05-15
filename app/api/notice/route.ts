@@ -38,30 +38,6 @@ export async function POST(req: Request) {
       }
     });
 
-    // console.log(createNotice);
-
-    // if (createNotice) {
-    //   const findUsers = await prismadb.user.findMany({
-    //     select: {
-    //       id: true
-    //     }
-    //   });
-
-    //   const findUsersId = findUsers.map((data) => data); 
-
-    //   console.log(...findUsersId);
-
-    //   const sendAlarm = await prismadb.alarm.create({
-    //     data: {
-    //       category: "공지",
-    //       fromUserId: createNotice.userId,
-    //       postId: createNotice.id,
-    //       fromEmail: createNotice.user.email!,
-    //       toUser: 
-    //     }
-    //   })
-    // }
-
     return NextResponse.json(createNotice.id, { status: 200 });
   } catch (error) {
     console.log("notice POST API에서 오류 발생", error);

@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import useSWR from "swr";
 
 interface ILikePost {
-  id: number;
+  id: string;
   createdAt: string;
   avatar: string;
   name: string;

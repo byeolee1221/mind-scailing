@@ -18,7 +18,7 @@ interface IUser {
   email: string;
 }
 interface IPostDetail {
-  id: number;
+  id: string;
   category: string;
   post: string;
   file: string | null;

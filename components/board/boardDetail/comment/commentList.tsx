@@ -12,9 +12,9 @@ interface ICommentList {
   userNewName: string;
   userEmail: string;
   comment: string;
-  id: number;
+  id: string;
   createdAt: string;
-  postId: number;
+  postId: string;
 }
 
 interface IProps {
@@ -37,7 +37,7 @@ const CommentList = (props: IProps) => {
 
   if (data) {
     filteredComment = data.filter(
-      (comment: ICommentList) => comment.postId === +postId
+      (comment: ICommentList) => comment.postId === postId
     );
   }
   mutate("/api/board/comment");

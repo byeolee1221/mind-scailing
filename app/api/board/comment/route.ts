@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     if (userCheck) {
       const findPost = await prismadb.post.findUnique({
         where: {
-          id: +postId,
+          id: postId,
         },
       });
       // console.log(findPost);
@@ -43,7 +43,7 @@ export async function POST(req: Request) {
             },
             post: {
               connect: {
-                id: +postId,
+                id: postId,
               },
             },
           },
@@ -54,7 +54,7 @@ export async function POST(req: Request) {
         // console.log(createComment);
         const updatePost = await prismadb.post.update({
           where: {
-            id: +postId,
+            id: postId,
           },
           data: {
             commentCount: {
@@ -71,7 +71,7 @@ export async function POST(req: Request) {
             postId: updatePost.id,
             fromUserId: createComment.userId,
             fromEmail: session.user?.email!,
-            commentId: createComment.id
+            commentId: +createComment.id
           },
           include: {
             user: true,
@@ -156,7 +156,7 @@ export async function DELETE(req: Request) {
     if (deleteComment) {
       const updateCount = await prismadb.post.update({
         where: {
-          id: +postId
+          id: postId
         },
         data: {
           commentCount: {

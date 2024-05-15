@@ -7,7 +7,7 @@ import { useParams } from "next/navigation";
 import useSWR from "swr";
 
 interface INoticeDetail {
-  id: number;
+  id: string;
   title: string;
   notice: string;
   formattedDate: string;
