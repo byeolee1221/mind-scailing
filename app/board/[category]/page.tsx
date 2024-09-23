@@ -1,7 +1,6 @@
 "use client";
 
 import PostList from "@/components/board/postList";
-import ShortPost from "@/components/board/shortPost";
 import Write from "@/components/board/write";
 import NavBar from "@/components/navBar";
 import { useSession } from "next-auth/react";
@@ -35,7 +34,6 @@ const Board = () => {
             글을 게시하려면 로그인해주세요.
           </p>
         )}
-        <ShortPost />
         <PostList />
       </div>
     </NavBar>
